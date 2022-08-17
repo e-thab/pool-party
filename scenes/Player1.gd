@@ -1,6 +1,5 @@
 extends Area2D
 
-
 export var speed = 200
 var screen_size
 
@@ -24,12 +23,12 @@ func _process(delta):
 	# play animation on move
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play("run")
+		$PlayerSprite.play("run")
 	else:
-		$AnimatedSprite.play("idle")
+		$PlayerSprite.play("idle")
 	
 	# flip animation by direction -- this is too quick. should keep flip_h somehow
-	$AnimatedSprite.flip_h = velocity.x < 0
+	$PlayerSprite.flip_h = velocity.x < 0
 	
 	# apply velocity to position
 	position += velocity * delta
