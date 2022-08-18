@@ -32,6 +32,7 @@ func _process(delta):
 	
 	# apply velocity to position
 	position += velocity * delta
+	
 	# clamp character into screen bounds
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+	#position.x = clamp(position.x, 0, screen_size.x)
+	#position.y = clamp(position.y, 0, screen_size.y)

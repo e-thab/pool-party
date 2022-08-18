@@ -12,13 +12,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	cursor_pos = get_viewport().get_mouse_position()
+	cursor_pos = get_global_mouse_position()
 	player_pos = player.position
 	
 	position = (cursor_pos - player_pos).normalized() * 25
 	rotation = cursor_pos.angle_to_point(player_pos)
 	
-#	if -PI/2 > rotation > PI/2:
-#		pass #flip vertical
+	$GunSprite.flip_v = rotation < (-PI/2) or rotation > (PI/2)
+	
 	#print(position)
 	#print(rotation)
