@@ -33,6 +33,9 @@ func _process(delta):
 	# apply velocity to position
 	position += velocity * delta
 	
+	# adjust background tile
+	$Background.offset = position # test this further
+	
 	# clamp character into screen bounds
 	#position.x = clamp(position.x, 0, screen_size.x)
 	#position.y = clamp(position.y, 0, screen_size.y)

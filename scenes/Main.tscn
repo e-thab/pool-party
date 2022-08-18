@@ -7,8 +7,11 @@
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 
-[node name="BG" type="Sprite" parent="."]
+[node name="Tile" type="Sprite" parent="."]
+visible = false
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 300 )
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
