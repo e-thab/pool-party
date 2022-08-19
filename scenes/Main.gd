@@ -12,4 +12,6 @@ onready var tile = $Tile
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	tile.offset = player.position
+	#tile.position = player.position
+	#tile.region_rect = Rect2(player.position.x, player.position.y, 612, 400)
+	pass
