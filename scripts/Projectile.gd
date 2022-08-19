@@ -17,7 +17,6 @@ func _process(delta):
 
 
 func apply_dmg(dmg):
-	print("damage applied")
 	damage = dmg
 
 func apply_spd(s):
@@ -26,8 +25,6 @@ func apply_spd(s):
 
 func _on_Projectile_body_entered(body):
 	if body.is_in_group("mobs"):
-		print("body is in group mobs, calling hurt()")
 		body.hurt(damage)
-	else:
-		print("body is not in group mobs")
-	queue_free()
+	if not body.is_in_group("players"):
+		queue_free()

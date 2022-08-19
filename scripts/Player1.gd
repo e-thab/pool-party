@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 
 
 export(PackedScene) var weapon_type
@@ -53,4 +53,5 @@ func _process(delta):
 
 func hurt(dmg):
 	health -= dmg
+	# update health bar here
 	print("player hurt. hp = " + str(health))

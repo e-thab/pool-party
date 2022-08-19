@@ -1,9 +1,9 @@
-extends RigidBody2D
+extends CanvasLayer
 
 
 # Declare member variables here. Examples:
-var health = 2
-var dmg = 1
+var time = 0
+# var b = "text"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,11 +16,13 @@ func _ready():
 #	pass
 
 
-func hurt(dmg):
-	health -= dmg
-	print("mob hurt. hp = " + str(health))
+func update_time(hp):
+	$HealthLabel.text = str(hp)
 
 
-func _on_Mob1_body_entered(body):
-	if body.is_in_group("players"):
-		body.hurt(dmg)
+func _on_RoundTimer_timeout():
+	time += 1
+	var seconds = "%02d" % (time % 60)
+	var minutes = "%02d" % (int(time / 60) % 60)
+	$TimeLabel.text = minutes + ":" + seconds
+	

@@ -25,7 +25,6 @@ func _process(_delta):
 func shoot():
 	can_fire = false
 	$ShotTimer.start()
-	print("shoot soaker")
 	
 	var proj_inst = projectile.instance()
 	root.add_child(proj_inst)

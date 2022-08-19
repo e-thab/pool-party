@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_aqua.png-b971bb7152f11c9ccf18912c557b85d4.stex"
+path="res://.import/char_1_16.png-88bba55768aac28f0a5bfa5c5af17343.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tile_aqua.png"
-dest_files=[ "res://.import/tile_aqua.png-b971bb7152f11c9ccf18912c557b85d4.stex" ]
+source_file="res://assets/sprites/sheets/char_1_16.png"
+dest_files=[ "res://.import/char_1_16.png-88bba55768aac28f0a5bfa5c5af17343.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

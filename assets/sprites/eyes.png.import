@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shotgun.png-0c67f93feb0f6dd5040af835fde1d6e7.stex"
+path="res://.import/eyes.png-c89ad4d636e56a614703c8714ea2c1dd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/shotgun.png"
-dest_files=[ "res://.import/shotgun.png-0c67f93feb0f6dd5040af835fde1d6e7.stex" ]
+source_file="res://assets/sprites/eyes.png"
+dest_files=[ "res://.import/eyes.png-c89ad4d636e56a614703c8714ea2c1dd.stex" ]
 
 [params]
 
