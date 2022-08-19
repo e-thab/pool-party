@@ -1,4 +1,4 @@
-extends Position2D
+extends Node2D
 
 var player
 var player_pos = Vector2.ZERO
@@ -17,8 +17,3 @@ func _process(_delta):
 	
 	position = (cursor_pos - player_pos).normalized() * 25
 	rotation = cursor_pos.angle_to_point(player_pos)
-	
-	$GunSprite.flip_v = rotation < (-PI/2) or rotation > (PI/2)
-	
-	#print(position)
-	#print(rotation)

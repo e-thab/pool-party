@@ -1,9 +1,18 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://sprites/sheets/char_1_16.png" type="Texture" id=1]
-[ext_resource path="res://scenes/Player1.gd" type="Script" id=2]
-[ext_resource path="res://sprites/soaker_hands.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Player1.gd" type="Script" id=2]
+[ext_resource path="res://sprites/tile_aqua.png" type="Texture" id=3]
 [ext_resource path="res://scripts/GunPosition.gd" type="Script" id=4]
+[ext_resource path="res://scenes/SuperSoaker.tscn" type="PackedScene" id=5]
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -29,16 +38,13 @@ region = Rect2( 32, 32, 16, 16 )
 atlas = ExtResource( 1 )
 region = Rect2( 48, 32, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 16, 16 )
-
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "idle",
@@ -48,18 +54,20 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 8.0
-}, {
-"frames": [ SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "hurt",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 10, 15 )
 
-[node name="Player1" type="Area2D"]
+[node name="Player1" type="Area2D" groups=["players"]]
 script = ExtResource( 2 )
+weapon_type = ExtResource( 5 )
+
+[node name="TileSpriteBG" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 612, 400 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
@@ -67,23 +75,16 @@ frames = SubResource( 9 )
 animation = "idle"
 playing = true
 
+[node name="PlayerCamera" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+smoothing_speed = 8.0
+
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 1 )
 shape = SubResource( 10 )
 
-[node name="GunPosition" type="Position2D" parent="."]
+[node name="GunPosition" type="Node2D" parent="."]
 position = Vector2( 25, 0 )
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="GunSprite" type="Sprite" parent="GunPosition"]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
-
-[node name="PlayerCamera" type="Camera2D" parent="."]
-current = true
-smoothing_enabled = true
-smoothing_speed = 25.0
