@@ -6,7 +6,7 @@ export(PackedScene) var projectile
 onready var root = get_tree().get_root()
 var can_fire = true
 var base_dmg = 1
-var base_spd = 100
+var base_spd = 250
 
 
 # Called when the node enters the scene tree for the first time.

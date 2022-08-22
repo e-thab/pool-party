@@ -11,14 +11,6 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 15 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 16, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 16, 16, 16 )
-
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 16, 16 )
@@ -26,6 +18,14 @@ region = Rect2( 32, 0, 16, 16 )
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
@@ -45,15 +45,15 @@ region = Rect2( 48, 32, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": false,
+"name": "hurt",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "hurt",
-"speed": 5.0
 }, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
@@ -65,9 +65,7 @@ animations = [ {
 size = 36
 font_data = ExtResource( 6 )
 
-[node name="Player1" type="RigidBody2D" groups=[
-"players",
-]]
+[node name="Player1" type="RigidBody2D" groups=["players"]]
 mode = 3
 contacts_reported = 2
 contact_monitor = true
@@ -81,9 +79,7 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 612, 400 )
 
-[node name="PlayerCollision" type="CollisionShape2D" parent="." groups=[
-"players",
-]]
+[node name="PlayerCollision" type="CollisionShape2D" parent="." groups=["players"]]
 visible = false
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
@@ -105,9 +101,6 @@ margin_top = 2.0
 margin_right = 10.0
 margin_bottom = 5.0
 color = Color( 0.164706, 0.164706, 0.164706, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Fill" type="ColorRect" parent="PlayerSprite/HealthBar"]
 anchor_left = 0.5
@@ -149,4 +142,6 @@ __meta__ = {
 
 [node name="RoundTimer" type="Timer" parent="HUD"]
 autostart = true
+
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_PlayerSprite_animation_finished"]
 [connection signal="timeout" from="HUD/RoundTimer" to="HUD" method="_on_RoundTimer_timeout"]

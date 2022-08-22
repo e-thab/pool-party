@@ -3,14 +3,15 @@ extends RigidBody2D
 
 export(PackedScene) var weapon_type
 export var speed = 200
-export var max_health = 1
+export var max_health = 10
 export var damage = 1 # modifies base damage of weapon
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
 
-var health
 var moving_left = false
+var being_hurt = false
+var health
 var gun
 
 
@@ -35,9 +36,9 @@ func _process(delta):
 	# play animation on move
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$PlayerSprite.play("run")
+		if not being_hurt: $PlayerSprite.play("run")
 	else:
-		$PlayerSprite.play("idle")
+		if not being_hurt: $PlayerSprite.play("idle")
 	
 	# face moving direction
 	if velocity.x < 0:
@@ -54,8 +55,12 @@ func _process(delta):
 
 
 func hurt(dmg):
-	health -= dmg
-	update_health_bar()
+	# check for on-hit invincibility (duration of hurt animation)
+	if not being_hurt:
+		health -= dmg
+		being_hurt = true
+		$PlayerSprite.play("hurt")
+		update_health_bar()
 
 
 func heal(hp):
@@ -64,6 +69,12 @@ func heal(hp):
 
 
 func update_health_bar():
+	# adjust size of red rect; 36 = full, 0 = empty
 	$PlayerSprite/HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
 	print("player hurt. hp = " + str(health))
-	print((36.0 / max_health) * health)
+
+
+func _on_PlayerSprite_animation_finished():
+	if $PlayerSprite.animation == "hurt":
+		being_hurt = false
+		$PlayerSprite.stop()
