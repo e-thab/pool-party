@@ -3,12 +3,13 @@ extends RigidBody2D
 
 export(PackedScene) var weapon_type
 export var speed = 200
-export var health = 100
+export var max_health = 1
 export var damage = 1 # modifies base damage of weapon
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
 
+var health
 var moving_left = false
 var gun
 
@@ -16,6 +17,7 @@ var gun
 func _ready():
 	gun = weapon_type.instance()
 	$GunPosition.add_child(gun)
+	health = max_health
 
 
 func _process(delta):
@@ -53,5 +55,15 @@ func _process(delta):
 
 func hurt(dmg):
 	health -= dmg
-	# update health bar here
+	update_health_bar()
+
+
+func heal(hp):
+	health += hp
+	update_health_bar()
+
+
+func update_health_bar():
+	$PlayerSprite/HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
 	print("player hurt. hp = " + str(health))
+	print((36.0 / max_health) * health)
