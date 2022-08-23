@@ -1,10 +1,14 @@
 extends RigidBody2D
 
 
+#signal stats_changed(stat, val)
+#enum Stats {HEALTH, MAX_HEALTH, SPEED, DAMAGE}
+
 export(PackedScene) var weapon_type
-export var speed = 200
-export var max_health = 10
-export var damage = 1 # modifies base damage of weapon
+
+export var max_health = 10.0
+export var speed = 100.0 # percentage
+export var damage = 100.0 # percentage; modifies base damage of weapon
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
@@ -35,7 +39,7 @@ func _process(delta):
 	
 	# play animation on move
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+		velocity = velocity.normalized() * speed * Stats.SPEED_MODIFIER
 		if not being_hurt: $PlayerSprite.play("run")
 	else:
 		if not being_hurt: $PlayerSprite.play("idle")
@@ -52,25 +56,30 @@ func _process(delta):
 	
 	# offset background tile to make it look constant
 	tile.region_rect = Rect2(position.x / 2, position.y / 2, 612, 400)
+	
+	# keep tile on screen even in ludicrous speed
+	$PlayerCamera.smoothing_speed = speed * 0.05
 
 
-func hurt(dmg):
+func hurt(n):
 	# check for on-hit invincibility (duration of hurt animation)
 	if not being_hurt:
-		health -= dmg
+		health -= n
 		being_hurt = true
 		$PlayerSprite.play("hurt")
 		update_health_bar()
 
 
-func heal(hp):
-	health += hp
+func heal(n):
+	health += n
 	update_health_bar()
 
 
 func update_health_bar():
 	# adjust size of red rect; 36 = full, 0 = empty
 	$PlayerSprite/HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
+	
+#	emit_signal("stats_changed", Stats.HEALTH, health)
 	print("player hurt. hp = " + str(health))
 
 

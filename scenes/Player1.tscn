@@ -88,7 +88,6 @@ shape = SubResource( 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="HealthBar" type="ColorRect" parent="PlayerSprite"]
@@ -119,7 +118,6 @@ __meta__ = {
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true
-smoothing_speed = 8.0
 
 [node name="GunPosition" type="Node2D" parent="."]
 position = Vector2( 25, 0 )

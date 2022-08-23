@@ -1,0 +1,19 @@
+[gd_resource type="ParticlesMaterial" format=2]
+
+[resource]
+emission_shape = 1
+emission_sphere_radius = 17.47
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -98, 0 )
+initial_velocity = 39.61
+initial_velocity_random = 0.35
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -4.0
+linear_accel_random = 0.2
+damping = 100.0
+damping_random = 0.2
+scale = 8.0
+scale_random = 0.05

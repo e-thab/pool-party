@@ -4,9 +4,11 @@ extends Sprite
 # Declare member variables here. Examples:
 export(PackedScene) var projectile
 onready var root = get_tree().get_root()
+onready var player = get_parent().get_parent()
+
 var can_fire = true
-var base_dmg = 1
-var base_spd = 250
+var base_dmg = 1.0
+var base_spd = 250.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,7 +32,7 @@ func shoot():
 	root.add_child(proj_inst)
 	proj_inst.position = $ShotOrigin.global_position
 	proj_inst.rotation = $ShotOrigin.global_rotation
-	proj_inst.apply_dmg(base_dmg)
+	proj_inst.apply_dmg(base_dmg * (player.damage / 100.0))
 	proj_inst.apply_spd(base_spd)
 
 

@@ -2,8 +2,8 @@ extends Area2D
 
 
 # Declare member variables here. Examples:
-var speed = 100
-var damage = 0
+var speed = 100.0
+var damage = 0.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,11 +16,11 @@ func _process(delta):
 	position += (transform.x * delta * speed) / scale
 
 
-func apply_dmg(dmg):
-	damage = dmg
+func apply_dmg(n):
+	damage = n
 
-func apply_spd(s):
-	speed = s
+func apply_spd(n):
+	speed = n
 
 
 func _on_Projectile_body_entered(body):
