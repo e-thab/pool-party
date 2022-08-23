@@ -1,0 +1,43 @@
+[gd_scene format=2]
+
+[node name="TestHUD" type="CanvasLayer"]
+
+[node name="Labels" type="Control" parent="."]
+anchor_right = 0.086
+anchor_bottom = 1.0
+margin_right = -0.064003
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PlayerHP" type="Label" parent="Labels"]
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.25
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Player HP: 0"
+
+[node name="PlayerDMG" type="Label" parent="Labels"]
+anchor_top = 0.275
+anchor_right = 1.0
+anchor_bottom = 0.275
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Label"
+
+[node name="PlayerSpeed" type="Label" parent="Labels"]
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 0.3
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Label2"
+
+[node name="Label3" type="Label" parent="Labels"]
+anchor_top = 0.325
+anchor_right = 1.0
+anchor_bottom = 0.325
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Label3"
