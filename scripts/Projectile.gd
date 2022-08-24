@@ -26,7 +26,7 @@ func set_spd(n):
 func _on_Projectile_body_entered(body):
 	if body.is_in_group("mobs"):
 		body.hurt(damage)
-	if not body.is_in_group("players"):
+	if not body.is_in_group("player"):
 		queue_free()
 
 

@@ -1,13 +1,13 @@
 extends Node2D
 
-var player
+onready var player  = get_tree().get_nodes_in_group("player")[0]
 var player_pos = Vector2.ZERO
 var cursor_pos = Vector2.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_parent()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

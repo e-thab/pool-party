@@ -4,7 +4,7 @@ extends Sprite
 # Declare member variables here. Examples:
 export(PackedScene) var projectile
 onready var root = get_tree().get_root()
-onready var player = get_parent().get_parent()
+onready var player = get_tree().get_nodes_in_group("player")[0]
 
 var can_fire = true
 var base_dmg = 1.0

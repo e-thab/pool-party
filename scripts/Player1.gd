@@ -2,20 +2,22 @@ extends RigidBody2D
 
 
 #signal stats_changed(stat, val)
-#enum Stats {HEALTH, MAX_HEALTH, SPEED, DAMAGE}
 
 export(PackedScene) var weapon_type
 
 export var max_health = 10.0
 export var speed = 100.0 # percentage
-export var damage = 100.0 # percentage; modifies base damage of weapon
+
+# variables below are percentages that modify base weapon stats
+export var damage = 100.0
+export var fire_rate = 100.0
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
 
 var moving_left = false
 var being_hurt = false
-var health
+var health = 0.0
 var gun
 
 
@@ -57,8 +59,8 @@ func _process(delta):
 	# offset background tile to make it look constant
 	tile.region_rect = Rect2(position.x / 2, position.y / 2, 612, 400)
 	
-	# keep tile on screen even in ludicrous speed
-	$PlayerCamera.smoothing_speed = speed * 0.05
+	# keep tile on screen even in ludicrous speed - looks bad though
+	#$PlayerCamera.smoothing_speed = speed * 0.05
 
 
 func hurt(n):
