@@ -79,18 +79,19 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 612, 400 )
 
-[node name="PlayerCollision" type="CollisionShape2D" parent="." groups=["players"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["players"]]
 visible = false
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
-[node name="PlayerSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 10 )
 animation = "idle"
+frame = 1
 playing = true
 
-[node name="HealthBar" type="ColorRect" parent="PlayerSprite"]
+[node name="HealthBar" type="ColorRect" parent="AnimatedSprite"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -101,7 +102,7 @@ margin_right = 10.0
 margin_bottom = 5.0
 color = Color( 0.164706, 0.164706, 0.164706, 1 )
 
-[node name="Fill" type="ColorRect" parent="PlayerSprite/HealthBar"]
+[node name="Fill" type="ColorRect" parent="AnimatedSprite/HealthBar"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -141,5 +142,5 @@ __meta__ = {
 [node name="RoundTimer" type="Timer" parent="HUD"]
 autostart = true
 
-[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_PlayerSprite_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_PlayerSprite_animation_finished"]
 [connection signal="timeout" from="HUD/RoundTimer" to="HUD" method="_on_RoundTimer_timeout"]

@@ -16,10 +16,10 @@ func _process(delta):
 	position += (transform.x * delta * speed) / scale
 
 
-func apply_dmg(n):
+func set_dmg(n):
 	damage = n
 
-func apply_spd(n):
+func set_spd(n):
 	speed = n
 
 

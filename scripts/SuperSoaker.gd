@@ -32,8 +32,8 @@ func shoot():
 	root.add_child(proj_inst)
 	proj_inst.position = $ShotOrigin.global_position
 	proj_inst.rotation = $ShotOrigin.global_rotation
-	proj_inst.apply_dmg(base_dmg * (player.damage / 100.0))
-	proj_inst.apply_spd(base_spd)
+	proj_inst.set_dmg(base_dmg * (player.damage / 100.0))
+	proj_inst.set_spd(base_spd)
 
 
 func _on_ShotTimer_timeout():

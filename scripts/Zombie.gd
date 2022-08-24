@@ -9,7 +9,6 @@ var max_health = 2.0
 var damage = 0.5
 var speed = 25.0
 var being_hurt = false
-
 var health
 
 
@@ -22,10 +21,8 @@ func _ready():
 func _process(delta):
 	position.x += delta * speed * Stats.SPEED_MODIFIER
 	
-	if being_hurt: # this is meh
-		$Particles2D.process_material = hurt_material
-	else:
-		$Particles2D.process_material = fire_material
+	if not being_hurt:
+		$AnimatedSprite.play("walk")
 	
 	if health <= 0:
 		die()
@@ -33,19 +30,22 @@ func _process(delta):
 
 func hurt(n):
 	health -= n
-	print("mob hurt. hp = " + str(health))
-	
-	if not being_hurt: # continuation of meh
-		being_hurt = true
-		yield(get_tree().create_timer(0.2), "timeout")
-		being_hurt = false
-	#$Particles2D.amount = health * 48
+	being_hurt = true
+	$AnimatedSprite.play("hurt")
+	print("zombie hurt. hp = " + str(health))
 
 
 func die():
-	$Particles2D.emitting = false
+	# do die stuff
+	queue_free()
 
 
-func _on_Mob1_body_entered(body):
+func _on_Zombie_body_entered(body):
 	if body.is_in_group("players"):
 		body.hurt(damage)
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "hurt":
+		being_hurt = false # make this (i frames duration) more controllable
+		$AnimatedSprite.stop()

@@ -40,16 +40,16 @@ func _process(delta):
 	# play animation on move
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed * Stats.SPEED_MODIFIER
-		if not being_hurt: $PlayerSprite.play("run")
+		if not being_hurt: $AnimatedSprite.play("run")
 	else:
-		if not being_hurt: $PlayerSprite.play("idle")
+		if not being_hurt: $AnimatedSprite.play("idle")
 	
 	# face moving direction
 	if velocity.x < 0:
 		moving_left = true
 	elif velocity.x > 0:
 		moving_left = false
-	$PlayerSprite.flip_h = moving_left
+	$AnimatedSprite.flip_h = moving_left
 	
 	# apply velocity to position
 	position += velocity * delta
@@ -66,7 +66,7 @@ func hurt(n):
 	if not being_hurt:
 		health -= n
 		being_hurt = true
-		$PlayerSprite.play("hurt")
+		$AnimatedSprite.play("hurt")
 		update_health_bar()
 
 
@@ -77,13 +77,13 @@ func heal(n):
 
 func update_health_bar():
 	# adjust size of red rect; 36 = full, 0 = empty
-	$PlayerSprite/HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
+	$AnimatedSprite/HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
 	
 #	emit_signal("stats_changed", Stats.HEALTH, health)
 	print("player hurt. hp = " + str(health))
 
 
 func _on_PlayerSprite_animation_finished():
-	if $PlayerSprite.animation == "hurt":
-		being_hurt = false
-		$PlayerSprite.stop()
+	if $AnimatedSprite.animation == "hurt":
+		being_hurt = false # make this (i frames duration) more controllable
+		$AnimatedSprite.stop()

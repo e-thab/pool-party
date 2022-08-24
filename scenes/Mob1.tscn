@@ -30,12 +30,12 @@ hurt_material = ExtResource( 3 )
 amount = 96
 process_material = ExtResource( 4 )
 
-[node name="Sprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["mobs"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, -10 )
 shape = SubResource( 5 )
