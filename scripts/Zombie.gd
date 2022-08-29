@@ -12,7 +12,7 @@ var speed = 33.3
 var being_hurt = false
 var health
 
-var velocity
+var dir = Vector2.ZERO
 var move_target
 
 # Called when the node enters the scene tree for the first time.
@@ -25,26 +25,32 @@ func _ready():
 	$AnimatedSprite.frames = zombie_types[randi() % 2]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if (position - player.position).length() > 1000:
 		queue_free()
 	if health <= 0:
 		die()
 	
 	# move toward target
-	velocity = position.direction_to(move_target.position).normalized()
-	velocity = velocity * speed * Stats.SPEED_MODIFIER
-	position += velocity * delta
-	
-	# flip sprite left/right
-	if velocity.x < 0:
-		$AnimatedSprite.flip_h = true
-	elif velocity.x > 0:
-		$AnimatedSprite.flip_h = false
+	#velocity = position.direction_to(move_target.position).normalized()
+	#velocity = velocity * speed * Stats.SPEED_MODIFIER
+	#position += velocity * delta
 	
 	# wait until hurt animation is done to resume walk
 	if not being_hurt:
 		$AnimatedSprite.play("walk")
+
+
+func _physics_process(delta):
+	# move toward target
+	dir = position.direction_to(move_target.position).normalized()
+	applied_force = dir * speed * delta * 100
+	
+	# flip sprite left/right
+	if dir.x < 0:
+		$AnimatedSprite.flip_h = true
+	elif dir.x > 0:
+		$AnimatedSprite.flip_h = false
 
 
 func hurt(n):

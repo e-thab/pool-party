@@ -7,8 +7,13 @@
 [ext_resource path="res://scenes/SuperSoaker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/8bitoperator.ttf" type="DynamicFontData" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 15 )
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -34,16 +39,13 @@ region = Rect2( 32, 32, 16, 16 )
 atlas = ExtResource( 1 )
 region = Rect2( 48, 32, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 16, 16 )
-
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "hurt",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
 "name": "idle",
@@ -53,11 +55,6 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 8.0
-}, {
-"frames": [ SubResource( 8 ), SubResource( 9 ) ],
-"loop": false,
-"name": "hurt",
-"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=13]
@@ -67,20 +64,15 @@ font_data = ExtResource( 6 )
 [sub_resource type="Theme" id=12]
 default_font = SubResource( 13 )
 
-[node name="Player1" type="RigidBody2D" groups=[
-"player",
-]]
+[sub_resource type="CapsuleShape2D" id=14]
+height = 8.0
+
+[node name="Player1" type="KinematicBody2D" groups=["player"]]
 z_index = 1
-mode = 3
-contacts_reported = 12
-contact_monitor = true
+collision_layer = 2
+collision_mask = 13
 script = ExtResource( 2 )
 weapon_type = ExtResource( 5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 1 )
-shape = SubResource( 1 )
 
 [node name="TileSpriteBG" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
@@ -93,6 +85,7 @@ region_rect = Rect2( 0, 0, 612, 400 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 10 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="HealthBar" type="ProgressBar" parent="AnimatedSprite"]
@@ -105,16 +98,18 @@ margin_top = 5.0
 margin_right = 25.0
 margin_bottom = 19.0
 theme = SubResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true
+process_mode = 0
 smoothing_enabled = true
 
 [node name="GunPosition" type="Node2D" parent="."]
 position = Vector2( 25, 0 )
 z_index = 2
 script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 14 )
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_PlayerSprite_animation_finished"]

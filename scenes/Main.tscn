@@ -60,5 +60,6 @@ clip_text = true
 autostart = true
 
 [node name="TestHUD" parent="HUD" instance=ExtResource( 3 )]
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="HUD/RoundTimer" to="HUD" method="_on_RoundTimer_timeout"]

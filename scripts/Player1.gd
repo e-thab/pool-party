@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends KinematicBody2D
 
 
 #signal stats_changed(stat, val)
@@ -23,6 +23,9 @@ var being_hurt = false
 var health = 0.0
 var gun
 
+var dir = Vector2.ZERO
+var mod_friction = 0.18
+
 
 func _ready():
 	gun = weapon_type.instance()
@@ -32,39 +35,34 @@ func _ready():
 
 
 func _process(delta):
+	pass
+
+
+func _physics_process(delta):
 	# get movement input
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	
-	# play animation on move
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed * Stats.SPEED_MODIFIER
+	dir = Vector2(
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	)
+#
+	if dir.length() > 0:
+		dir = dir.normalized() #* speed * Stats.SPEED_MODIFIER
 		if not being_hurt: $AnimatedSprite.play("run")
 	else:
 		if not being_hurt: $AnimatedSprite.play("idle")
 	
-	# face moving direction
-	if velocity.x < 0:
+	# apply movement
+	move_and_collide(dir * speed * delta)
+	
+	# face moving direction and keep state when no direction
+	if dir.x < 0:
 		moving_left = true
-	elif velocity.x > 0:
+	elif dir.x > 0:
 		moving_left = false
 	$AnimatedSprite.flip_h = moving_left
 	
-	# apply velocity to position
-	position += velocity * delta
-	
 	# offset background tile to make it look constant
 	tile.region_rect = Rect2(position.x / 2, position.y / 2, 612, 400)
-	
-	# keep tile on screen even in ludicrous speed - looks bad though
-	#$PlayerCamera.smoothing_speed = speed * 0.05
 
 
 func hurt(n):

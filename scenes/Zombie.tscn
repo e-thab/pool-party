@@ -4,16 +4,18 @@
 [ext_resource path="res://scripts/Zombie.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/Zombie_v1.tres" type="SpriteFrames" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 15 )
+[sub_resource type="CapsuleShape2D" id=1]
+height = 6.0
 
-[node name="Zombie" type="RigidBody2D" groups=[
-"mobs",
-]]
-mode = 3
+[node name="Zombie" type="RigidBody2D" groups=["mobs"]]
+collision_layer = 4
+collision_mask = 7
+mode = 2
+mass = 0.1
 gravity_scale = 0.0
-contacts_reported = 12
+contacts_reported = 2
 contact_monitor = true
+linear_damp = 20.0
 script = ExtResource( 2 )
 zombie_types = [ ExtResource( 3 ), ExtResource( 1 ) ]
 
@@ -21,11 +23,12 @@ zombie_types = [ ExtResource( 3 ), ExtResource( 1 ) ]
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
+
 [connection signal="body_entered" from="." to="." method="_on_Zombie_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

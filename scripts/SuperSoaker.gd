@@ -90,4 +90,4 @@ func _on_ReloadTimer_timeout():
 	update_ammo()
 	$Canvas/ReloadProgress.visible = false
 	reloading = false
-	can_fire = true
+	if $ShotTimer.time_left == 0: can_fire = true

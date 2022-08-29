@@ -3,6 +3,7 @@ extends CanvasLayer
 
 # Declare member variables here. Examples:
 var player
+var fps
 var pos
 var hp_edit
 var dmg_edit
@@ -15,6 +16,7 @@ var reload_edit
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_owner().get_node("Player1")
+	fps = $Labels/FPS
 	pos = $Labels/PlayerPos
 	hp_edit = $Labels/PlayerHP/HPEdit
 	dmg_edit = $Labels/PlayerDmg/DmgEdit
@@ -25,8 +27,9 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pos.text = str(player.position)
+func _process(delta):
+	pos.text = "Pos: " + str(player.position)
+	fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	
 	if not hp_edit.has_focus():
 		hp_edit.text = str(player.health)
