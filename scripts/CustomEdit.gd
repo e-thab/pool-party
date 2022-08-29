@@ -14,5 +14,5 @@ func _process(_delta):
 			np = int(text)
 			text = str(np)
 			emit_signal("value_entered", np)
-			print("health set at " + str(np))
+			print(str(name) + " set at " + str(np))
 			release_focus()

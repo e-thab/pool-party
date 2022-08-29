@@ -8,7 +8,7 @@ export(Array, SpriteFrames) var zombie_types
 
 var max_health = 2.0
 var damage = 0.5
-var speed = 25.0
+var speed = 33.3
 var being_hurt = false
 var health
 

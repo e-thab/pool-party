@@ -5,12 +5,15 @@ extends RigidBody2D
 
 export(PackedScene) var weapon_type
 
-export var max_health = 10.0
-export var speed = 100.0 # percentage
+var max_health = 10.0
+var speed = 100.0 # percentage
 
+var max_ammo = 0 # int, adds to weapon max ammo
 # variables below are percentages that modify base weapon stats
-export var damage = 100.0
-export var fire_rate = 100.0
+var damage = 100.0
+var fire_rate = 100.0
+var shot_speed = 100.0
+var reload_speed = 100.0
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
@@ -25,6 +28,7 @@ func _ready():
 	gun = weapon_type.instance()
 	$GunPosition.add_child(gun)
 	health = max_health
+	update_health_bar()
 
 
 func _process(delta):
@@ -79,7 +83,9 @@ func heal(n):
 
 func update_health_bar():
 	# adjust size of red rect; 36 = full, 0 = empty
-	$AnimatedSprite/HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
+	#$AnimatedSprite/HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
+	$AnimatedSprite/HealthBar.max_value = max_health
+	$AnimatedSprite/HealthBar.value = health
 	
 #	emit_signal("stats_changed", Stats.HEALTH, health)
 	print("player hurt. hp = " + str(health))
