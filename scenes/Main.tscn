@@ -11,7 +11,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 608, 400, 0, 0, 0, 0, 608, -400, 0, 0, 0, 0, -608, -400, 0, 0, 0, 0, -608, 400, 0, 0, 0, 0, 608, 400 )
+"points": PoolVector2Array( 0, 0, 0, 0, 999, 570, 0, 0, 0, 0, 998, -567, 0, 0, 0, 0, -993, -569, 0, 0, 0, 0, -992, 570, 0, 0, 0, 0, 999, 570 )
 }
 
 [sub_resource type="DynamicFont" id=2]
@@ -29,11 +29,12 @@ zombie = ExtResource( 6 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( 608, 399.998 )
-rotation = -1.5708
+position = Vector2( 999, 569.998 )
+rotation = -1.57168
 offset = 0.00341797
 
 [node name="TestCamera" type="Camera2D" parent="."]
+visible = false
 zoom = Vector2( 2, 2 )
 
 [node name="Reference" type="Sprite" parent="."]
@@ -60,6 +61,9 @@ clip_text = true
 autostart = true
 
 [node name="TestHUD" parent="HUD" instance=ExtResource( 3 )]
+
+[node name="TestObject" type="Sprite" parent="."]
+texture = ExtResource( 4 )
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="HUD/RoundTimer" to="HUD" method="_on_RoundTimer_timeout"]

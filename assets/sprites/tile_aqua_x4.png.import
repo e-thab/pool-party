@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/projectile4.png-3b38b399d07d455d4f5b9286313b6654.stex"
+path="res://.import/tile_aqua_x4.png-7355432b2d80ae7865e17504c3b63ff3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/projectile4.png"
-dest_files=[ "res://.import/projectile4.png-3b38b399d07d455d4f5b9286313b6654.stex" ]
+source_file="res://assets/sprites/tile_aqua_x4.png"
+dest_files=[ "res://.import/tile_aqua_x4.png-7355432b2d80ae7865e17504c3b63ff3.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

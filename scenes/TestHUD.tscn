@@ -9,20 +9,22 @@ script = ExtResource( 2 )
 [node name="Labels" type="Control" parent="."]
 anchor_right = 0.226
 anchor_bottom = 1.0
-margin_right = -0.424011
+margin_right = -264.92
 
 [node name="FPS" type="Label" parent="Labels"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 42.0
-margin_bottom = 16.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 24.0
 text = "FPS: "
 
 [node name="PlayerPos" type="Label" parent="Labels"]
 anchor_top = 0.25
 anchor_right = 1.0
 anchor_bottom = 0.25
+margin_left = 7.0
 margin_top = -7.0
+margin_right = 2.0
 margin_bottom = 7.0
 text = "Pos:"
 
@@ -30,19 +32,19 @@ text = "Pos:"
 anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 0.3
+margin_left = 91.0
 margin_top = -7.0
 margin_bottom = 7.0
 text = "HP:"
 
 [node name="HPEdit" type="TextEdit" parent="Labels/PlayerHP"]
 anchor_left = 1.0
-anchor_top = 0.3
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.3
-margin_left = -182.0
-margin_top = -8.2
-margin_right = -135.0
-margin_bottom = 12.8
+anchor_bottom = 0.5
+margin_left = -47.0
+margin_top = -10.5
+margin_bottom = 10.5
 text = "100"
 script = ExtResource( 1 )
 
@@ -50,6 +52,7 @@ script = ExtResource( 1 )
 anchor_top = 0.35
 anchor_right = 1.0
 anchor_bottom = 0.35
+margin_left = 79.0
 margin_top = -7.0
 margin_bottom = 7.0
 text = "Dmg: "
@@ -59,13 +62,12 @@ __meta__ = {
 
 [node name="DmgEdit" type="TextEdit" parent="Labels/PlayerDmg"]
 anchor_left = 1.0
-anchor_top = 0.3
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.3
-margin_left = -182.0
-margin_top = -8.2
-margin_right = -135.0
-margin_bottom = 12.8
+anchor_bottom = 0.5
+margin_left = -47.0
+margin_top = -10.5
+margin_bottom = 10.5
 text = "100"
 script = ExtResource( 1 )
 
@@ -73,19 +75,19 @@ script = ExtResource( 1 )
 anchor_top = 0.4
 anchor_right = 1.0
 anchor_bottom = 0.4
+margin_left = 69.0
 margin_top = -7.0
 margin_bottom = 7.0
 text = "Speed:"
 
 [node name="SpeedEdit" type="TextEdit" parent="Labels/PlayerSpeed"]
 anchor_left = 1.0
-anchor_top = 0.3
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.3
-margin_left = -182.0
-margin_top = -8.2
-margin_right = -135.0
-margin_bottom = 12.8
+anchor_bottom = 0.5
+margin_left = -47.0
+margin_top = -10.5
+margin_bottom = 10.5
 text = "100"
 script = ExtResource( 1 )
 __meta__ = {
@@ -96,6 +98,7 @@ __meta__ = {
 anchor_top = 0.45
 anchor_right = 1.0
 anchor_bottom = 0.45
+margin_left = 54.0
 margin_top = -7.0
 margin_bottom = 7.0
 text = "Fire rate:"
@@ -105,13 +108,12 @@ __meta__ = {
 
 [node name="FireRateEdit" type="TextEdit" parent="Labels/FireRate"]
 anchor_left = 1.0
-anchor_top = 0.3
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.3
-margin_left = -158.646
-margin_top = -8.2
-margin_right = -111.646
-margin_bottom = 12.8
+anchor_bottom = 0.5
+margin_left = -47.0
+margin_top = -10.5
+margin_bottom = 10.5
 text = "100"
 script = ExtResource( 1 )
 __meta__ = {
@@ -122,6 +124,7 @@ __meta__ = {
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+margin_left = 35.0
 margin_top = -7.0
 margin_bottom = 7.0
 text = "Shot speed:"
@@ -131,13 +134,12 @@ __meta__ = {
 
 [node name="ShotSpeedEdit" type="TextEdit" parent="Labels/ShotSpeed"]
 anchor_left = 1.0
-anchor_top = 0.3
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.3
-margin_left = -136.196
-margin_top = -8.2
-margin_right = -89.1965
-margin_bottom = 12.8
+anchor_bottom = 0.5
+margin_left = -46.9995
+margin_top = -10.5
+margin_bottom = 10.5
 text = "100"
 script = ExtResource( 1 )
 __meta__ = {
@@ -148,6 +150,7 @@ __meta__ = {
 anchor_top = 0.55
 anchor_right = 1.0
 anchor_bottom = 0.55
+margin_left = 18.0
 margin_top = -7.0
 margin_bottom = 7.0
 text = "Reload speed:"
@@ -157,13 +160,12 @@ __meta__ = {
 
 [node name="ReloadEdit" type="TextEdit" parent="Labels/Reload"]
 anchor_left = 1.0
-anchor_top = 0.3
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.3
-margin_left = -136.196
-margin_top = -8.2
-margin_right = -89.1965
-margin_bottom = 12.8
+anchor_bottom = 0.5
+margin_left = -46.9995
+margin_top = -10.5
+margin_bottom = 10.5
 text = "100"
 script = ExtResource( 1 )
 

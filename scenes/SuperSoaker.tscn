@@ -14,7 +14,7 @@ font_data = ExtResource( 5 )
 default_font = SubResource( 13 )
 
 [node name="SuperSoaker" type="Sprite"]
-scale = Vector2( 2, 2 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 projectile = ExtResource( 3 )
@@ -32,9 +32,6 @@ margin_right = 204.0
 theme = SubResource( 12 )
 text = "XX/XX"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ReloadProgress" type="ProgressBar" parent="Canvas"]
 visible = false

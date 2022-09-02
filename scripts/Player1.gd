@@ -34,7 +34,7 @@ func _ready():
 	update_health_bar()
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -52,7 +52,7 @@ func _physics_process(delta):
 		if not being_hurt: $AnimatedSprite.play("idle")
 	
 	# apply movement
-	move_and_collide(dir * speed * delta)
+	move_and_collide(dir * speed * Stats.SPEED_MODIFIER * delta)
 	
 	# face moving direction and keep state when no direction
 	if dir.x < 0:
@@ -62,7 +62,7 @@ func _physics_process(delta):
 	$AnimatedSprite.flip_h = moving_left
 	
 	# offset background tile to make it look constant
-	tile.region_rect = Rect2(position.x / 2, position.y / 2, 612, 400)
+	tile.region_rect = Rect2(Vector2(position.x, position.y), screen_size*2)
 
 
 func hurt(n):
@@ -81,9 +81,9 @@ func heal(n):
 
 func update_health_bar():
 	# adjust size of red rect; 36 = full, 0 = empty
-	#$AnimatedSprite/HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
-	$AnimatedSprite/HealthBar.max_value = max_health
-	$AnimatedSprite/HealthBar.value = health
+	#$HealthBar/Fill.rect_size.x = (36.0 / max_health) * health
+	$HealthBar.max_value = max_health
+	$HealthBar.value = health
 	
 #	emit_signal("stats_changed", Stats.HEALTH, health)
 	print("player hurt. hp = " + str(health))

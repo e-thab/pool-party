@@ -13,6 +13,7 @@ onready var player = $Player1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Engine.set_target_fps(Engine.get_iterations_per_second())
+	print("setting fps at " + str(Engine.get_iterations_per_second()))
 	
 	rng.randomize()
 	Input.set_custom_mouse_cursor(crosshair, 0, Vector2(16, 16))
