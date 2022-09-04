@@ -21,7 +21,7 @@ func set_dmg(n):
 
 func set_spd(n):
 	speed = n
-	$Particles2D.amount = $Particles2D.amount * (n / 100.0) # doesn't work?
+	$Particles2D.amount = $Particles2D.amount * (n / 100.0) # lower framerates can't keep up
 
 
 func _on_Projectile_body_entered(body):
@@ -35,4 +35,4 @@ func _on_Lifetime_timeout():
 	$Particles2D.emitting = false
 	$CollisionShape2D.set_deferred("Disabled", true)
 	yield(get_tree().create_timer(1), "timeout")
-	queue_free() # can be called after object is already freed
+	if not null: queue_free()

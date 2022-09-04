@@ -44,7 +44,7 @@ func _process(_delta):
 func _physics_process(delta):
 	# move toward target
 	dir = position.direction_to(move_target.position).normalized()
-	applied_force = dir * speed * delta * 100
+	applied_force = dir * speed * Stats.SPEED_MODIFIER * delta * 100
 	
 	# flip sprite left/right
 	if dir.x < 0:

@@ -12,8 +12,14 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(_delta):
+	if Input.is_action_just_pressed("pause"):
+		if get_tree().paused:
+			$PauseLabel.hide()
+			get_tree().paused = false
+		else:
+			get_tree().paused = true
+			$PauseLabel.show()
 
 
 func update_time(hp):

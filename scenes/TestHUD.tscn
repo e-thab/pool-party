@@ -12,11 +12,38 @@ anchor_bottom = 1.0
 margin_right = -264.92
 
 [node name="FPS" type="Label" parent="Labels"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 50.0
-margin_bottom = 24.0
+margin_left = 70.0
+margin_top = 14.0
+margin_right = 169.0
+margin_bottom = 28.0
 text = "FPS: "
+
+[node name="FPSEdit" type="LineEdit" parent="Labels/FPS"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -111.5
+margin_top = -13.0
+margin_right = -53.5
+margin_bottom = 11.0
+
+[node name="TimeScale" type="Label" parent="Labels"]
+margin_left = 7.0
+margin_top = 228.0
+margin_right = 84.0
+margin_bottom = 242.0
+text = "Time Scale: "
+
+[node name="TimeScaleEdit" type="LineEdit" parent="Labels/TimeScale"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 38.5
+margin_top = -12.0
+margin_right = 96.5
+margin_bottom = 12.0
 
 [node name="PlayerPos" type="Label" parent="Labels"]
 anchor_top = 0.25
@@ -169,6 +196,10 @@ margin_bottom = 10.5
 text = "100"
 script = ExtResource( 1 )
 
+[connection signal="text_entered" from="Labels/FPS/FPSEdit" to="." method="_on_TextEdit_text_entered"]
+[connection signal="text_entered" from="Labels/FPS/FPSEdit" to="." method="_on_FPSEdit_text_entered"]
+[connection signal="text_entered" from="Labels/TimeScale/TimeScaleEdit" to="." method="_on_TextEdit_text_entered"]
+[connection signal="text_entered" from="Labels/TimeScale/TimeScaleEdit" to="." method="_on_TimeScaleEdit_text_entered"]
 [connection signal="value_entered" from="Labels/PlayerHP/HPEdit" to="." method="_on_HPEdit_value_entered"]
 [connection signal="value_entered" from="Labels/PlayerDmg/DmgEdit" to="." method="_on_DmgEdit_value_entered"]
 [connection signal="value_entered" from="Labels/PlayerSpeed/SpeedEdit" to="." method="_on_SpeedEdit_value_entered"]

@@ -68,3 +68,13 @@ func _on_ReloadEdit_value_entered(val):
 
 func _on_FireRateEdit_value_entered(val):
 	player.fire_rate = val
+
+
+func _on_TimeScaleEdit_text_entered(new_text):
+	$Labels/TimeScale/TimeScaleEdit.release_focus()
+	Engine.time_scale = float(new_text)
+
+
+func _on_FPSEdit_text_entered(new_text):
+	$Labels/FPS/FPSEdit.release_focus()
+	Engine.set_target_fps(int(new_text))

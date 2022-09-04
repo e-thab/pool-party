@@ -44,11 +44,13 @@ func _physics_process(delta):
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	)
-#
+	
 	if dir.length() > 0:
+		Engine.time_scale = 1
 		dir = dir.normalized() #* speed * Stats.SPEED_MODIFIER
 		if not being_hurt: $AnimatedSprite.play("run")
 	else:
+		Engine.time_scale = 0.2
 		if not being_hurt: $AnimatedSprite.play("idle")
 	
 	# apply movement

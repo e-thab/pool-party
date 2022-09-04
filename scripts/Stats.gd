@@ -1,7 +1,7 @@
 extends Node
 
 # AutoLoad stats
-const SPEED_MODIFIER = 1.5
+const SPEED_MODIFIER = 2
 
 enum {
 	HEALTH, 

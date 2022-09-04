@@ -9,7 +9,7 @@ onready var player = get_tree().get_nodes_in_group("player")[0]
 var base_dmg = 1.0
 var base_rate = 0.4
 var base_reload = 1.0 
-var base_spd = 100.0
+var base_spd = 200.0
 var base_ammo = 12
 var can_fire = true
 var reloading = false
@@ -28,7 +28,7 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_pressed("primary_fire") and can_fire:
 		shoot()
-	elif Input.is_action_just_pressed("reload"):
+	elif Input.is_action_just_pressed("reload") and not reloading:
 		reload()
 	
 	if reloading:
