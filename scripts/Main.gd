@@ -2,13 +2,10 @@ extends Node
 
 
 # Declare member variables here. Examples:
-var rng = RandomNumberGenerator.new()
-
 export(Resource) var crosshair
 export(PackedScene) var zombie
 
 onready var player = $Player1
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +16,7 @@ func _ready():
 	#Engine.time_scale = 5
 	
 	Input.set_custom_mouse_cursor(crosshair, 0, Vector2(16, 16))
-	rng.randomize()
+	randomize()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -30,6 +27,6 @@ func _on_MobTimer_timeout():
 	# spawn a zombie at a random point on MobPath
 	var mob = zombie.instance()
 	var spawn_loc = $MobPath/MobSpawnLocation
-	spawn_loc.offset = rng.randi()
+	spawn_loc.offset = randi()
 	mob.position = player.position + spawn_loc.position
 	add_child(mob)

@@ -39,7 +39,7 @@ rotation = -1.57168
 offset = 0.00341797
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.5
 autostart = true
 
 [node name="TestCamera" type="Camera2D" parent="."]

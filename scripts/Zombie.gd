@@ -20,8 +20,6 @@ func _ready():
 	health = max_health
 	move_target = player
 	
-	# randomly choose sprite type
-	randomize()
 	$AnimatedSprite.frames = zombie_types[randi() % 2]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,10 +39,29 @@ func _physics_process(delta):
 	dir = position.direction_to(move_target.position).normalized()
 	applied_force = dir * speed * Stats.SPEED_MODIFIER * delta * 100
 	
-	for c in get_colliding_bodies():
-		if c.is_in_group("mobs"):
-			#apply_central_impulse((position - c.position) * 10)
-			add_central_force((position - c.position).normalized() * (delta*100)) # weird
+	# naive pathfinding, doesn't really work:
+#	var rot
+#	for c in get_colliding_bodies():
+#		if c.is_in_group("mobs") and (
+#			(move_target.position - position).length() > (move_target.position - c.position).length()
+#			):
+#			#var r = deg2rad(randi() % 180 - 90)
+#			#apply_central_impulse((position - c.position).rotated(r) / 2)
+#
+#			var relative = position.angle_to(c.position)
+#			rot = dir.rotated( (PI/2) * (int(relative > dir.angle()) * -1) )
+#
+#			if relative < dir.angle():
+#				add_central_force(dir.rotated(PI/2) * 100)
+#			else:
+#				add_central_force(dir.rotated(-PI/2) * 100)
+#	
+#	if rot:
+#		applied_force = rot * speed * Stats.SPEED_MODIFIER * delta * 100
+#		#add_central_force(-dir * 600)
+#	else:
+#		applied_force = dir * speed * Stats.SPEED_MODIFIER * delta * 100
+	$DebugMovement.set_point_position(1, applied_force.normalized() * 50)
 	
 	# flip sprite left/right
 	if dir.x < 0:
