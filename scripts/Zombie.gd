@@ -26,15 +26,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if (position - player.position).length() > 3000:
+	if (position - player.position).length() > 4000:
 		queue_free()
 	if health <= 0:
 		die()
-	
-	# move toward target
-	#velocity = position.direction_to(move_target.position).normalized()
-	#velocity = velocity * speed * Stats.SPEED_MODIFIER
-	#position += velocity * delta
 	
 	# wait until hurt animation is done to resume walk
 	if not being_hurt:
@@ -45,6 +40,11 @@ func _physics_process(delta):
 	# move toward target
 	dir = position.direction_to(move_target.position).normalized()
 	applied_force = dir * speed * Stats.SPEED_MODIFIER * delta * 100
+	
+	for c in get_colliding_bodies():
+		if c.is_in_group("mobs"):
+			#apply_central_impulse((position - c.position) * 10)
+			add_central_force((position - c.position).normalized() * (delta*100)) # weird
 	
 	# flip sprite left/right
 	if dir.x < 0:
@@ -57,7 +57,7 @@ func hurt(n):
 	health -= n
 	being_hurt = true
 	$AnimatedSprite.play("hurt")
-	print("zombie hurt. hp = " + str(health))
+	#print("zombie hurt. hp = " + str(health))
 
 
 func die():

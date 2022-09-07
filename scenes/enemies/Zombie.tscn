@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/sprites/Zombie_v2.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://assets/variants/Zombie_v2.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scripts/Zombie.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/Zombie_v1.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://assets/variants/Zombie_v1.tres" type="SpriteFrames" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 8.0
@@ -13,7 +13,7 @@ collision_mask = 7
 mode = 2
 mass = 0.1
 gravity_scale = 0.0
-contacts_reported = 2
+contacts_reported = 8
 contact_monitor = true
 linear_damp = 20.0
 script = ExtResource( 2 )
@@ -23,6 +23,7 @@ zombie_types = [ ExtResource( 3 ), ExtResource( 1 ) ]
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "walk"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

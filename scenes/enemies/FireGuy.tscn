@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/sprites/eyes.png" type="Texture" id=1]
-[ext_resource path="res://scripts/Mob1.gd" type="Script" id=2]
-[ext_resource path="res://assets/FireParticleWhite.tres" type="Material" id=3]
-[ext_resource path="res://assets/FireParticle.tres" type="Material" id=4]
+[ext_resource path="res://scripts/Mob1.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/eyes.png" type="Texture" id=2]
+[ext_resource path="res://assets/themes/FireParticle.tres" type="Material" id=3]
+[ext_resource path="res://assets/themes/FireParticleWhite.tres" type="Material" id=4]
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -22,13 +22,13 @@ mode = 3
 gravity_scale = 0.0
 contacts_reported = 2
 contact_monitor = true
-script = ExtResource( 2 )
-fire_material = ExtResource( 4 )
-hurt_material = ExtResource( 3 )
+script = ExtResource( 1 )
+fire_material = ExtResource( 3 )
+hurt_material = ExtResource( 4 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 amount = 96
-process_material = ExtResource( 4 )
+process_material = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )

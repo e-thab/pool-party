@@ -46,15 +46,14 @@ func _physics_process(delta):
 	)
 	
 	if dir.length() > 0:
-		Engine.time_scale = 1
 		dir = dir.normalized() #* speed * Stats.SPEED_MODIFIER
 		if not being_hurt: $AnimatedSprite.play("run")
 	else:
-		Engine.time_scale = 0.2
 		if not being_hurt: $AnimatedSprite.play("idle")
 	
 	# apply movement
 	move_and_collide(dir * speed * Stats.SPEED_MODIFIER * delta)
+	#move_and_slide(dir * speed * Stats.SPEED_MODIFIER)
 	
 	# face moving direction and keep state when no direction
 	if dir.x < 0:
