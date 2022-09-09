@@ -181,9 +181,6 @@ margin_left = 18.0
 margin_top = -7.0
 margin_bottom = 7.0
 text = "Reload speed:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ReloadEdit" type="TextEdit" parent="Labels/Reload"]
 anchor_left = 1.0

@@ -1,5 +1,8 @@
 extends Sprite
 
+signal reload(time)
+signal stop_reload()
+signal update_ammo(amt, maxm)
 
 # Declare member variables here. Examples:
 export(PackedScene) var projectile
@@ -8,7 +11,7 @@ onready var player = get_tree().get_nodes_in_group("player")[0]
 
 var base_dmg = 1.0
 var base_rate = 0.4
-var base_reload = 1.0 
+var base_reload = 1.0
 var base_spd = 200.0
 var base_ammo = 12
 var can_fire = true
@@ -19,7 +22,7 @@ var ammo
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	max_ammo = base_ammo + player.max_ammo
+	max_ammo = base_ammo + player.ammo_mod
 	ammo = max_ammo
 	update_ammo()
 
@@ -28,13 +31,10 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_pressed("primary_fire") and can_fire:
 		shoot()
-	elif Input.is_action_just_pressed("reload") and not reloading:
+	elif Input.is_action_just_pressed("reload") and not reloading and not ammo == max_ammo:
 		reload()
 	
-	if reloading:
-		display_reload() # show reload timer indicator
-	
-	flip_v = global_rotation < (-PI/2) or global_rotation > (PI/2)
+	flip_v = global_rotation < (-PI/2) or global_rotation > (PI/2) # use abs() for easier comparison
 
 
 func shoot():
@@ -42,7 +42,7 @@ func shoot():
 		stop_reload()
 	
 	can_fire = false
-	$ShotTimer.wait_time = base_rate * (player.fire_rate / 100.0) # make this inverse
+	$ShotTimer.wait_time = base_rate * (100.0 / player.fire_rate)
 	$ShotTimer.start()
 	
 	var proj_inst = projectile.instance()
@@ -59,25 +59,18 @@ func shoot():
 
 
 func update_ammo():
-	$Canvas/AmmoLabel.text = str(ammo) + "/" + str(max_ammo)
+	emit_signal("update_ammo", ammo, max_ammo)
 
 
 func reload():
 	reloading = true
-	$Canvas/ReloadProgress.visible = true
-	$ReloadTimer.wait_time = base_reload * (player.reload_speed / 100.0)
-	$ReloadTimer.start()
-
-
-func display_reload():
-	$Canvas/ReloadProgress.max_value = $ReloadTimer.wait_time
-	$Canvas/ReloadProgress.value = $ReloadTimer.wait_time - $ReloadTimer.time_left
+	emit_signal("reload", base_reload * (100.0 / player.reload_speed))
 
 
 func stop_reload():
 	reloading = false
-	$ReloadTimer.stop()
-	$Canvas/ReloadProgress.visible = false
+	emit_signal("stop_reload")
+	update_ammo()
 
 
 func _on_ShotTimer_timeout():
@@ -85,9 +78,8 @@ func _on_ShotTimer_timeout():
 		can_fire = true
 
 
-func _on_ReloadTimer_timeout():
+func _on_reload_done():
 	ammo = max_ammo
 	update_ammo()
-	$Canvas/ReloadProgress.visible = false
 	reloading = false
-	if $ShotTimer.time_left == 0: can_fire = true
+	can_fire = $ShotTimer.time_left == 0

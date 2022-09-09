@@ -1,10 +1,10 @@
 extends RigidBody2D
 
 
-# Declare member variables here. Examples:
-onready var player  = get_tree().get_nodes_in_group("player")[0]
+signal enemy_death
 
 export(Array, SpriteFrames) var zombie_types
+onready var player  = get_tree().get_nodes_in_group("player")[0]
 
 var max_health = 2.0
 var damage = 0.5
@@ -79,6 +79,7 @@ func hurt(n):
 
 func die():
 	# do death stuff
+	emit_signal("enemy_death")
 	queue_free()
 
 
