@@ -1,8 +1,8 @@
-extends Sprite
+extends Node2D
 
-signal reload(time)
-signal stop_reload()
-signal update_ammo(amt, maxm)
+#signal reload(time)
+#signal stop_reload()
+#signal update_ammo(amt, maxm)
 
 # Declare member variables here. Examples:
 export(PackedScene) var projectile
@@ -14,17 +14,20 @@ var base_rate = 0.4
 var base_reload = 1.0
 var base_spd = 200.0
 var base_ammo = 12
-var can_fire = true
-var reloading = false
 
 var max_ammo
 var ammo
+var can_fire = true
+var reloading = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	max_ammo = base_ammo + player.ammo_mod
 	ammo = max_ammo
 	update_ammo()
+	
+	# set reload UI as top level so it doesn't follow weapon transform position
+	$UI.set_as_toplevel(true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +37,14 @@ func _process(_delta):
 	elif Input.is_action_just_pressed("reload") and not reloading and not ammo == max_ammo:
 		reload()
 	
-	flip_v = global_rotation < (-PI/2) or global_rotation > (PI/2) # use abs() for easier comparison
+	if reloading:
+		display_reload() # show reload timer indicator
+	
+	$Sprite.flip_v = global_rotation < (-PI/2) or global_rotation > (PI/2) # use abs() for easier comparison
+
+
+func _physics_process(_delta):
+	$UI.position = player.position
 
 
 func shoot():
@@ -59,26 +69,33 @@ func shoot():
 
 
 func update_ammo():
-	emit_signal("update_ammo", ammo, max_ammo)
+	$UI/AmmoBar.max_value = max_ammo
+	$UI/AmmoBar.value = ammo
+	$UI/AmmoLabel.text = str(ammo) + "/" + str(max_ammo)
 
 
 func reload():
 	reloading = true
-	emit_signal("reload", base_reload * (100.0 / player.reload_speed))
+	$ReloadTimer.wait_time = base_reload * (100.0 / player.reload_speed)
+	$UI/AmmoBar.max_value = $ReloadTimer.wait_time
+	$ReloadTimer.start()
+
+
+func display_reload():
+	$UI/AmmoBar.value = $ReloadTimer.wait_time - $ReloadTimer.time_left
 
 
 func stop_reload():
 	reloading = false
-	emit_signal("stop_reload")
+	$ReloadTimer.stop()
 	update_ammo()
 
 
 func _on_ShotTimer_timeout():
-	if ammo > 0:
-		can_fire = true
+	can_fire = ammo > 0
 
 
-func _on_reload_done():
+func _on_ReloadTimer_timeout():
 	ammo = max_ammo
 	update_ammo()
 	reloading = false

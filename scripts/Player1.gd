@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 
 #signal stats_changed(stat, val)
-signal reload_done
 
 export(PackedScene) var weapon_type
 
@@ -19,7 +18,6 @@ onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
 
 #var moving_left = false
-var reloading = false
 var being_hurt = false
 var health = 0.0
 var gun
@@ -32,19 +30,14 @@ func _ready():
 	# create exported weapon type instance
 	gun = weapon_type.instance()
 	$GunPosition.add_child(gun)
-	gun.connect("reload", self, "_on_reload")
-	gun.connect("update_ammo", self, "_on_update_ammo")
-	gun.connect("stop_reload", self, "_on_stop_reload")
-	connect("reload_done", gun, "_on_reload_done")
 	
 	# set health
 	health = max_health
 	update_health_bar()
 
 
-func _process(_delta):
-	if reloading:
-		display_reload() # show reload timer indicator
+#func _process(_delta):
+#	pass
 
 
 func _physics_process(delta):
@@ -99,37 +92,9 @@ func update_health_bar():
 	$HealthBar.max_value = max_health
 	$HealthBar.value = health
 #	emit_signal("stats_changed", Stats.HEALTH, health)
-#	print("player hurt. hp = " + str(health))
-
-
-func display_reload():
-	$AmmoBar.value = $ReloadTimer.wait_time - $ReloadTimer.time_left
 
 
 func _on_PlayerSprite_animation_finished():
 	if $AnimatedSprite.animation == "hurt":
 		being_hurt = false # make this (invincibility duration) more controllable
 		$AnimatedSprite.stop()
-
-
-func _on_reload(time):
-	reloading = true
-	$AmmoBar.max_value = $ReloadTimer.wait_time
-	$ReloadTimer.wait_time = time
-	$ReloadTimer.start()
-
-
-func _on_update_ammo(amt, maxm):
-	$AmmoBar.max_value = maxm
-	$AmmoBar.value = amt
-	$AmmoLabel.text = str(amt) + "/" + str(maxm)
-
-
-func _on_ReloadTimer_timeout():
-	reloading = false
-	emit_signal("reload_done")
-
-
-func _on_stop_reload():
-	reloading = false
-	$ReloadTimer.stop()

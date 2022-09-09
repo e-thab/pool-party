@@ -34,5 +34,5 @@ func _on_Projectile_body_entered(body):
 func _on_Lifetime_timeout():
 	$Particles2D.emitting = false
 	$CollisionShape2D.set_deferred("Disabled", true)
-	yield(get_tree().create_timer(1), "timeout")
+	yield(get_tree().create_timer(1), "timeout") # can resume after projectile is freed
 	if not null: queue_free()

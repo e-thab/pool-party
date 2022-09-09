@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/sprites/sheets/char_1_16.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player1.gd" type="Script" id=2]
@@ -6,7 +6,14 @@
 [ext_resource path="res://scripts/GunPosition.gd" type="Script" id=4]
 [ext_resource path="res://scenes/weapons/SuperSoaker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://assets/themes/8b_font_theme.tres" type="Theme" id=7]
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -32,16 +39,13 @@ region = Rect2( 32, 32, 16, 16 )
 atlas = ExtResource( 1 )
 region = Rect2( 48, 32, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 16, 16 )
-
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "hurt",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
 "name": "idle",
@@ -51,11 +55,6 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 8.0
-}, {
-"frames": [ SubResource( 8 ), SubResource( 9 ) ],
-"loop": false,
-"name": "hurt",
-"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=15]
@@ -66,19 +65,6 @@ bg_color = Color( 0.788235, 0.313726, 0.313726, 1 )
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
-
-[sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 0, 0.772549, 1, 1 )
-
-[sub_resource type="StyleBoxFlat" id=20]
-bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
-
-[sub_resource type="DynamicFont" id=13]
-size = 22
-font_data = ExtResource( 6 )
-
-[sub_resource type="Theme" id=16]
-default_font = SubResource( 13 )
 
 [sub_resource type="CapsuleShape2D" id=14]
 radius = 19.0
@@ -101,7 +87,6 @@ region_rect = Rect2( 0, 0, 1920, 1080 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]
@@ -118,39 +103,6 @@ custom_styles/fg = SubResource( 17 )
 custom_styles/bg = SubResource( 18 )
 value = 50.0
 percent_visible = false
-
-[node name="AmmoBar" type="ProgressBar" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -85.0
-margin_top = 71.0
-margin_right = 85.0
-margin_bottom = 90.0
-grow_horizontal = 2
-theme = ExtResource( 7 )
-custom_styles/fg = SubResource( 19 )
-custom_styles/bg = SubResource( 20 )
-value = 50.0
-percent_visible = false
-
-[node name="ReloadTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="AmmoLabel" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -204.0
-margin_top = 94.0
-margin_right = 204.0
-margin_bottom = 128.0
-theme = SubResource( 16 )
-text = "XX/XX"
-align = 1
-valign = 1
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true
@@ -169,4 +121,3 @@ shape = SubResource( 14 )
 [node name="Pickups" type="Node" parent="."]
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_PlayerSprite_animation_finished"]
-[connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
