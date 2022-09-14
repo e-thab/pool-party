@@ -6,11 +6,11 @@ export(PackedScene) var projectile
 onready var root = get_tree().get_root()
 onready var player = get_tree().get_nodes_in_group("player")[0]
 
-var base_dmg = 1.0
-var base_rate = 1.0
-var base_reload = 1.0
-var base_spd = 100.0
-var base_ammo = 10
+var base_dmg = 1.0       # literal damage value
+var base_rate = 100.0    # fire rate, percentage of 1 sec
+var base_reload = 100.0  # reload rate, percentage of 1 sec
+var base_spd = 100.0     # projectile speed, arbitrary for now
+var base_ammo = 10       # literal number of shots
 
 var max_ammo
 var ammo
@@ -48,7 +48,7 @@ func _physics_process(_delta):
 
 func shoot():
 	can_fire = false
-	$ShotTimer.wait_time = base_rate * (100.0 / player.fire_rate)
+	$ShotTimer.wait_time = (base_rate / 100.0) * (100.0 / player.fire_rate)
 	$ShotTimer.start()
 	
 	var proj_inst = projectile.instance()
@@ -72,7 +72,7 @@ func update_ammo():
 
 func reload():
 	reloading = true
-	$ReloadTimer.wait_time = base_reload * (100.0 / player.reload_speed)
+	$ReloadTimer.wait_time = (base_reload / 100.0) * (100.0 / player.reload_speed)
 	$UI/AmmoBar.max_value = $ReloadTimer.wait_time
 	$ReloadTimer.start()
 
