@@ -2,51 +2,37 @@ extends CanvasLayer
 
 
 # Declare member variables here. Examples:
-var player
-var fps
-var tscale
-#var pos
-var max_hp_edit
-var hp_edit
-var dmg_edit
-var speed_edit
-var ammo_edit
-var fire_rate_edit
-var reload_speed_edit
-var shot_speed_edit
-var shot_count_edit
-var shot_spread_edit
-var piercing_edit
+onready var player = get_tree().get_nodes_in_group("player")[0]
+onready var fps = $Control/FPS
+onready var tscale = $Control/TimeScale
+onready var max_hp_edit = $Control/MaxHP
+onready var hp_edit = $Control/HP
+onready var dmg_edit = $Control/Dmg
+onready var speed_edit = $Control/Speed
+onready var ammo_edit = $Control/Ammo
+onready var fire_rate_edit = $Control/FireRate
+onready var reload_speed_edit = $Control/ReloadSpeed
+onready var shot_speed_edit = $Control/ShotSpeed
+onready var shot_count_edit = $Control/ShotCount
+onready var shot_spread_edit = $Control/ShotSpread
+onready var piercing_edit = $Control/Piercing
 
+#var pos
 var controls
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_owner().get_node("Player1")
-	fps = $Control/FPS/Label
-	tscale = $Control/TimeScale
-	#pos = $Labels/PlayerPos
-	max_hp_edit = $Control/MaxHP
-	hp_edit = $Control/HP
-	dmg_edit = $Control/FPS
-	speed_edit = $Control/Speed
-	ammo_edit = $Control/Ammo
-	fire_rate_edit = $Control/FireRate
-	reload_speed_edit = $Control/ReloadSpeed
-	shot_speed_edit = $Control/ShotSpeed
-	shot_count_edit = $Control/ShotCount
-	shot_spread_edit = $Control/ShotSpread
-	piercing_edit = $Control/Piercing
-	
-	controls = [fps, tscale, max_hp_edit, hp_edit, dmg_edit, speed_edit, ammo_edit, fire_rate_edit,
-	reload_speed_edit, shot_speed_edit, shot_count_edit, shot_spread_edit, piercing_edit]
+	pass
+	#controls = [fps, tscale, max_hp_edit, hp_edit, dmg_edit, speed_edit, ammo_edit, fire_rate_edit,
+	#reload_speed_edit, shot_speed_edit, shot_count_edit, shot_spread_edit, piercing_edit]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 #	pos.text = "Pos: " + str(player.position)
-	fps.text = "FPS: " + str(Engine.get_frames_per_second())
+	$Control/FPS/Label.text = "FPS: " + str(Engine.get_frames_per_second())
+	
 	
 #	if not hp_edit.has_focus():
 #		hp_edit.text = str(player.health)
@@ -100,51 +86,64 @@ func _process(_delta):
 func _on_FPS_text_entered(new_text):
 	Engine.set_target_fps(int(new_text))
 	$Control/FPS/Label.text = "FPS: " + new_text
+	fps.release_focus()
 
 
 func _on_TimeScale_text_entered(new_text):
 	Engine.time_scale = float(new_text)
+	tscale.release_focus()
 
 
 func _on_MaxHP_text_entered(new_text):
-	pass # Replace with function body.
+	player.max_health = float(new_text)
+	max_hp_edit.release_focus()
 
 
 func _on_HP_text_entered(new_text):
-	pass # Replace with function body.
+	player.health = float(new_text)
+	hp_edit.release_focus()
 
 
 func _on_Dmg_text_entered(new_text):
-	pass # Replace with function body.
+	player.damage = float(new_text)
+	dmg_edit.release_focus()
 
 
 func _on_Speed_text_entered(new_text):
-	pass # Replace with function body.
+	player.speed = float(new_text)
+	speed_edit.release_focus()
 
 
 func _on_Ammo_text_entered(new_text):
-	pass # Replace with function body.
+	player.ammo_mod = float(new_text)
+	ammo_edit.release_focus()
 
 
 func _on_FireRate_text_entered(new_text):
-	pass # Replace with function body.
+	player.fire_rate = float(new_text)
+	fire_rate_edit.release_focus()
 
 
 func _on_ReloadSpeed_text_entered(new_text):
-	pass # Replace with function body.
+	player.reload_speed = float(new_text)
+	reload_speed_edit.release_focus()
 
 
 func _on_ShotSpeed_text_entered(new_text):
-	pass # Replace with function body.
+	player.shot_speed = float(new_text)
+	shot_speed_edit.release_focus()
 
 
 func _on_ShotCount_text_entered(new_text):
-	pass # Replace with function body.
+	player.shot_count = float(new_text)
+	shot_count_edit.release_focus()
 
 
 func _on_ShotSpread_text_entered(new_text):
-	pass # Replace with function body.
+	player.shot_spread = float(new_text)
+	shot_spread_edit.release_focus()
 
 
 func _on_Piercing_text_entered(new_text):
-	pass # Replace with function body.
+	player.piercing = float(new_text)
+	piercing_edit.release_focus()
