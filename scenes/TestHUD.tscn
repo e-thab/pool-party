@@ -193,10 +193,10 @@ margin_bottom = 10.5
 text = "100"
 script = ExtResource( 1 )
 
-[connection signal="text_entered" from="Labels/FPS/FPSEdit" to="." method="_on_TextEdit_text_entered"]
 [connection signal="text_entered" from="Labels/FPS/FPSEdit" to="." method="_on_FPSEdit_text_entered"]
-[connection signal="text_entered" from="Labels/TimeScale/TimeScaleEdit" to="." method="_on_TextEdit_text_entered"]
+[connection signal="text_entered" from="Labels/FPS/FPSEdit" to="." method="_on_TextEdit_text_entered"]
 [connection signal="text_entered" from="Labels/TimeScale/TimeScaleEdit" to="." method="_on_TimeScaleEdit_text_entered"]
+[connection signal="text_entered" from="Labels/TimeScale/TimeScaleEdit" to="." method="_on_TextEdit_text_entered"]
 [connection signal="value_entered" from="Labels/PlayerHP/HPEdit" to="." method="_on_HPEdit_value_entered"]
 [connection signal="value_entered" from="Labels/PlayerDmg/DmgEdit" to="." method="_on_DmgEdit_value_entered"]
 [connection signal="value_entered" from="Labels/PlayerSpeed/SpeedEdit" to="." method="_on_SpeedEdit_value_entered"]

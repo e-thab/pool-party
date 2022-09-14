@@ -11,8 +11,11 @@ var ammo_mod = 0 # int, adds to weapon max ammo
 # variables below are percentages that modify base weapon stats
 var damage = 100.0
 var fire_rate = 100.0
-var shot_speed = 100.0
 var reload_speed = 100.0
+
+var shot_speed = 100.0
+var shot_count = 0
+var shot_spread = 20
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG

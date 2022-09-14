@@ -10,7 +10,10 @@ var base_dmg = 1.0       # literal damage value
 var base_rate = 100.0    # fire rate, percentage of 1 sec
 var base_reload = 100.0  # reload rate, percentage of 1 sec
 var base_spd = 100.0     # projectile speed, arbitrary for now
-var base_ammo = 10       # literal number of shots
+var base_ammo = 10       # literal number of shots per mag
+var base_shot_count = 1  # literal number of projectiles per shot
+var base_spread = 10.0   # arc spread in degrees for guns w/ multi shot
+var multi_shot = false   # flag for guns with multiple shots by default
 
 var max_ammo
 var ammo
@@ -51,17 +54,31 @@ func shoot():
 	$ShotTimer.wait_time = (base_rate / 100.0) * (100.0 / player.fire_rate)
 	$ShotTimer.start()
 	
-	var proj_inst = projectile.instance()
-	root.add_child(proj_inst)
-	proj_inst.position = $ShotOrigin.global_position
-	proj_inst.rotation = $ShotOrigin.global_rotation
-	proj_inst.set_dmg(base_dmg * (player.damage / 100.0))
-	proj_inst.set_spd(base_spd * (player.shot_speed / 100.0))
+	if multi_shot or player.shot_count > 0:
+		var shot_count = base_shot_count + player.shot_count
+		var spread = max(base_spread, player.shot_spread)
+		var theta = $ShotOrigin.global_rotation_degrees + spread/2
+		var inc = spread / (shot_count - 1)
+		
+		for i in range(shot_count):
+			instance_projectile(deg2rad(theta))
+			theta -= inc
+	else:
+		instance_projectile($ShotOrigin.global_rotation)
 	
 	ammo -= 1
 	update_ammo()
 	if ammo <= 0:
 		reload()
+
+
+func instance_projectile(rot):
+	var proj_inst = projectile.instance()
+	root.add_child(proj_inst)
+	proj_inst.position = $ShotOrigin.global_position
+	proj_inst.rotation = rot
+	proj_inst.set_dmg(base_dmg * (player.damage / 100.0))
+	proj_inst.set_spd(base_spd * (player.shot_speed / 100.0))
 
 
 func update_ammo():
