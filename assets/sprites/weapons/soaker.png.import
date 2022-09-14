@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/char_1_base.png-29c72d84442c15ec015f23cae122a5e5.stex"
+path="res://.import/soaker.png-87fa11e1a05d9fd22976b4fce4ea3e2f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/char_1_base.png"
-dest_files=[ "res://.import/char_1_base.png-29c72d84442c15ec015f23cae122a5e5.stex" ]
+source_file="res://assets/sprites/weapons/soaker.png"
+dest_files=[ "res://.import/soaker.png-87fa11e1a05d9fd22976b4fce4ea3e2f.stex" ]
 
 [params]
 

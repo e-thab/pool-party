@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_aqua.png-d51d871e252a87116e5e5560e9fc58ce.stex"
+path="res://.import/water_ball_1.png-7bfc16e706b2d029360137946e4db73c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tile_aqua.png"
-dest_files=[ "res://.import/tile_aqua.png-d51d871e252a87116e5e5560e9fc58ce.stex" ]
+source_file="res://assets/sprites/weapons/water_ball_1.png"
+dest_files=[ "res://.import/water_ball_1.png-7bfc16e706b2d029360137946e4db73c.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

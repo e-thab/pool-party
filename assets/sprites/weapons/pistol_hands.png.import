@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/projectile3_small.png-62cecde3523622904284df0e46812afb.stex"
+path="res://.import/pistol_hands.png-489c0abe04b88fc809135fa2e246986f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/projectile3_small.png"
-dest_files=[ "res://.import/projectile3_small.png-62cecde3523622904284df0e46812afb.stex" ]
+source_file="res://assets/sprites/weapons/pistol_hands.png"
+dest_files=[ "res://.import/pistol_hands.png-489c0abe04b88fc809135fa2e246986f.stex" ]
 
 [params]
 

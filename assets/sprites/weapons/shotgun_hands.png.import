@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_aqua_x4.png-7355432b2d80ae7865e17504c3b63ff3.stex"
+path="res://.import/shotgun_hands.png-1b275b9f9597382d9696500005a46406.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tile_aqua_x4.png"
-dest_files=[ "res://.import/tile_aqua_x4.png-7355432b2d80ae7865e17504c3b63ff3.stex" ]
+source_file="res://assets/sprites/weapons/shotgun_hands.png"
+dest_files=[ "res://.import/shotgun_hands.png-1b275b9f9597382d9696500005a46406.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

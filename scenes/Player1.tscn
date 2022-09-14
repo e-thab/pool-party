@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/sprites/sheets/robby_16.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player1.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/tile_aqua_x4.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/misc/tile_aqua_x4.png" type="Texture" id=3]
 [ext_resource path="res://scripts/GunPosition.gd" type="Script" id=4]
 [ext_resource path="res://scenes/weapons/SuperSoaker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=6]

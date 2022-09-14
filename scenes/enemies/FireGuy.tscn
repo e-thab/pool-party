@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Mob1.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/eyes.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/enemies/eyes.png" type="Texture" id=2]
 [ext_resource path="res://assets/themes/FireParticle.tres" type="Material" id=3]
 [ext_resource path="res://assets/themes/FireParticleWhite.tres" type="Material" id=4]
 
