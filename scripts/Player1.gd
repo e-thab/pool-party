@@ -8,14 +8,16 @@ export(PackedScene) var weapon_type
 var max_health = 10.0
 var speed = 100.0 # percentage
 var ammo_mod = 0 # int, adds to weapon max ammo
-# variables below are percentages that modify base weapon stats
+
+# percentages that modify base weapon stats
 var damage = 100.0
 var fire_rate = 100.0
 var reload_speed = 100.0
-
 var shot_speed = 100.0
+
 var shot_count = 0
 var shot_spread = 20
+var piercing = 0 # unused
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
