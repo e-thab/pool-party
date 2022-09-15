@@ -10,10 +10,9 @@ var base_dmg = 1.0       # literal damage value
 var base_rate = 100.0    # fire rate, percentage of 1 sec
 var base_reload = 100.0  # reload rate, percentage of 1 sec
 var base_spd = 100.0     # projectile speed, arbitrary for now
-var base_ammo = 10       # literal number of shots per mag
+var base_ammo = 1        # literal number of shots per mag
 var base_shot_count = 1  # literal number of projectiles per shot
 var base_spread = 10.0   # arc spread in degrees for guns w/ multi shot
-var multi_shot = false   # flag for guns with multiple shots by default
 
 var max_ammo
 var ammo
@@ -22,7 +21,7 @@ var reloading = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	max_ammo = base_ammo + player.ammo_mod # this ready 'overrides' instance ready
+	max_ammo = base_ammo + player.ammo_mod
 	ammo = max_ammo
 	update_ammo()
 	
@@ -54,16 +53,16 @@ func shoot():
 	$ShotTimer.wait_time = (base_rate / 100.0) * (100.0 / player.fire_rate)
 	$ShotTimer.start()
 	
-	if multi_shot or player.shot_count > 0:
-		var shot_count = base_shot_count + player.shot_count
+	var shot_count = base_shot_count + player.shot_count
+	if shot_count > 1:
 		var spread = max(base_spread, player.shot_spread)
 		var theta = $ShotOrigin.global_rotation_degrees + spread/2
 		var inc = spread / (shot_count - 1)
 		
-		for i in range(shot_count):
+		for _i in range(shot_count):
 			instance_projectile(deg2rad(theta))
 			theta -= inc
-	else:
+	else: # minimum shot count is 1
 		instance_projectile($ShotOrigin.global_rotation)
 	
 	ammo -= 1

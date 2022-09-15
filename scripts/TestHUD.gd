@@ -3,19 +3,19 @@ extends CanvasLayer
 
 # Declare member variables here. Examples:
 onready var player = get_tree().get_nodes_in_group("player")[0]
-onready var fps = $Control/FPS
-onready var tscale = $Control/TimeScale
-onready var max_hp_edit = $Control/MaxHP
-onready var hp_edit = $Control/HP
-onready var dmg_edit = $Control/Dmg
-onready var speed_edit = $Control/Speed
-onready var ammo_edit = $Control/Ammo
-onready var fire_rate_edit = $Control/FireRate
-onready var reload_speed_edit = $Control/ReloadSpeed
-onready var shot_speed_edit = $Control/ShotSpeed
-onready var shot_count_edit = $Control/ShotCount
-onready var shot_spread_edit = $Control/ShotSpread
-onready var piercing_edit = $Control/Piercing
+onready var fps = $FPS
+onready var tscale = $TimeScale
+onready var max_hp_edit = $MaxHP
+onready var hp_edit = $HP
+onready var dmg_edit = $Dmg
+onready var speed_edit = $Speed
+onready var ammo_edit = $Ammo
+onready var fire_rate_edit = $FireRate
+onready var reload_speed_edit = $ReloadSpeed
+onready var shot_speed_edit = $ShotSpeed
+onready var shot_count_edit = $ShotCount
+onready var shot_spread_edit = $ShotSpread
+onready var piercing_edit = $Piercing
 
 #var pos
 var controls
@@ -31,61 +31,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 #	pos.text = "Pos: " + str(player.position)
-	$Control/FPS/Label.text = "FPS: " + str(Engine.get_frames_per_second())
-	
-	
-#	if not hp_edit.has_focus():
-#		hp_edit.text = str(player.health)
-#	if not dmg_edit.has_focus():
-#		dmg_edit.text = str(player.damage)
-#	if not speed_edit.has_focus():
-#		speed_edit.text = str(player.speed)
-#	if not fire_rate_edit.has_focus():
-#		fire_rate_edit.text = str(player.fire_rate)
-#	if not shot_speed_edit.has_focus():
-#		shot_speed_edit.text = str(player.shot_speed)
-#	if not reload_edit.has_focus():
-#		reload_edit.text = str(player.reload_speed)
-
-
-#func _on_HPEdit_value_entered(val):
-#	player.health = val
-#	player.update_health_bar()
-#
-#
-#func _on_DmgEdit_value_entered(val):
-#	player.damage = val
-#
-#
-#func _on_SpeedEdit_value_entered(val):
-#	player.speed = val
-#
-#
-#func _on_ShotSpeedEdit_value_entered(val):
-#	player.shot_speed = val
-#
-#
-#func _on_ReloadEdit_value_entered(val):
-#	player.reload_speed = val
-#
-#
-#func _on_FireRateEdit_value_entered(val):
-#	player.fire_rate = val
-#
-#
-#func _on_TimeScaleEdit_text_entered(new_text):
-#	$Labels/TimeScale/TimeScaleEdit.release_focus()
-#	Engine.time_scale = float(new_text)
-#
-#
-#func _on_FPSEdit_text_entered(new_text):
-#	$Labels/FPS/FPSEdit.release_focus()
-#	Engine.set_target_fps(int(new_text))
+	$FPS/Label.text = "FPS: " + str(Engine.get_frames_per_second())
 
 
 func _on_FPS_text_entered(new_text):
 	Engine.set_target_fps(int(new_text))
-	$Control/FPS/Label.text = "FPS: " + new_text
+	$FPS/Label.text = "FPS: " + new_text
 	fps.release_focus()
 
 
@@ -96,11 +47,14 @@ func _on_TimeScale_text_entered(new_text):
 
 func _on_MaxHP_text_entered(new_text):
 	player.max_health = float(new_text)
+	player.update_health_bar()
+	print('setting max health')
 	max_hp_edit.release_focus()
 
 
 func _on_HP_text_entered(new_text):
 	player.health = float(new_text)
+	player.update_health_bar()
 	hp_edit.release_focus()
 
 

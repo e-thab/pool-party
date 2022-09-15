@@ -13,4 +13,4 @@ projectile = ExtResource( 1 )
 texture = ExtResource( 4 )
 
 [node name="ShotOrigin" parent="." index="1"]
-position = Vector2( 18, 0 )
+position = Vector2( 20, 0 )

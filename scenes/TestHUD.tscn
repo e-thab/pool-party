@@ -1,219 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scripts/CustomEdit.gd" type="Script" id=1]
 [ext_resource path="res://scripts/TestHUD.gd" type="Script" id=2]
 
 [node name="TestHUD" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="Labels" type="Control" parent="."]
-visible = false
-anchor_right = 0.226
-anchor_bottom = 1.0
-margin_right = -257.92
-
-[node name="FPS" type="Label" parent="Labels"]
-visible = false
-margin_left = 70.0
-margin_top = 14.0
-margin_right = 169.0
-margin_bottom = 28.0
-text = "FPS: "
-
-[node name="FPSEdit" type="LineEdit" parent="Labels/FPS"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -111.5
-margin_top = -13.0
-margin_right = -53.5
-margin_bottom = 11.0
-
-[node name="TimeScale" type="Label" parent="Labels"]
-visible = false
-margin_left = 7.0
-margin_top = 228.0
-margin_right = 84.0
-margin_bottom = 242.0
-text = "Time Scale: "
-
-[node name="TimeScaleEdit" type="LineEdit" parent="Labels/TimeScale"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 38.5
-margin_top = -12.0
-margin_right = 96.5
-margin_bottom = 12.0
-
-[node name="PlayerPos" type="Label" parent="Labels"]
-visible = false
-anchor_top = 0.25
-anchor_right = 1.0
-anchor_bottom = 0.25
-margin_left = 7.0
-margin_top = -7.0
-margin_right = 2.0
-margin_bottom = 7.0
-text = "Pos:"
-
-[node name="PlayerHP" type="Label" parent="Labels"]
-visible = false
-anchor_top = 0.3
-anchor_right = 1.0
-anchor_bottom = 0.3
-margin_left = 91.0
-margin_top = -7.0
-margin_bottom = 7.0
-text = "HP:"
-
-[node name="HPEdit" type="TextEdit" parent="Labels/PlayerHP"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -47.0
-margin_top = -10.5
-margin_bottom = 10.5
-text = "100"
-script = ExtResource( 1 )
-
-[node name="PlayerDmg" type="Label" parent="Labels"]
-visible = false
-anchor_top = 0.35
-anchor_right = 1.0
-anchor_bottom = 0.35
-margin_left = 79.0
-margin_top = -7.0
-margin_bottom = 7.0
-text = "Dmg: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DmgEdit" type="TextEdit" parent="Labels/PlayerDmg"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -47.0
-margin_top = -10.5
-margin_bottom = 10.5
-text = "100"
-script = ExtResource( 1 )
-
-[node name="PlayerSpeed" type="Label" parent="Labels"]
-visible = false
-anchor_top = 0.4
-anchor_right = 1.0
-anchor_bottom = 0.4
-margin_left = 69.0
-margin_top = -7.0
-margin_bottom = 7.0
-text = "Speed:"
-
-[node name="SpeedEdit" type="TextEdit" parent="Labels/PlayerSpeed"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -47.0
-margin_top = -10.5
-margin_bottom = 10.5
-text = "100"
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FireRate" type="Label" parent="Labels"]
-visible = false
-anchor_top = 0.45
-anchor_right = 1.0
-anchor_bottom = 0.45
-margin_left = 54.0
-margin_top = -7.0
-margin_bottom = 7.0
-text = "Fire rate:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FireRateEdit" type="TextEdit" parent="Labels/FireRate"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -47.0
-margin_top = -10.5
-margin_bottom = 10.5
-text = "100"
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ShotSpeed" type="Label" parent="Labels"]
-visible = false
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 35.0
-margin_top = -7.0
-margin_bottom = 7.0
-text = "Shot speed:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ShotSpeedEdit" type="TextEdit" parent="Labels/ShotSpeed"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -46.9995
-margin_top = -10.5
-margin_bottom = 10.5
-text = "100"
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Reload" type="Label" parent="Labels"]
-visible = false
-anchor_top = 0.55
-anchor_right = 1.0
-anchor_bottom = 0.55
-margin_left = 18.0
-margin_top = -7.0
-margin_bottom = 7.0
-text = "Reload speed:"
-
-[node name="ReloadEdit" type="TextEdit" parent="Labels/Reload"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -46.9995
-margin_top = -10.5
-margin_bottom = 10.5
-text = "100"
-script = ExtResource( 1 )
-
-[node name="Control" type="Control" parent="."]
-anchor_bottom = 1.0
-
-[node name="FPS" type="LineEdit" parent="Control"]
+[node name="FPS" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 66.0
 margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Control/FPS"]
+[node name="Label" type="Label" parent="FPS"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -225,13 +26,13 @@ margin_bottom = 12.0
 text = "FPS"
 valign = 1
 
-[node name="TimeScale" type="LineEdit" parent="Control"]
+[node name="TimeScale" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 39.0
 margin_right = 66.0
 margin_bottom = 63.0
 
-[node name="Label" type="Label" parent="Control/TimeScale"]
+[node name="Label" type="Label" parent="TimeScale"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -243,13 +44,16 @@ margin_bottom = 12.0
 text = "Engine.time_scale"
 valign = 1
 
-[node name="MaxHP" type="LineEdit" parent="Control"]
+[node name="MaxHP" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 135.0
 margin_right = 66.0
 margin_bottom = 159.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Control/MaxHP"]
+[node name="Label" type="Label" parent="MaxHP"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -261,13 +65,13 @@ margin_bottom = 12.0
 text = "max_health"
 valign = 1
 
-[node name="HP" type="LineEdit" parent="Control"]
+[node name="HP" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 167.0
 margin_right = 66.0
 margin_bottom = 191.0
 
-[node name="Label" type="Label" parent="Control/HP"]
+[node name="Label" type="Label" parent="HP"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -279,13 +83,13 @@ margin_bottom = 12.0
 text = "health"
 valign = 1
 
-[node name="Dmg" type="LineEdit" parent="Control"]
+[node name="Dmg" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 199.0
 margin_right = 66.0
 margin_bottom = 223.0
 
-[node name="Label" type="Label" parent="Control/Dmg"]
+[node name="Label" type="Label" parent="Dmg"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -297,13 +101,13 @@ margin_bottom = 12.0
 text = "damage"
 valign = 1
 
-[node name="Speed" type="LineEdit" parent="Control"]
+[node name="Speed" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 231.0
 margin_right = 66.0
 margin_bottom = 255.0
 
-[node name="Label" type="Label" parent="Control/Speed"]
+[node name="Label" type="Label" parent="Speed"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -315,13 +119,13 @@ margin_bottom = 12.0
 text = "speed"
 valign = 1
 
-[node name="Ammo" type="LineEdit" parent="Control"]
+[node name="Ammo" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 263.0
 margin_right = 66.0
 margin_bottom = 287.0
 
-[node name="Label" type="Label" parent="Control/Ammo"]
+[node name="Label" type="Label" parent="Ammo"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -333,13 +137,13 @@ margin_bottom = 12.0
 text = "ammo_mod"
 valign = 1
 
-[node name="FireRate" type="LineEdit" parent="Control"]
+[node name="FireRate" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 295.0
 margin_right = 66.0
 margin_bottom = 319.0
 
-[node name="Label" type="Label" parent="Control/FireRate"]
+[node name="Label" type="Label" parent="FireRate"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -351,13 +155,13 @@ margin_bottom = 12.0
 text = "fire_rate"
 valign = 1
 
-[node name="ReloadSpeed" type="LineEdit" parent="Control"]
+[node name="ReloadSpeed" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 327.0
 margin_right = 66.0
 margin_bottom = 351.0
 
-[node name="Label" type="Label" parent="Control/ReloadSpeed"]
+[node name="Label" type="Label" parent="ReloadSpeed"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -369,13 +173,13 @@ margin_bottom = 12.0
 text = "reload_speed"
 valign = 1
 
-[node name="ShotSpeed" type="LineEdit" parent="Control"]
+[node name="ShotSpeed" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 359.0
 margin_right = 66.0
 margin_bottom = 383.0
 
-[node name="Label" type="Label" parent="Control/ShotSpeed"]
+[node name="Label" type="Label" parent="ShotSpeed"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -387,13 +191,13 @@ margin_bottom = 12.0
 text = "shot_speed"
 valign = 1
 
-[node name="ShotCount" type="LineEdit" parent="Control"]
+[node name="ShotCount" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 391.0
 margin_right = 66.0
 margin_bottom = 415.0
 
-[node name="Label" type="Label" parent="Control/ShotCount"]
+[node name="Label" type="Label" parent="ShotCount"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -405,13 +209,13 @@ margin_bottom = 12.0
 text = "shot_count"
 valign = 1
 
-[node name="ShotSpread" type="LineEdit" parent="Control"]
+[node name="ShotSpread" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 423.0
 margin_right = 66.0
 margin_bottom = 447.0
 
-[node name="Label" type="Label" parent="Control/ShotSpread"]
+[node name="Label" type="Label" parent="ShotSpread"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -423,13 +227,13 @@ margin_bottom = 12.0
 text = "shot_spread"
 valign = 1
 
-[node name="Piercing" type="LineEdit" parent="Control"]
+[node name="Piercing" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 455.0
 margin_right = 66.0
 margin_bottom = 479.0
 
-[node name="Label" type="Label" parent="Control/Piercing"]
+[node name="Label" type="Label" parent="Piercing"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -440,27 +244,16 @@ margin_right = 83.0
 margin_bottom = 12.0
 text = "piercing"
 valign = 1
-
-[connection signal="text_entered" from="Labels/FPS/FPSEdit" to="." method="_on_TextEdit_text_entered"]
-[connection signal="text_entered" from="Labels/FPS/FPSEdit" to="." method="_on_FPSEdit_text_entered"]
-[connection signal="text_entered" from="Labels/TimeScale/TimeScaleEdit" to="." method="_on_TextEdit_text_entered"]
-[connection signal="text_entered" from="Labels/TimeScale/TimeScaleEdit" to="." method="_on_TimeScaleEdit_text_entered"]
-[connection signal="value_entered" from="Labels/PlayerHP/HPEdit" to="." method="_on_HPEdit_value_entered"]
-[connection signal="value_entered" from="Labels/PlayerDmg/DmgEdit" to="." method="_on_DmgEdit_value_entered"]
-[connection signal="value_entered" from="Labels/PlayerSpeed/SpeedEdit" to="." method="_on_SpeedEdit_value_entered"]
-[connection signal="value_entered" from="Labels/FireRate/FireRateEdit" to="." method="_on_FireRateEdit_value_entered"]
-[connection signal="value_entered" from="Labels/ShotSpeed/ShotSpeedEdit" to="." method="_on_ShotSpeedEdit_value_entered"]
-[connection signal="value_entered" from="Labels/Reload/ReloadEdit" to="." method="_on_ReloadEdit_value_entered"]
-[connection signal="text_entered" from="Control/FPS" to="." method="_on_FPS_text_entered"]
-[connection signal="text_entered" from="Control/TimeScale" to="." method="_on_TimeScale_text_entered"]
-[connection signal="text_entered" from="Control/MaxHP" to="." method="_on_MaxHP_text_entered"]
-[connection signal="text_entered" from="Control/HP" to="." method="_on_HP_text_entered"]
-[connection signal="text_entered" from="Control/Dmg" to="." method="_on_Dmg_text_entered"]
-[connection signal="text_entered" from="Control/Speed" to="." method="_on_Speed_text_entered"]
-[connection signal="text_entered" from="Control/Ammo" to="." method="_on_Ammo_text_entered"]
-[connection signal="text_entered" from="Control/FireRate" to="." method="_on_FireRate_text_entered"]
-[connection signal="text_entered" from="Control/ReloadSpeed" to="." method="_on_ReloadSpeed_text_entered"]
-[connection signal="text_entered" from="Control/ShotSpeed" to="." method="_on_ShotSpeed_text_entered"]
-[connection signal="text_entered" from="Control/ShotCount" to="." method="_on_ShotCount_text_entered"]
-[connection signal="text_entered" from="Control/ShotSpread" to="." method="_on_ShotSpread_text_entered"]
-[connection signal="text_entered" from="Control/Piercing" to="." method="_on_Piercing_text_entered"]
+[connection signal="text_entered" from="FPS" to="." method="_on_FPS_text_entered"]
+[connection signal="text_entered" from="TimeScale" to="." method="_on_TimeScale_text_entered"]
+[connection signal="text_entered" from="MaxHP" to="." method="_on_MaxHP_text_entered"]
+[connection signal="text_entered" from="HP" to="." method="_on_HP_text_entered"]
+[connection signal="text_entered" from="Dmg" to="." method="_on_Dmg_text_entered"]
+[connection signal="text_entered" from="Speed" to="." method="_on_Speed_text_entered"]
+[connection signal="text_entered" from="Ammo" to="." method="_on_Ammo_text_entered"]
+[connection signal="text_entered" from="FireRate" to="." method="_on_FireRate_text_entered"]
+[connection signal="text_entered" from="ReloadSpeed" to="." method="_on_ReloadSpeed_text_entered"]
+[connection signal="text_entered" from="ShotSpeed" to="." method="_on_ShotSpeed_text_entered"]
+[connection signal="text_entered" from="ShotCount" to="." method="_on_ShotCount_text_entered"]
+[connection signal="text_entered" from="ShotSpread" to="." method="_on_ShotSpread_text_entered"]
+[connection signal="text_entered" from="Piercing" to="." method="_on_Piercing_text_entered"]

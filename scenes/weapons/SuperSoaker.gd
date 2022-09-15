@@ -1,7 +1,7 @@
 extends "res://scripts/Gun.gd"
 
 
-func _ready():
+func _init():
 	base_dmg = 1.0
 	base_rate = 100.0
 	base_reload = 100.0
