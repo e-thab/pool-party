@@ -50,6 +50,10 @@ func _process(_delta):
 		display_reload() # show reload timer indicator
 	
 	$Sprite.flip_v = global_rotation < (-PI/2) or global_rotation > (PI/2) # use abs() for easier comparison
+	
+	if max_ammo != base_ammo + player.ammo_mod:
+		max_ammo = base_ammo + player.ammo_mod
+		update_ammo()
 
 
 func _physics_process(_delta):
@@ -68,7 +72,9 @@ func shoot():
 		var inc = spread / (shot_count - 1)
 		
 		for _i in range(shot_count):
-			instance_projectile(deg2rad(theta))
+			var rnd = -1 * (randi()%2)
+			var rnd_amt = inc/int(randi()%10 or inc)
+			instance_projectile(deg2rad(theta + rnd * rnd_amt))
 			theta -= inc
 	else: # minimum shot count is 1
 		instance_projectile($ShotOrigin.global_rotation)
