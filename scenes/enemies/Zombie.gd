@@ -9,7 +9,7 @@ onready var player  = get_tree().get_nodes_in_group("player")[0]
 var max_health = 2.0
 var damage = 0.5
 var speed = 33.3
-var being_hurt = false
+#var being_hurt = false
 var health
 
 var dir = Vector2.ZERO
@@ -28,10 +28,6 @@ func _process(_delta):
 		queue_free()
 	if health <= 0:
 		die()
-	
-	# wait until hurt animation is done to resume walk
-	if not being_hurt:
-		$AnimatedSprite.play("walk")
 
 
 func _physics_process(delta):
@@ -72,8 +68,8 @@ func _physics_process(delta):
 
 func hurt(n):
 	health -= n
-	being_hurt = true
 	$AnimatedSprite.play("hurt")
+	$AnimatedSprite.frame = 0
 	#print("zombie hurt. hp = " + str(health))
 
 
@@ -94,5 +90,4 @@ func _on_Zombie_body_entered(body):
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "hurt":
-		being_hurt = false
-		$AnimatedSprite.stop()
+		$AnimatedSprite.play("walk")

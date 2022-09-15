@@ -4,7 +4,7 @@ extends Area2D
 # Declare member variables here. Examples:
 var speed = 100.0
 var damage = 0.0
-var pierce = 1
+var pierce = 0
 var fading = false
 
 
@@ -15,23 +15,14 @@ var fading = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position += (transform.x * delta * speed) / scale
+	position += (transform.x * delta * speed * Stats.SPEED_MODIFIER) / scale
 
 
 func set_stats(dmg, spd, prc):
 	damage = dmg
 	speed = spd
 	pierce = prc
-
-#func set_dmg(n):
-#	damage = n
-#
-#func set_spd(n):
-#	speed = n
-#	#$Particles2D.amount = $Particles2D.amount * (n / 100) # lower framerates can't keep up
-#
-#func set_pierce(n):
-#	piercing = n
+	$Particles2D.amount = $Particles2D.amount * (spd / 100) # lower framerates can't keep up
 
 
 func _on_Projectile_body_entered(body):
@@ -39,7 +30,7 @@ func _on_Projectile_body_entered(body):
 		if not fading:
 			body.hurt(damage)
 			pierce -= 1
-			if pierce <= 0: fade()
+			if pierce <= -1: fade()
 	elif not body.is_in_group("player") and not fading:
 		fade()
 

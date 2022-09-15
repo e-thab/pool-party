@@ -38,7 +38,6 @@ script = ExtResource( 2 )
 [node name="Particles2D" type="Particles2D" parent="."]
 amount = 32
 lifetime = 0.2
-speed_scale = 0.4
 local_coords = false
 process_material = SubResource( 2 )
 texture = ExtResource( 1 )

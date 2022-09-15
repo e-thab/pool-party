@@ -14,6 +14,7 @@ var base_ammo = 1        # literal number of shots per mag
 var base_shot_count = 1  # literal number of projectiles per shot
 var base_spread = 10.0   # arc spread in degrees for guns w/ multi shot
 var base_pierce = 0      # number of enemies projectile can pass through
+var semi_auto = false    # flag for hold to fire functionality
 
 var max_ammo
 var ammo
@@ -35,7 +36,13 @@ func _process(_delta):
 	if Input.is_action_pressed("primary_fire") and can_fire:
 		if reloading:
 			stop_reload()
-		shoot()
+		
+		if semi_auto:
+			if Input.is_action_just_pressed("primary_fire"):
+				shoot()
+		else:
+			shoot()
+		
 	elif Input.is_action_just_pressed("reload") and not reloading and not ammo == max_ammo:
 		reload()
 	
@@ -77,11 +84,9 @@ func instance_projectile(rot):
 	root.add_child(proj_inst)
 	proj_inst.position = $ShotOrigin.global_position
 	proj_inst.rotation = rot
-	#proj_inst.set_dmg(base_dmg * (player.damage / 100.0))
-	#proj_inst.set_spd(base_spd * (player.shot_speed / 100.0))
-	proj_inst.set_stats(base_dmg * (player.damage / 100.0),
-						base_spd * (player.shot_speed / 100.0),
-						base_pierce + player.pierce)
+	proj_inst.set_stats(base_dmg * (player.damage / 100.0),      # damage
+						base_spd * (player.shot_speed / 100.0),  # speed
+						base_pierce + player.pierce)             # pierce
 
 
 func update_ammo():
