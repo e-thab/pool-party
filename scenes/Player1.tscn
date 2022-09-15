@@ -89,7 +89,6 @@ region_rect = Rect2( 0, 0, 1920, 1080 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]

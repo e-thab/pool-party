@@ -15,7 +15,7 @@ onready var reload_speed_edit = $ReloadSpeed
 onready var shot_speed_edit = $ShotSpeed
 onready var shot_count_edit = $ShotCount
 onready var shot_spread_edit = $ShotSpread
-onready var piercing_edit = $Piercing
+onready var pierce_edit = $Pierce
 
 #var pos
 var controls
@@ -99,5 +99,5 @@ func _on_ShotSpread_text_entered(new_text):
 
 
 func _on_Piercing_text_entered(new_text):
-	player.piercing = float(new_text)
-	piercing_edit.release_focus()
+	player.pierce = float(new_text)
+	pierce_edit.release_focus()

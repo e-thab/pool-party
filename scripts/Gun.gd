@@ -13,6 +13,7 @@ var base_spd = 100.0     # projectile speed, arbitrary for now
 var base_ammo = 1        # literal number of shots per mag
 var base_shot_count = 1  # literal number of projectiles per shot
 var base_spread = 10.0   # arc spread in degrees for guns w/ multi shot
+var base_pierce = 0      # number of enemies projectile can pass through
 
 var max_ammo
 var ammo
@@ -76,8 +77,11 @@ func instance_projectile(rot):
 	root.add_child(proj_inst)
 	proj_inst.position = $ShotOrigin.global_position
 	proj_inst.rotation = rot
-	proj_inst.set_dmg(base_dmg * (player.damage / 100.0))
-	proj_inst.set_spd(base_spd * (player.shot_speed / 100.0))
+	#proj_inst.set_dmg(base_dmg * (player.damage / 100.0))
+	#proj_inst.set_spd(base_spd * (player.shot_speed / 100.0))
+	proj_inst.set_stats(base_dmg * (player.damage / 100.0),
+						base_spd * (player.shot_speed / 100.0),
+						base_pierce + player.pierce)
 
 
 func update_ammo():

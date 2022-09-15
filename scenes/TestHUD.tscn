@@ -227,13 +227,16 @@ margin_bottom = 12.0
 text = "shot_spread"
 valign = 1
 
-[node name="Piercing" type="LineEdit" parent="."]
+[node name="Pierce" type="LineEdit" parent="."]
 margin_left = 8.0
 margin_top = 455.0
 margin_right = 66.0
 margin_bottom = 479.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Piercing"]
+[node name="Label" type="Label" parent="Pierce"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -242,7 +245,7 @@ margin_left = 5.0
 margin_top = -12.0
 margin_right = 83.0
 margin_bottom = 12.0
-text = "piercing"
+text = "pierce"
 valign = 1
 [connection signal="text_entered" from="FPS" to="." method="_on_FPS_text_entered"]
 [connection signal="text_entered" from="TimeScale" to="." method="_on_TimeScale_text_entered"]
@@ -256,4 +259,4 @@ valign = 1
 [connection signal="text_entered" from="ShotSpeed" to="." method="_on_ShotSpeed_text_entered"]
 [connection signal="text_entered" from="ShotCount" to="." method="_on_ShotCount_text_entered"]
 [connection signal="text_entered" from="ShotSpread" to="." method="_on_ShotSpread_text_entered"]
-[connection signal="text_entered" from="Piercing" to="." method="_on_Piercing_text_entered"]
+[connection signal="text_entered" from="Pierce" to="." method="_on_Piercing_text_entered"]

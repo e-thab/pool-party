@@ -17,7 +17,7 @@ var shot_speed = 100.0
 
 var shot_count = 0
 var shot_spread = 20
-var piercing = 0 # unused
+var pierce = 0 # unused
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
