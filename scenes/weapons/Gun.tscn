@@ -32,6 +32,7 @@ one_shot = true
 one_shot = true
 
 [node name="UI" type="Node2D" parent="."]
+z_index = 2
 
 [node name="AmmoBar" type="ProgressBar" parent="UI"]
 margin_left = -84.5

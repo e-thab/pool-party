@@ -14,6 +14,7 @@ var health
 
 var dir = Vector2.ZERO
 var move_target
+var player_colliding = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -64,6 +65,9 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = true
 	elif dir.x > 0:
 		$AnimatedSprite.flip_h = false
+	
+	if player_colliding:
+		player.hurt(damage)
 
 
 func hurt(n):
@@ -85,9 +89,17 @@ func set_move_target(target):
 
 func _on_Zombie_body_entered(body):
 	if body.is_in_group("player"):
-		body.hurt(damage)
+		player_colliding = true
+		#body.hurt(damage)
+
+func _on_Zombie_body_exited(body):
+	if body.is_in_group("player"):
+		player_colliding = false
 
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "hurt":
 		$AnimatedSprite.play("walk")
+
+
+

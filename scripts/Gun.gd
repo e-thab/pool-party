@@ -49,9 +49,9 @@ func _process(_delta):
 	if reloading:
 		display_reload() # show reload timer indicator
 	
-	$Sprite.flip_v = global_rotation < (-PI/2) or global_rotation > (PI/2) # use abs() for easier comparison
+	$Sprite.flip_v = abs(global_rotation) > (PI/2) # use abs() for easier comparison
 	
-	if max_ammo != base_ammo + player.ammo_mod:
+	if max_ammo != base_ammo + player.ammo_mod: # wrap this into player.set_stats() func when created
 		max_ammo = base_ammo + player.ammo_mod
 		update_ammo()
 
@@ -72,9 +72,9 @@ func shoot():
 		var inc = spread / (shot_count - 1)
 		
 		for _i in range(shot_count):
-			var rnd = -1 * (randi()%2)
-			var rnd_amt = inc/int(randi()%10 or inc)
-			instance_projectile(deg2rad(theta + rnd * rnd_amt))
+			var rnd_pol = 1 if randi()%2 else -1
+			var rnd_amt = (inc / 10) * randf()
+			instance_projectile(deg2rad(theta + rnd_pol * rnd_amt))
 			theta -= inc
 	else: # minimum shot count is 1
 		instance_projectile($ShotOrigin.global_rotation)

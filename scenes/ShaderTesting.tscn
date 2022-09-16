@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/weapons/soaker.png" type="Texture" id=1]
+[ext_resource path="res://assets/shaders/oscillate.gdshader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/speed = 2.0
+shader_param/height = 2.0
+
+[node name="ShaderTesting" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )

@@ -5,6 +5,7 @@ extends KinematicBody2D
 
 export(PackedScene) var weapon_type
 
+var pickup_distance = 100.0
 var max_health = 10.0
 var speed = 100.0 # percentage
 var ammo_mod = 0 # int, adds to weapon max ammo
@@ -33,8 +34,7 @@ var mod_friction = 0.18
 
 func _ready():
 	# create exported weapon type instance
-	gun = weapon_type.instance()
-	$GunPosition.add_child(gun)
+	equip_weapon(weapon_type)
 	
 	# set health
 	health = max_health
@@ -97,6 +97,11 @@ func update_health_bar():
 	$HealthBar.max_value = max_health
 	$HealthBar.value = health
 #	emit_signal("stats_changed", Stats.HEALTH, health)
+
+
+func equip_weapon(weapon):
+	gun = weapon.instance()
+	$GunPosition.add_child(gun)
 
 
 func _on_PlayerSprite_animation_finished():

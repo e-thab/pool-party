@@ -4,6 +4,8 @@ extends Node
 # Declare member variables here. Examples:
 export(Resource) var crosshair
 export(PackedScene) var zombie
+export(bool) var spawn_enemies = true
+export(PackedScene) var pickup_temp
 
 onready var player = $Player1
 var kills = 0
@@ -18,10 +20,23 @@ func _ready():
 	
 	Input.set_custom_mouse_cursor(crosshair, 0, Vector2(16, 16))
 	randomize()
+	
+	if not spawn_enemies:
+		$MobTimer.stop()
+	
+	temp_pickup_spawn()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+
+func temp_pickup_spawn():
+	for x in range(-1000, 1000, 50):
+		for y in range(-1000, 1000, 50):
+			var t = pickup_temp.instance()
+			t.position = Vector2(x, y)
+			add_child(t)
 
 
 func _on_MobTimer_timeout():

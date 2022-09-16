@@ -16,6 +16,7 @@ onready var shot_speed_edit = $ShotSpeed
 onready var shot_count_edit = $ShotCount
 onready var shot_spread_edit = $ShotSpread
 onready var pierce_edit = $Pierce
+onready var pickup_distance_edit = $PickupDistance
 
 #var pos
 var controls
@@ -101,3 +102,8 @@ func _on_ShotSpread_text_entered(new_text):
 func _on_Piercing_text_entered(new_text):
 	player.pierce = float(new_text)
 	pierce_edit.release_focus()
+
+
+func _on_PickupDistance_text_entered(new_text):
+	player.pickup_distance = float(new_text)
+	pickup_distance_edit.release_focus()
