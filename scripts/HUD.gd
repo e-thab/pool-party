@@ -22,10 +22,6 @@ func _process(_delta):
 			$PauseLabel.show()
 
 
-func update_time(hp):
-	$HealthLabel.text = str(hp)
-
-
 func _on_RoundTimer_timeout():
 	time += 1
 	var seconds = "%02d" % (time % 60)

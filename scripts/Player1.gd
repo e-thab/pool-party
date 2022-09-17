@@ -5,20 +5,20 @@ extends KinematicBody2D
 
 export(PackedScene) var weapon_type
 
-var pickup_distance = 100.0
+var pickup_dist = 100.0
 var max_health = 10.0
-var speed = 100.0 # percentage
-var ammo_mod = 0 # int, adds to weapon max ammo
+var speed = 100.0        # percentage
+var ammo_mod = 0         # int, adds to weapon max ammo
+var xp = 0               # literal
 
-# percentages that modify base weapon stats
-var damage = 100.0
-var fire_rate = 100.0
-var reload_speed = 100.0
-var shot_speed = 100.0
-
-var shot_count = 0
-var shot_spread = 20
-var pierce = 0 # unused
+# modify base weapon stats
+var damage = 100.0       # percentage
+var fire_rate = 100.0    # percentage
+var reload_speed = 100.0 # percentage
+var shot_speed = 100.0   # percentage
+var shot_count = 0       # int, adds to base count
+var shot_spread = 20     # angle of shot spread, does not add
+var pierce = 0           # number of enemies to pierce
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG

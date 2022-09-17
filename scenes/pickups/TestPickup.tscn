@@ -8,6 +8,5 @@
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
-material = null
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 3 )

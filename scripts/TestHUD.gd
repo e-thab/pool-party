@@ -105,5 +105,5 @@ func _on_Piercing_text_entered(new_text):
 
 
 func _on_PickupDistance_text_entered(new_text):
-	player.pickup_distance = float(new_text)
+	player.pickup_dist = float(new_text)
 	pickup_distance_edit.release_focus()

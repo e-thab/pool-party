@@ -24,7 +24,7 @@ func _ready():
 	if not spawn_enemies:
 		$MobTimer.stop()
 	
-	temp_pickup_spawn()
+	#temp_pickup_spawn()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
