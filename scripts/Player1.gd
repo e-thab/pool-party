@@ -1,15 +1,14 @@
 extends KinematicBody2D
 
 
-#signal stats_changed(stat, val)
-
 export(PackedScene) var weapon_type
 
 var pickup_dist = 100.0
 var max_health = 10.0
 var speed = 100.0        # percentage
-var ammo_mod = 0         # int, adds to weapon max ammo
-var xp = 0               # literal
+var ammo_mod = 0         # adds to weapon max ammo
+var xp = 0
+var lvl = 1
 
 # modify base weapon stats
 var damage = 100.0       # percentage
@@ -79,6 +78,59 @@ func _physics_process(delta):
 	tile.region_rect = Rect2(Vector2(position.x, position.y), screen_size*2)
 
 
+func set_stats(stat, val):
+	# match statement for changing stats, calls necessary functions & guarantees proper type
+	match stat:
+		Stats.PICKUP_DIST:
+			pickup_dist = val
+		
+		Stats.MAX_HEALTH:
+			max_health = val
+			update_health_bar()
+		
+		Stats.HEALTH:
+			health = val
+			update_health_bar()
+		
+		Stats.SPEED:
+			speed = val
+		
+		Stats.AMMO_MOD:
+			ammo_mod = val
+		
+		Stats.XP:
+			xp = int(val)
+		
+		Stats.LVL:
+			lvl = int(val)
+			level_up()
+		
+		Stats.DAMAGE:
+			damage = val
+		
+		Stats.FIRE_RATE:
+			fire_rate = val
+		
+		Stats.RELOAD_SPEED:
+			reload_speed = val
+		
+		Stats.SHOT_SPEED:
+			shot_speed = val
+		
+		Stats.SHOT_COUNT:
+			shot_count = int(val)
+		
+		Stats.SHOT_SPREAD:
+			shot_spread = int(val)
+		
+		Stats.PIERCE:
+			pierce = int(val)
+
+
+func level_up():
+	pass
+
+
 func hurt(n):
 	# check for on-hit invincibility (duration of hurt animation)
 	if not being_hurt:
@@ -96,7 +148,6 @@ func heal(n):
 func update_health_bar():
 	$HealthBar.max_value = max_health
 	$HealthBar.value = health
-#	emit_signal("stats_changed", Stats.HEALTH, health)
 
 
 func equip_weapon(weapon):
