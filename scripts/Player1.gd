@@ -38,6 +38,7 @@ func _ready():
 	# set health
 	health = max_health
 	update_health_bar()
+	update_xp_bar()
 
 
 #func _process(_delta):
@@ -78,6 +79,51 @@ func _physics_process(delta):
 	tile.region_rect = Rect2(Vector2(position.x, position.y), screen_size*2)
 
 
+func add_xp(n):
+	xp += int(n)
+	var new_lvl = (xp + 5) / 5
+	
+	for i in range(lvl, new_lvl):
+		level_up()
+	
+	update_xp_bar()
+
+
+func level_up():
+	#print('level up')
+	lvl += 1
+
+
+func update_xp_bar():
+#	$XPHUD/XPBar.max_value = 5
+	$XPHUD/XPBar.value = xp % 5
+	$XPHUD/XPBar/Level.text = "LVL " + str(lvl)
+
+
+func hurt(n):
+	# check for on-hit invincibility (duration of hurt animation)
+	if not being_hurt:
+		health -= n
+		being_hurt = true
+		$AnimatedSprite.play("hurt")
+		update_health_bar()
+
+
+func heal(n):
+	health += n
+	update_health_bar()
+
+
+func update_health_bar():
+	$HealthBar.max_value = max_health
+	$HealthBar.value = health
+
+
+func equip_weapon(weapon):
+	gun = weapon.instance()
+	$GunPosition.add_child(gun)
+
+
 func set_stats(stat, val):
 	# match statement for changing stats, calls necessary functions & guarantees proper type
 	match stat:
@@ -99,7 +145,8 @@ func set_stats(stat, val):
 			ammo_mod = val
 		
 		Stats.XP:
-			xp = int(val)
+#			xp = int(val)
+			add_xp(int(val))
 		
 		Stats.LVL:
 			lvl = int(val)
@@ -125,34 +172,6 @@ func set_stats(stat, val):
 		
 		Stats.PIERCE:
 			pierce = int(val)
-
-
-func level_up():
-	pass
-
-
-func hurt(n):
-	# check for on-hit invincibility (duration of hurt animation)
-	if not being_hurt:
-		health -= n
-		being_hurt = true
-		$AnimatedSprite.play("hurt")
-		update_health_bar()
-
-
-func heal(n):
-	health += n
-	update_health_bar()
-
-
-func update_health_bar():
-	$HealthBar.max_value = max_health
-	$HealthBar.value = health
-
-
-func equip_weapon(weapon):
-	gun = weapon.instance()
-	$GunPosition.add_child(gun)
 
 
 func _on_PlayerSprite_animation_finished():

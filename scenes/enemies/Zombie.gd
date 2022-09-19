@@ -4,7 +4,9 @@ extends RigidBody2D
 signal enemy_death
 
 export(Array, SpriteFrames) var zombie_types
+export(Array, PackedScene) var drops
 onready var player  = get_tree().get_nodes_in_group("player")[0]
+onready var root = get_tree().get_root()
 
 var max_health = 2.0
 var damage = 0.5
@@ -80,6 +82,10 @@ func hurt(n):
 func die():
 	# do death stuff
 	emit_signal("enemy_death")
+	if randi()%2:
+		var drop = drops[0].instance()
+		root.add_child(drop)
+		drop.position = global_position
 	queue_free()
 
 

@@ -104,10 +104,15 @@ func _on_PickupDistance_text_entered(new_text):
 	release_all()
 
 
+func _on_XP_text_entered(new_text):
+	player.set_stats(Stats.XP, float(new_text))
+	release_all()
+
+
 func release_all():
 	var controls = [
-		$FPS, $TimeScale, $MaxHP, $HP, $Dmg, $Speed, $Ammo, $FireRate,
-		$ReloadSpeed, $ShotSpeed, $ShotCount, $ShotSpread, $Pierce, $PickupDistance
+		$FPS, $TimeScale, $MaxHP, $HP, $Dmg, $Speed, $Ammo, $FireRate, $ReloadSpeed,
+		$ShotSpeed, $ShotCount, $ShotSpread, $Pierce, $PickupDistance, $XP
 		]
 	for x in controls:
 		if x.has_focus(): x.release_focus()
