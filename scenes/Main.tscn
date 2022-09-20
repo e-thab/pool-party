@@ -63,6 +63,8 @@ zoom = Vector2( 2, 2 )
 visible = false
 texture = ExtResource( 4 )
 
+[node name="DebugHUD" parent="." instance=ExtResource( 3 )]
+
 [node name="HUD" type="CanvasLayer" parent="."]
 pause_mode = 2
 script = ExtResource( 7 )
@@ -83,18 +85,19 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -350.0
+margin_left = -840.0
 margin_top = -14.5
-margin_right = -7.0
+margin_right = -497.0
 margin_bottom = 14.5
 custom_fonts/font = SubResource( 5 )
 text = "WAVE 1"
-align = 2
 
 [node name="TimeLabel" type="Label" parent="HUD"]
 pause_mode = 1
 anchor_right = 1.0
+margin_left = 878.0
 margin_top = 4.0
+margin_right = -878.0
 margin_bottom = 59.0
 custom_fonts/font = ExtResource( 10 )
 text = "00:00"
@@ -116,9 +119,6 @@ valign = 1
 [node name="RoundTimer" type="Timer" parent="HUD"]
 pause_mode = 1
 autostart = true
-
-[node name="DebugHUD" parent="HUD" instance=ExtResource( 3 )]
-pause_mode = 1
 
 [node name="PauseLabel" type="Label" parent="HUD"]
 visible = false

@@ -4,7 +4,7 @@ extends CanvasLayer
 # Declare member variables here. Examples:
 onready var player = get_tree().get_nodes_in_group("player")[0]
 
-var controls = [
+onready var controls = [
 		$FPS, $TimeScale, $MaxHP, $HP, $Dmg, $Speed, $Ammo, $FireRate, $ReloadSpeed,
 		$ShotSpeed, $ShotCount, $ShotSpread, $Pierce, $PickupDistance, $XP
 		]

@@ -81,7 +81,7 @@ func _physics_process(delta):
 
 func add_xp(n):
 	xp += int(n)
-	var new_lvl = (xp + 5) / 5
+	var new_lvl = Stats.xp2lvl(xp)
 	
 	for _i in range(lvl, new_lvl):
 		level_up()
@@ -90,14 +90,23 @@ func add_xp(n):
 
 
 func level_up():
-	#print('level up')
-	lvl += 1
+	if lvl < len(Stats.lvl_incs):
+		#print('level up')
+		lvl += 1
 
 
 func update_xp_bar():
-#	$XPHUD/XPBar.max_value = 5
-	$XPHUD/XPBar.value = xp % 5
-	$XPHUD/XPBar/Level.text = "LVL " + str(lvl)
+	if lvl >= len(Stats.lvl_incs):
+		$XPHUD/XPBar.max_value = 1
+		$XPHUD/XPBar.value = 1
+		$XPHUD/XPBar/Level.text = "LVL MAX"
+	else:
+		$XPHUD/XPBar.max_value = Stats.lvl_incs[lvl+1]
+		$XPHUD/XPBar.value = xp - Stats.lvl_sums[lvl]
+		$XPHUD/XPBar/Level.text = "LVL " + str(lvl)
+	
+#	print('max_value =', Stats.lvl_incs[lvl+1])
+#	print('value =', xp - Stats.lvl_sums[lvl])
 
 
 func hurt(n):
