@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/WaveManager.gd" type="Script" id=1]
+[ext_resource path="res://scenes/enemies/Zombie.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 999, 570, 0, 0, 0, 0, 998, -567, 0, 0, 0, 0, -993, -569, 0, 0, 0, 0, -992, 570, 0, 0, 0, 0, 999, 570 )
+}
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.423529, 0.768627, 0.462745, 0.705882 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.164706, 0.164706, 0.164706, 0.705882 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 18
+font_data = ExtResource( 3 )
+
+[node name="WaveManager" type="Node"]
+script = ExtResource( 1 )
+zombie = ExtResource( 2 )
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 4 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2( 999, 569.998 )
+rotation = -1.57168
+offset = 0.00341797
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="WaveBar" type="ProgressBar" parent="HUD"]
+anchor_right = 1.0
+margin_left = 1055.0
+margin_top = 18.0
+margin_right = -18.0
+margin_bottom = 47.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 33.0
+percent_visible = false
+
+[node name="Wave" type="Label" parent="HUD/WaveBar"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -840.0
+margin_top = -14.5
+margin_right = -497.0
+margin_bottom = 14.5
+custom_fonts/font = SubResource( 3 )
+text = "WAVE 1"
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

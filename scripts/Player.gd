@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 export(PackedScene) var weapon_type
 
-var pickup_dist = 100.0
+var pickup_dist = 100.0  # distance in units
 var max_health = 10.0
 var speed = 100.0        # percentage
 var ammo_mod = 0         # adds to weapon max ammo
