@@ -83,7 +83,7 @@ func add_xp(n):
 	xp += int(n)
 	var new_lvl = (xp + 5) / 5
 	
-	for i in range(lvl, new_lvl):
+	for _i in range(lvl, new_lvl):
 		level_up()
 	
 	update_xp_bar()

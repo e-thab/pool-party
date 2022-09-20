@@ -3,23 +3,11 @@ extends CanvasLayer
 
 # Declare member variables here. Examples:
 onready var player = get_tree().get_nodes_in_group("player")[0]
-#onready var fps = $FPS
-#onready var tscale = $TimeScale
-#onready var max_hp_edit = $MaxHP
-#onready var hp_edit = $HP
-#onready var dmg_edit = $Dmg
-#onready var speed_edit = $Speed
-#onready var ammo_edit = $Ammo
-#onready var fire_rate_edit = $FireRate
-#onready var reload_speed_edit = $ReloadSpeed
-#onready var shot_speed_edit = $ShotSpeed
-#onready var shot_count_edit = $ShotCount
-#onready var shot_spread_edit = $ShotSpread
-#onready var pierce_edit = $Pierce
-#onready var pickup_distance_edit = $PickupDistance
 
-#var pos
-#var controls
+var controls = [
+		$FPS, $TimeScale, $MaxHP, $HP, $Dmg, $Speed, $Ammo, $FireRate, $ReloadSpeed,
+		$ShotSpeed, $ShotCount, $ShotSpread, $Pierce, $PickupDistance, $XP
+		]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -110,9 +98,5 @@ func _on_XP_text_entered(new_text):
 
 
 func release_all():
-	var controls = [
-		$FPS, $TimeScale, $MaxHP, $HP, $Dmg, $Speed, $Ammo, $FireRate, $ReloadSpeed,
-		$ShotSpeed, $ShotCount, $ShotSpread, $Pierce, $PickupDistance, $XP
-		]
 	for x in controls:
 		if x.has_focus(): x.release_focus()
