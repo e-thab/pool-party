@@ -27,6 +27,8 @@ func _ready():
 	ammo = max_ammo
 	update_ammo()
 	
+	$Sprite/Hands.self_modulate = player.hand_color
+	
 	# set reload UI as top level so it doesn't follow weapon transform position
 	$UI.set_as_toplevel(true)
 
@@ -50,6 +52,7 @@ func _process(_delta):
 		display_reload() # show reload timer indicator
 	
 	$Sprite.flip_v = abs(global_rotation) > (PI/2) # use abs() for easier comparison
+	$Sprite/Hands.flip_v = $Sprite.flip_v
 	
 	if max_ammo != base_ammo + player.ammo_mod: # wrap this into player.set_stats() func when created
 		max_ammo = base_ammo + player.ammo_mod

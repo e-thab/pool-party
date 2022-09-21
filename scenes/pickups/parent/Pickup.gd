@@ -14,7 +14,7 @@ func _physics_process(delta):
 		pickup()
 	elif seeking:
 		var dir = position.direction_to(player.position).normalized()
-		position += dir * delta * player.speed * 2.5
+		position += dir * delta * 10 * sqrt(player.speed) * 2.5
 	elif dist <= player.pickup_dist:
 		seeking = true
 	

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/sheets/base_16.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/enemies/parent/Mob.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 8.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_layer = 4
+collision_mask = 7
+mode = 2
+mass = 0.1
+gravity_scale = 0.0
+contacts_reported = 8
+contact_monitor = true
+linear_damp = 20.0
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 4, 4 )
+frames = ExtResource( 1 )
+animation = "walk"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 5 )
+scale = Vector2( 2, 2 )
+shape = SubResource( 1 )
+
+[node name="DebugMovement" type="Line2D" parent="."]
+z_index = 50
+points = PoolVector2Array( 0, 0, 50, 0 )
+width = 1.0
+default_color = Color( 0, 1, 0, 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Mob_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Mob_body_exited"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

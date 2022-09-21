@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 export(PackedScene) var weapon_type
+export(Color) var hand_color
 
 var pickup_dist = 100.0  # distance in units
 var max_health = 10.0
@@ -21,6 +22,7 @@ var pierce = 0           # number of enemies to pierce
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
+onready var cam = $PlayerCamera
 
 #var moving_left = false
 var being_hurt = false
@@ -41,8 +43,19 @@ func _ready():
 	update_xp_bar()
 
 
-#func _process(_delta):
-#	pass
+func _process(_delta):
+	# the use of just_released probably makes this bad for non-scroll bindings,
+	# but scroll requires it. may try an or with action_pressed
+	if Input.is_action_just_released("zoom_in"):
+		var zoom = max(cam.zoom.x - 0.02, 0.25)
+		cam.zoom = Vector2(zoom, zoom)
+		
+	elif Input.is_action_just_released("zoom_out"):
+		var zoom = min(cam.zoom.x + 0.02, 1)
+		cam.zoom = Vector2(zoom, zoom)
+		
+	elif Input.is_action_just_pressed("zoom_reset"):
+		cam.zoom = Vector2(1, 1)
 
 
 func _physics_process(delta):
@@ -54,7 +67,7 @@ func _physics_process(delta):
 	
 	if dir.length() > 0:
 		dir = dir.normalized() #* speed * Stats.SPEED_MODIFIER
-		if not being_hurt: $AnimatedSprite.play("run")
+		if not being_hurt: $AnimatedSprite.play("walk")
 	else:
 		if not being_hurt: $AnimatedSprite.play("idle")
 	
@@ -81,9 +94,9 @@ func _physics_process(delta):
 
 func add_xp(n):
 	xp += int(n)
-	var new_lvl = Stats.xp2lvl(xp)
+	var new_lvl = Stats.xp2lvl(xp) # find target level at current total xp
 	
-	for _i in range(lvl, new_lvl):
+	for _i in range(lvl, new_lvl): # for every level between current and target
 		level_up()
 	
 	update_xp_bar()
@@ -104,9 +117,6 @@ func update_xp_bar():
 		$XPHUD/XPBar.max_value = Stats.lvl_incs[lvl+1]
 		$XPHUD/XPBar.value = xp - Stats.lvl_sums[lvl]
 		$XPHUD/XPBar/Level.text = "LVL " + str(lvl)
-	
-#	print('max_value =', Stats.lvl_incs[lvl+1])
-#	print('value =', xp - Stats.lvl_sums[lvl])
 
 
 func hurt(n):

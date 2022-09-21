@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/players/Robby.gd" type="Script" id=1]
+[ext_resource path="res://scenes/players/parent/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/sheets/robby_16.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/weapons/Shotgun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/players/Robby.gd" type="Script" id=4]
 
-[node name="Robby"]
-script = ExtResource( 1 )
-weapon_type = null
+[node name="Robby" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+weapon_type = ExtResource( 3 )
+hand_color = Color( 0.537255, 0.388235, 0.278431, 1 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = ExtResource( 2 )

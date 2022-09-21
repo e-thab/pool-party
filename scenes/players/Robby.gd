@@ -1,4 +1,4 @@
-extends "res://scripts/Player.gd"
+extends "res://scenes/players/parent/Player.gd"
 
 
 func _init():

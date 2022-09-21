@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://scenes/pickups/parent/Pickup.gd" type="Script" id=1]
 [ext_resource path="res://assets/shaders/oscillate.tres" type="Material" id=2]
-[ext_resource path="res://scripts/Pickup.gd" type="Script" id=3]
 
 [node name="Pickup" type="Node2D"]
 scale = Vector2( 4, 4 )
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 2 )
