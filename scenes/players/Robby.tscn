@@ -8,8 +8,12 @@
 [node name="Robby" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
 weapon_type = ExtResource( 3 )
-hand_color = Color( 0.537255, 0.388235, 0.278431, 1 )
+hand_color = Color( 0.721569, 0.435294, 0.313726, 1 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = ExtResource( 2 )
-frame = 1
+frame = 0
+
+[node name="XPBar" parent="XPHUD" index="0"]
+anchor_right = 0.451
+margin_right = -0.920044

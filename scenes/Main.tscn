@@ -39,11 +39,13 @@ script = ExtResource( 7 )
 
 [node name="TimeLabel" type="Label" parent="HUD"]
 pause_mode = 1
-anchor_right = 1.0
-margin_left = 878.0
+anchor_left = 0.457
+anchor_right = 0.543
+anchor_bottom = 0.004
+margin_left = 0.559937
 margin_top = 4.0
-margin_right = -878.0
-margin_bottom = 59.0
+margin_right = -0.560059
+margin_bottom = 54.68
 custom_fonts/font = ExtResource( 10 )
 text = "00:00"
 align = 1
