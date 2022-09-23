@@ -196,4 +196,4 @@ func set_stats(stat, val):
 func _on_PlayerSprite_animation_finished():
 	if $AnimatedSprite.animation == "hurt":
 		being_hurt = false # make this (invincibility duration) more controllable
-		$AnimatedSprite.stop()
+		#$AnimatedSprite.stop()

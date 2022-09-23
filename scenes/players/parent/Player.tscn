@@ -18,7 +18,7 @@ font_data = ExtResource( 6 )
 bg_color = Color( 0.788235, 0.313726, 0.313726, 1 )
 
 [sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
+bg_color = Color( 0.164706, 0.164706, 0.164706, 0.705882 )
 
 [sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.819608, 0.317647, 0.6, 0.705882 )
@@ -48,7 +48,6 @@ region_rect = Rect2( 0, 0, 1920, 1080 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

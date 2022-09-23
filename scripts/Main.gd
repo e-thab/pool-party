@@ -19,7 +19,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	if Input.is_action_just_pressed("debug_1"):
+		$DebugHUD.visible = !$DebugHUD.visible
+	
+	if Input.is_action_pressed("debug_speed+"):
+		Engine.time_scale = 3
+	elif Input.is_action_pressed("debug_speed-"):
+		Engine.time_scale = 0.33
+	else:
+		Engine.time_scale = $DebugHUD.target_time_scale
 
 
 #func temp_pickup_spawn():

@@ -8,7 +8,7 @@
 bg_color = Color( 0, 0.772549, 1, 1 )
 
 [sub_resource type="StyleBoxFlat" id=15]
-bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
+bg_color = Color( 0.164706, 0.164706, 0.164706, 0.705882 )
 
 [sub_resource type="DynamicFont" id=13]
 size = 22

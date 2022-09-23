@@ -3,11 +3,12 @@ extends CanvasLayer
 
 # Declare member variables here. Examples:
 onready var player = get_tree().get_nodes_in_group("player")[0]
-
 onready var controls = [
 		$FPS, $TimeScale, $MaxHP, $HP, $Dmg, $Speed, $Ammo, $FireRate, $ReloadSpeed,
 		$ShotSpeed, $ShotCount, $ShotSpread, $Pierce, $PickupDistance, $XP
 		]
+
+var target_time_scale = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,6 +20,7 @@ onready var controls = [
 func _process(_delta):
 #	pos.text = "Pos: " + str(player.position)
 	$FPS/Label.text = "FPS: " + str(Engine.get_frames_per_second())
+	$TimeScale/Label.text = "Time Scale: " + str(Engine.time_scale)
 
 
 func _on_FPS_text_entered(new_text):
@@ -29,6 +31,7 @@ func _on_FPS_text_entered(new_text):
 
 func _on_TimeScale_text_entered(new_text):
 	Engine.time_scale = float(new_text)
+	target_time_scale = float(new_text)
 	release_all()
 
 

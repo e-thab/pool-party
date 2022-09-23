@@ -39,7 +39,7 @@ margin_left = 5.0
 margin_top = -12.0
 margin_right = 83.0
 margin_bottom = 12.0
-text = "Engine.time_scale"
+text = "Time Scale"
 valign = 1
 
 [node name="MaxHP" type="LineEdit" parent="."]

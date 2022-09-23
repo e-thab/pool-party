@@ -37,9 +37,9 @@ region = Rect2( 54, 18, 18, 18 )
 [resource]
 animations = [ {
 "frames": [ SubResource( 18 ), SubResource( 19 ) ],
-"loop": true,
+"loop": false,
 "name": "hurt",
-"speed": 4.0
+"speed": 5.0
 }, {
 "frames": [ SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
