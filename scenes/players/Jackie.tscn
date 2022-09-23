@@ -1,0 +1,65 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/sprites/sheets/jackie_17.png" type="Texture" id=1]
+[ext_resource path="res://scenes/players/parent/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/players/Jackie.gd" type="Script" id=3]
+[ext_resource path="res://scenes/weapons/Shotgun.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 0, 20, 20 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 60, 0, 20, 20 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 20, 20 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 20, 0, 20, 20 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 20, 20, 20 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 20, 20, 20, 20 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 20, 20, 20 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 60, 20, 20, 20 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "walk",
+"speed": 6.0
+} ]
+
+[node name="Jackie" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+weapon_type = ExtResource( 4 )
+hand_color = Color( 0.45098, 0.243137, 0.223529, 1 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+frames = SubResource( 9 )
+frame = 0
