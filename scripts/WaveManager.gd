@@ -79,6 +79,3 @@ func _on_enemy_death():
 	
 	if wave <= max_wave:
 		update_wave_bar()
-	
-	print(mob_count)
-	

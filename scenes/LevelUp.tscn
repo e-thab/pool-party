@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="LevelUp" type="CanvasLayer"]
+
+[node name="Container" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -344.0
+margin_top = -207.0
+margin_right = 344.0
+margin_bottom = 207.0
