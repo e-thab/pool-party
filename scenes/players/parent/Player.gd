@@ -193,6 +193,56 @@ func set_stats(stat, val):
 			pierce = int(val)
 
 
+func set_stats_percent(stat, percent):
+	# match statement for changing stats, calls necessary functions & guarantees proper type
+	match stat:
+		Stats.PICKUP_DIST:
+			pickup_dist *= (percent/100)
+		
+		Stats.MAX_HEALTH:
+			max_health *= (percent/100)
+			update_health_bar()
+		
+		Stats.HEALTH:
+			health *= (percent/100)
+			update_health_bar()
+		
+		Stats.SPEED:
+			speed *= (percent/100)
+		
+#		Stats.AMMO_MOD:
+#			ammo_mod = val
+		
+#		Stats.XP:
+##			xp = int(val)
+#			add_xp(int(val))
+#
+#		Stats.LVL:
+#			lvl = int(val)
+#			level_up()
+		
+		Stats.DAMAGE:
+			damage *= (percent/100)
+		
+		Stats.FIRE_RATE:
+			fire_rate *= (percent/100)
+		
+		Stats.RELOAD_SPEED:
+			reload_speed *= (percent/100)
+		
+		Stats.SHOT_SPEED:
+			shot_speed *= (percent/100)
+		
+#		Stats.SHOT_COUNT:
+#			shot_count = int(val)
+		
+		Stats.SHOT_SPREAD:
+			shot_spread = int(shot_spread * (percent/100))
+		
+#		Stats.PIERCE:
+#			pierce = int(val)
+
+
 func _on_PlayerSprite_animation_finished():
 	if $AnimatedSprite.animation == "hurt":
 		being_hurt = false # make this (invincibility duration) more controllable
