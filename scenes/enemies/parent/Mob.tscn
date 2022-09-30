@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/sheets/base_16.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/enemies/parent/Mob.gd" type="Script" id=2]
+[ext_resource path="res://scenes/DmgNumber.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 8.0
@@ -16,11 +17,13 @@ contacts_reported = 8
 contact_monitor = true
 linear_damp = 20.0
 script = ExtResource( 2 )
+dmg_number = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "walk"
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

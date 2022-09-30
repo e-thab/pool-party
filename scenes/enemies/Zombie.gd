@@ -8,8 +8,8 @@ extends "res://scenes/enemies/parent/Mob.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _init():
-	max_health = 2.0
-	damage = 0.5
+	max_health = 30.0
+	damage = 5.0
 	speed = 33.3
 
 

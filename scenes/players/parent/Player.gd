@@ -5,7 +5,9 @@ export(PackedScene) var weapon_type
 export(Color) var hand_color
 
 var pickup_dist = 100.0  # distance in units
-var max_health = 10.0
+var max_health = 100.0
+var regen_amt = 0.1      # how much health to regen
+var regen_time = 5.0     # time to regen 
 var speed = 100.0        # percentage
 var ammo_mod = 0         # adds to weapon max ammo
 var xp = 0

@@ -3,7 +3,7 @@ extends "res://scenes/players/parent/Player.gd"
 
 func _init():
 	pickup_dist = 100.0  # distance in units
-	max_health = 10.0
+	max_health = 100.0
 	speed = 100.0        # percentage
 	ammo_mod = 0         # adds to weapon max ammo
 	xp = 0

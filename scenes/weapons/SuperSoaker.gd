@@ -2,7 +2,7 @@ extends "res://scenes/weapons/parent/Gun.gd"
 
 
 func _init():
-	base_dmg = 0.8
+	base_dmg = 9.0
 	base_rate = 30.0
 	base_reload = 100.0
 	base_spd = 400.0

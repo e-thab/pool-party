@@ -48,6 +48,7 @@ region_rect = Rect2( 0, 0, 1920, 1080 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -69,6 +70,8 @@ custom_styles/fg = SubResource( 10 )
 custom_styles/bg = SubResource( 11 )
 value = 50.0
 percent_visible = false
+
+[node name="RegenTimer" type="Timer" parent="."]
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true

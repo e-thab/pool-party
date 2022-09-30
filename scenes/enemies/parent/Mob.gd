@@ -5,11 +5,12 @@ signal enemy_death
 
 export(Array, SpriteFrames) var mob_types
 export(Array, PackedScene) var drops
+export(PackedScene) var dmg_number
 onready var player  = get_tree().get_nodes_in_group("player")[0]
 onready var root = get_tree().get_root()
 
-var max_health = 2.0
-var damage = 0.5
+var max_health = 30.0
+var damage = 5.0
 var speed = 33.3
 #var being_hurt = false
 var health
@@ -76,7 +77,18 @@ func hurt(n):
 	health -= n
 	$AnimatedSprite.play("hurt")
 	$AnimatedSprite.frame = 0
+	dmg_popup(n)
 	#print("zombie hurt. hp = " + str(health))
+
+
+func dmg_popup(n):
+	var num = dmg_number.instance()
+	num.set_num(n)
+	root.add_child(num)
+	num.position = global_position
+	
+	num.position.y -= 40
+	num.position.x += rand_range(-15.0, 15.0)
 
 
 func die():
