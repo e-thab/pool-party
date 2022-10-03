@@ -12,7 +12,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 #	if Input.is_action_just_pressed("use_item"):
 #		print(rand_choice(powerups, 3))
 	pass

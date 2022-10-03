@@ -12,7 +12,7 @@ func _ready():
 	#Engine.set_target_fps(Engine.get_iterations_per_second())
 	#print("setting fps at " + str(Engine.get_iterations_per_second()))
 	
-	Input.set_custom_mouse_cursor(crosshair, 0, Vector2(16, 16))
+	Input.set_custom_mouse_cursor(crosshair, 0, crosshair.get_size()/2)
 	randomize()
 	
 	#temp_pickup_spawn()

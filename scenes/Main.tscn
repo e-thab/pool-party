@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/Main.gd" type="Script" id=2]
 [ext_resource path="res://scenes/debug/DebugHUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/misc/red_circle.png" type="Texture" id=4]
-[ext_resource path="res://assets/crosshairs/ch_1.png" type="Texture" id=5]
+[ext_resource path="res://assets/crosshairs/crosshair_4.png" type="Texture" id=5]
 [ext_resource path="res://scenes/weapons/Pistol.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=7]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=8]
@@ -21,6 +21,7 @@ script = ExtResource( 2 )
 crosshair = ExtResource( 5 )
 
 [node name="WaveManager" parent="." instance=ExtResource( 12 )]
+spawn_enemies = false
 
 [node name="TestCamera" type="Camera2D" parent="."]
 visible = false
