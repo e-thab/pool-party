@@ -3,7 +3,7 @@ extends CanvasLayer
 
 # Declare member variables here. Examples:
 var time = 0
-# var b = "text"
+var level_pause = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,10 +16,14 @@ func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused:
 			$PauseLabel.hide()
-			get_tree().paused = false
+			get_tree().paused = level_pause
 		else:
-			get_tree().paused = true
+			get_tree().paused = level_pause
 			$PauseLabel.show()
+
+
+func on_level_pause(b_pause):
+	level_pause = b_pause
 
 
 func _on_RoundTimer_timeout():

@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+signal level_pause
 
 export(Array, PackedScene) var powerups
 
@@ -28,14 +29,15 @@ func _ready():
 
 
 func _on_level_up():
+	$Control.visible = true
+	get_tree().paused = true
+	emit_signal("level_pause", true)
 	generate()
 
 
 func generate():
-	visible = true
 	var choices = rand_choice(powerups, player.lvl_choices)
 	show_choices(choices)
-	get_tree().paused = true # problem with main pause menu
 
 
 func show_choices(arr):
@@ -60,6 +62,7 @@ func clear():
 	for x in $Control.get_children():
 		x.queue_free()
 	get_tree().paused = false # problem with main pause menu
+	emit_signal("level_pause", false)
 
 
 func rand_choice(arr, amt):
