@@ -2,8 +2,7 @@ extends Control
 
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var color = Color.white
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,4 +20,10 @@ func _on_Item2_mouse_entered():
 
 
 func _on_Item2_mouse_exited():
-	modulate = Color.white
+	modulate = color
+
+
+func _on_Item2_gui_input(event):
+	if event.is_action("primary_fire") and event.is_pressed():
+		print('click')
+		color = Color.black if color == Color.white else Color.white
