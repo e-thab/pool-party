@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 
+signal level_up
+
 export(PackedScene) var weapon_type
 export(Color) var hand_color
 
@@ -12,6 +14,7 @@ var speed = 100.0        # percentage
 var ammo_mod = 0         # adds to weapon max ammo
 var xp = 0
 var lvl = 1
+var lvl_choices = 4      # number of powerup choices on level
 
 # modify base weapon stats
 var damage = 100.0       # percentage
@@ -108,6 +111,7 @@ func level_up():
 	if lvl < len(Stats.lvl_incs):
 		#print('level up')
 		lvl += 1
+		emit_signal("level_up")
 
 
 func update_xp_bar():

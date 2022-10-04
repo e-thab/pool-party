@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/glyph_2.png-b95f5b8ba99baa5088c873270938f839.stex"
+path="res://.import/heart_1.png-832d5549747c026845939fa1c231acaa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/glyphs/glyph_2.png"
-dest_files=[ "res://.import/glyph_2.png-b95f5b8ba99baa5088c873270938f839.stex" ]
+source_file="res://assets/sprites/icons/heart_1.png"
+dest_files=[ "res://.import/heart_1.png-832d5549747c026845939fa1c231acaa.stex" ]
 
 [params]
 

@@ -8,6 +8,7 @@ func _init():
 	ammo_mod = 0         # adds to weapon max ammo
 	xp = 0
 	lvl = 1
+	lvl_choices = 4
 
 	# modify base weapon stats
 	damage = 100.0       # percentage

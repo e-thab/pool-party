@@ -12,7 +12,6 @@ hand_color = Color( 0.721569, 0.435294, 0.313726, 1 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = ExtResource( 2 )
-frame = 1
 
 [node name="XPBar" parent="XPHUD" index="0"]
 anchor_right = 0.451

@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/ui/frame_normal_76.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/glyphs/smile_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/icons/smile_1.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://scenes/LevelUp_Test2.gd" type="Script" id=4]
+[ext_resource path="res://scenes/powerups/LevelUp_Test2.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=3]
 size = 18
