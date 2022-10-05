@@ -1,9 +1,11 @@
 extends TextureRect
 
 
+signal hover
+
 # Declare member variables here. Examples:
-var title = 'title'
-var desc = 'description'
+var title = 'test title'
+var desc = 'test description'
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,12 +15,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	#$Label.text = str(rect_position)
 	pass
 
 
 func _on_TextureRect_mouse_entered():
 	$Highlight.visible = true
+	emit_signal("hover", title, desc)
 
 
 func _on_TextureRect_mouse_exited():

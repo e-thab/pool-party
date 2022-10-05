@@ -1,19 +1,29 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/LevelUp.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/misc/green_circle.png" type="Texture" id=2]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Blue.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Cerulean.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Green.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Heliconia.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Orange.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Seafoam.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Magenta.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Red.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Yellow.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Cyan.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Spring.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/powerups/Powerup_Test_Purple.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/powerups/Powerup_Blue.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/powerups/Powerup_Cerulean.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/powerups/Powerup_Green.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/powerups/Powerup_Heliconia.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/powerups/Powerup_Orange.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/powerups/Powerup_Seafoam.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/powerups/Powerup_Magenta.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/powerups/Powerup_Red.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/powerups/Powerup_Yellow.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/powerups/Powerup_Cyan.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/powerups/Powerup_Spring.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/powerups/Powerup_Purple.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/sprites/ui/highlight_28.png" type="Texture" id=15]
+[ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=16]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 16 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 18
+font_data = ExtResource( 16 )
 
 [node name="LevelUp" type="CanvasLayer"]
 pause_mode = 2
@@ -35,6 +45,7 @@ expand = true
 stretch_mode = 6
 
 [node name="Control" type="Control" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -43,3 +54,42 @@ margin_left = -300.0
 margin_top = -300.0
 margin_right = 300.0
 margin_bottom = 300.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+self_modulate = Color( 0, 0, 0, 0.705882 )
+anchor_left = 0.232
+anchor_top = 0.232
+anchor_right = 0.768
+anchor_bottom = 0.768
+margin_left = -0.200012
+margin_top = -0.200012
+margin_right = 0.199982
+margin_bottom = 0.199982
+texture = ExtResource( 15 )
+stretch_mode = 6
+
+[node name="Title" type="Label" parent="Control/TextureRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_top = 11.0
+margin_right = 150.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 1 )
+text = "TITLE"
+align = 1
+valign = 1
+
+[node name="Description" type="Label" parent="Control/TextureRect"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -241.0
+margin_right = 150.0
+margin_bottom = -11.0
+custom_fonts/font = SubResource( 2 )
+text = "Description"
+align = 1
+autowrap = true

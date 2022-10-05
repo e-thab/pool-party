@@ -12,6 +12,7 @@ var player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if get_tree().current_scene.name == "LevelUp":
+		$Control.visible = true
 		randomize()
 		var choices = rand_choice(powerups, 8)
 		show_choices(choices)
@@ -56,6 +57,7 @@ func show_choices(arr):
 		theta += PI / (rngi/2.0)
 		
 		inst.rect_position = Vector2(x, y)
+		inst.connect("hover", self, "_on_hover")
 
 
 func clear():
@@ -75,3 +77,8 @@ func rand_choice(arr, amt):
 			choices.append(tmp)
 	
 	return choices
+
+
+func _on_hover(title, desc):
+	$Control/TextureRect/Title.text = title
+	$Control/TextureRect/Description.text = desc

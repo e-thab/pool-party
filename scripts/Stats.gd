@@ -12,6 +12,7 @@ enum {
 	SPEED,
 	AMMO_MOD,
 	XP,
+	XP_GAIN,
 	LVL,
 	LVL_CHOICES,
 	DAMAGE,

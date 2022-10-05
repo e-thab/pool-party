@@ -13,6 +13,7 @@ var regen_time = 5.0     # time to regen
 var speed = 100.0        # percentage
 var ammo_mod = 0         # adds to weapon max ammo
 var xp = 0
+var xp_gain = 100.0      # percentage
 var lvl = 1
 var lvl_choices = 4      # number of powerup choices on level
 
@@ -24,6 +25,23 @@ var shot_speed = 100.0   # percentage
 var shot_count = 0       # int, adds to base count
 var shot_spread = 20     # angle of shot spread, does not add
 var pierce = 0           # number of enemies to pierce
+
+# base player stats so that percentage modifiers don't compound
+onready var base_pickup_dist = pickup_dist
+onready var base_max_health = max_health
+onready var base_regen_amt = regen_amt
+onready var base_speed = speed
+onready var base_ammo_mod = ammo_mod
+onready var base_xp = xp
+onready var base_xp_gain = xp_gain
+onready var base_lvl = lvl
+onready var base_lvl_choices = lvl_choices
+onready var base_damage = damage
+onready var base_fire_rate = fire_rate
+onready var base_reload_speed = reload_speed
+onready var base_shot_speed = shot_speed
+onready var base_shot_count = shot_count
+onready var base_pierce = pierce
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
@@ -98,7 +116,7 @@ func _physics_process(delta):
 
 
 func add_xp(n):
-	xp += int(n)
+	xp += int(n * (xp_gain / 100.0))
 	var new_lvl = Stats.xp2lvl(xp) # find target level at current total xp
 	
 	for _i in range(lvl, new_lvl): # for every level between current and target
@@ -203,18 +221,19 @@ func set_stats_percent(stat, percent):
 	# match statement for changing stats, calls necessary functions & guarantees proper type
 	match stat:
 		Stats.PICKUP_DIST:
-			pickup_dist *= (percent/100)
+			pickup_dist *= (percent/100.0)
 		
 		Stats.MAX_HEALTH:
-			max_health *= (percent/100)
+			max_health *= (percent/100.0)
 			update_health_bar()
 		
 		Stats.HEALTH:
-			health *= (percent/100)
+			health *= (percent/100.0)
 			update_health_bar()
 		
 		Stats.SPEED:
-			speed *= (percent/100)
+			speed *= (percent/100.0)
+		
 		
 #		Stats.AMMO_MOD:
 #			ammo_mod = val
@@ -227,23 +246,28 @@ func set_stats_percent(stat, percent):
 #			lvl = int(val)
 #			level_up()
 		
+		
+		Stats.XP_GAIN:
+			xp_gain *= (percent/100.0)
+		
+		
 		Stats.DAMAGE:
-			damage *= (percent/100)
+			damage *= (percent/100.0)
 		
 		Stats.FIRE_RATE:
-			fire_rate *= (percent/100)
+			fire_rate *= (percent/100.0)
 		
 		Stats.RELOAD_SPEED:
-			reload_speed *= (percent/100)
+			reload_speed *= (percent/100.0)
 		
 		Stats.SHOT_SPEED:
-			shot_speed *= (percent/100)
+			shot_speed *= (percent/100.0)
 		
 #		Stats.SHOT_COUNT:
 #			shot_count = int(val)
 		
 		Stats.SHOT_SPREAD:
-			shot_spread = int(shot_spread * (percent/100))
+			shot_spread = int(shot_spread * (percent/100.0))
 		
 #		Stats.PIERCE:
 #			pierce = int(val)
