@@ -1,19 +1,15 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/LevelUp.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/misc/green_circle.png" type="Texture" id=2]
-[ext_resource path="res://scenes/powerups/Powerup_Blue.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/powerups/Glasses.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/powerups/Powerup_Cerulean.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/powerups/Powerup_Green.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/powerups/Powerup_Heliconia.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/powerups/Powerup_Orange.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/powerups/Powerup_Seafoam.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/powerups/Powerup_Magenta.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/powerups/Powerup_Red.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/powerups/Powerup_Yellow.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/powerups/Powerup_Cyan.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/powerups/Powerup_Spring.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/powerups/Powerup_Purple.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/sprites/ui/highlight_28.png" type="Texture" id=15]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=16]
 
@@ -28,7 +24,7 @@ font_data = ExtResource( 16 )
 [node name="LevelUp" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 1 )
-powerups = [ ExtResource( 10 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 6 ) ]
+powerups = [ ExtResource( 10 ), ExtResource( 3 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 6 ) ]
 
 [node name="SizePreview" type="TextureRect" parent="."]
 visible = false
@@ -44,31 +40,22 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="Control" type="Control" parent="."]
+[node name="Info" type="TextureRect" parent="."]
 visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -300.0
-margin_top = -300.0
-margin_right = 300.0
-margin_bottom = 300.0
-
-[node name="TextureRect" type="TextureRect" parent="Control"]
 self_modulate = Color( 0, 0, 0, 0.705882 )
-anchor_left = 0.232
-anchor_top = 0.232
-anchor_right = 0.768
-anchor_bottom = 0.768
-margin_left = -0.200012
-margin_top = -0.200012
-margin_right = 0.199982
-margin_bottom = 0.199982
+anchor_left = 0.411
+anchor_top = 0.343
+anchor_right = 0.589
+anchor_bottom = 0.657
+margin_left = 0.880005
+margin_top = -0.440033
+margin_right = -0.880127
+margin_bottom = 0.440002
 texture = ExtResource( 15 )
+expand = true
 stretch_mode = 6
 
-[node name="Title" type="Label" parent="Control/TextureRect"]
+[node name="Title" type="Label" parent="Info"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -150.0
@@ -80,7 +67,7 @@ text = "TITLE"
 align = 1
 valign = 1
 
-[node name="Description" type="Label" parent="Control/TextureRect"]
+[node name="Description" type="Label" parent="Info"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -93,3 +80,14 @@ custom_fonts/font = SubResource( 2 )
 text = "Description"
 align = 1
 autowrap = true
+
+[node name="Placement" type="Control" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -300.0
+margin_right = 300.0
+margin_bottom = 300.0

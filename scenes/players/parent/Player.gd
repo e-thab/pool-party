@@ -6,23 +6,24 @@ signal level_up
 export(PackedScene) var weapon_type
 export(Color) var hand_color
 
-var pickup_dist = 100.0  # distance in units
-var max_health = 100.0
+# literal values
+var pickup_dist = 100.0  # literal distance in units but can be treated as percentage
 var regen_amt = 0.1      # how much health to regen
 var regen_time = 5.0     # time to regen 
-var speed = 100.0        # percentage
-var ammo_mod = 0         # adds to weapon max ammo
-var xp = 0
-var xp_gain = 100.0      # percentage
-var lvl = 1
 var lvl_choices = 4      # number of powerup choices on level
+
+# percentages
+var max_health = 100.0   # percentage
+var speed = 100.0        # percentage
+var xp_gain = 100.0      # percentage
 
 # modify base weapon stats
 var damage = 100.0       # percentage
 var fire_rate = 100.0    # percentage
 var reload_speed = 100.0 # percentage
 var shot_speed = 100.0   # percentage
-var shot_count = 0       # int, adds to base count
+var ammo_mod = 0         # int literal, adds to weapon max ammo
+var shot_count = 0       # int literal, adds to base count
 var shot_spread = 20     # angle of shot spread, does not add
 var pierce = 0           # number of enemies to pierce
 
@@ -30,6 +31,7 @@ var pierce = 0           # number of enemies to pierce
 onready var base_pickup_dist = pickup_dist
 onready var base_max_health = max_health
 onready var base_regen_amt = regen_amt
+onready var base_regen_time = regen_time
 onready var base_speed = speed
 onready var base_ammo_mod = ammo_mod
 onready var base_xp = xp
@@ -48,6 +50,8 @@ onready var tile = $TileSpriteBG
 onready var cam = $PlayerCamera
 
 #var moving_left = false
+var xp = 0
+var lvl = 1
 var being_hurt = false
 var health = 0.0
 var gun
@@ -167,6 +171,64 @@ func equip_weapon(weapon):
 	$GunPosition.add_child(gun)
 
 
+func add_stats_percent(stat, percent):
+	# adds percent to stat with respect to its base_stat value
+	# preferred function to modify any percentage-based stats except health
+	# to subtract just pass negative percent values, e.g. -20 would reduce by 20%
+	match stat:
+		Stats.PICKUP_DIST:
+			pickup_dist += base_pickup_dist * (percent/100.0)
+		
+		Stats.MAX_HEALTH:
+			max_health += base_max_health * (percent/100.0)
+			update_health_bar()
+		
+		Stats.SPEED:
+			speed += base_speed * (percent/100.0)
+		
+		Stats.XP_GAIN:
+			xp_gain += base_xp_gain * (percent/100.0)
+		
+		Stats.DAMAGE:
+			damage += base_damage * (percent/100.0)
+		
+		Stats.FIRE_RATE:
+			fire_rate += base_fire_rate * (percent/100.0)
+		
+		Stats.RELOAD_SPEED:
+			reload_speed += base_reload_speed * (percent/100.0)
+		
+		Stats.SHOT_SPEED:
+			shot_speed += base_shot_speed * (percent/100.0)
+
+
+func add_stats_literal(stat, val):
+	# adds literal value to stat, casts to int when needed
+	# preferred function to modify any literal value stats
+	# to subtract just pass negative values, e.g. -20 would reduce by 20
+	match stat:
+		Stats.REGEN_AMT:
+			regen_amt += val
+		
+		Stats.REGEN_TIME:
+			regen_time += val
+		
+		Stats.AMMO_MOD:
+			ammo_mod += int(val)
+		
+		Stats.LVL_CHOICES:
+			lvl_choices += int(val)
+		
+		Stats.SHOT_COUNT:
+			shot_count += int(val)
+		
+		Stats.SHOT_SPREAD:
+			shot_spread += int(val)
+		
+		Stats.PIERCE:
+			pierce += int(val)
+
+
 func set_stats(stat, val):
 	# match statement for changing stats, calls necessary functions & guarantees proper type
 	match stat:
@@ -188,12 +250,12 @@ func set_stats(stat, val):
 			ammo_mod = val
 		
 		Stats.XP:
-#			xp = int(val)
-			add_xp(int(val))
+			xp = int(val)
+			#add_xp(int(val))
 		
 		Stats.LVL:
 			lvl = int(val)
-			level_up()
+			#level_up()
 		
 		Stats.DAMAGE:
 			damage = val
@@ -234,22 +296,8 @@ func set_stats_percent(stat, percent):
 		Stats.SPEED:
 			speed *= (percent/100.0)
 		
-		
-#		Stats.AMMO_MOD:
-#			ammo_mod = val
-		
-#		Stats.XP:
-##			xp = int(val)
-#			add_xp(int(val))
-#
-#		Stats.LVL:
-#			lvl = int(val)
-#			level_up()
-		
-		
 		Stats.XP_GAIN:
 			xp_gain *= (percent/100.0)
-		
 		
 		Stats.DAMAGE:
 			damage *= (percent/100.0)
@@ -263,14 +311,8 @@ func set_stats_percent(stat, percent):
 		Stats.SHOT_SPEED:
 			shot_speed *= (percent/100.0)
 		
-#		Stats.SHOT_COUNT:
-#			shot_count = int(val)
-		
 		Stats.SHOT_SPREAD:
 			shot_spread = int(shot_spread * (percent/100.0))
-		
-#		Stats.PIERCE:
-#			pierce = int(val)
 
 
 func _on_PlayerSprite_animation_finished():

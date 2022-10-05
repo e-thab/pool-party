@@ -2,6 +2,7 @@ extends TextureRect
 
 
 signal hover
+signal choose
 
 # Declare member variables here. Examples:
 var title = 'test title'
@@ -14,19 +15,24 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+#func _process(_delta):
+#	pass
 
 
-func _on_TextureRect_mouse_entered():
+func power():  # the function to redefine for children
+	pass  # do power up stuff here
+
+
+func _on_Powerup_mouse_entered():
 	$Highlight.visible = true
 	emit_signal("hover", title, desc)
 
 
-func _on_TextureRect_mouse_exited():
+func _on_Powerup_mouse_exited():
 	$Highlight.visible = false
 
 
-func _on_TextureRect_gui_input(event):
+func _on_Powerup_gui_input(event):
 	if event.is_action("primary_fire") and event.is_pressed():
-		print('click')
+		power()
+		emit_signal("choose")

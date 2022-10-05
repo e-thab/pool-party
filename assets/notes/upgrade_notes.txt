@@ -1,0 +1,48 @@
+
+simple stat upgrades (purchased with drop currency)
+screen to buy appears on wave progression
+---
+4 categories:
+	health/protection:		
+		+max health
+		+regen amount
+		+regen frequency
+		+armor (not implemented)
+
+
+	damage/weapon:
+		+additional bullets (ammo_mod)
+		+damage
+		+fire rate
+		+reload speed
+		+shot speed?
+		+shot spread
+		+pierce
+		
+
+	speed/movement: ??
+		+speed
+	
+
+	utility (non-denominational):
+		+pickup distance
+		+xp gain
+
+
+powerups/active items [(p) = passive, (a) = active]
+screen to choose appears on level up
+---
+4 rarities:
+	white:
+		
+	
+	green:
+		molotov (a)
+	
+	blue:
+		bullet splash(heh) damage (p)
+		
+	
+	purple:
+		+1 level choice (p)
+		superhot (a) - pickup instead?

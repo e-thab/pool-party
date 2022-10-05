@@ -9,7 +9,7 @@ func _init():
 	xp = 0
 	xp_gain = 100.0
 	lvl = 1
-	lvl_choices = 8
+	lvl_choices = 5
 
 	# modify base weapon stats
 	damage = 100.0       # percentage

@@ -1,4 +1,4 @@
-extends "res://scenes/powerups/Powerup.gd"
+extends "res://scenes/powerups/parent/Powerup.gd"
 
 
 # Declare member variables here. Examples:
@@ -12,11 +12,5 @@ func _init():
 	desc = "This powerup is red.\n+30% warmth."
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_TextureRect_gui_input(event):
-	if event.is_action("primary_fire") and event.is_pressed():
-		print('click red')
+func power():
+	print('you feel 30% warmer.')

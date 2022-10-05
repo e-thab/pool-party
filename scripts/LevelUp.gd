@@ -4,17 +4,17 @@ signal level_pause
 
 export(Array, PackedScene) var powerups
 
-onready var centerx = $Control.rect_size.x/2.0
-onready var centery = $Control.rect_size.y/2.0
+onready var centerx = $Placement.rect_size.x/2.0
+onready var centery = $Placement.rect_size.y/2.0
 var player
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if get_tree().current_scene.name == "LevelUp":
-		$Control.visible = true
+		$Placement.visible = true
 		randomize()
-		var choices = rand_choice(powerups, 8)
+		var choices = rand_choice(powerups, 800)
 		show_choices(choices)
 	else:
 		player = get_tree().get_nodes_in_group("player")[0]
@@ -30,13 +30,14 @@ func _ready():
 
 
 func _on_level_up():
-	$Control.visible = true
 	get_tree().paused = true
 	emit_signal("level_pause", true)
 	generate()
 
 
 func generate():
+	$Placement.visible = true
+	$Info.visible = true
 	var choices = rand_choice(powerups, player.lvl_choices)
 	show_choices(choices)
 
@@ -44,11 +45,11 @@ func generate():
 func show_choices(arr):
 	# given an array of scenes, spawn all scenes in a circle
 	var rngi = len(arr)
-	var theta = 0
+	var theta = PI/2    # pi/2 to start from the top
 	
 	for i in range(rngi):
 		var inst = arr[i].instance()
-		$Control.add_child(inst)
+		$Placement.add_child(inst)
 		
 		var x = centerx + centerx * cos(theta)
 		var y = centery - centery * sin(theta)
@@ -58,27 +59,38 @@ func show_choices(arr):
 		
 		inst.rect_position = Vector2(x, y)
 		inst.connect("hover", self, "_on_hover")
+		inst.connect("choose", self, "_on_choose")
 
 
 func clear():
-	for x in $Control.get_children():
+	for x in $Placement.get_children():
 		x.queue_free()
-	get_tree().paused = false # problem with main pause menu
+	#$Placement.visible = false
+	$Info.visible = false
+	get_tree().paused = false
 	emit_signal("level_pause", false)
 
 
 func rand_choice(arr, amt):
 	# randomly choose {amt} items from {arr}
-	var choices = []
+	if amt > len(arr):  # can't choose more items than exist
+		return arr
 	
-	while len(choices) < amt:
-		var tmp = arr[randi() % len(arr)]
-		if not (tmp in choices):
-			choices.append(tmp)
-	
-	return choices
+	else:
+		var choices = []
+		while len(choices) < amt:
+			var tmp = arr[randi() % len(arr)]
+			if not (tmp in choices):
+				choices.append(tmp)
+		
+		return choices
+
+
+func _on_choose():
+	#print('chosen')
+	clear()
 
 
 func _on_hover(title, desc):
-	$Control/TextureRect/Title.text = title
-	$Control/TextureRect/Description.text = desc
+	$Info/Title.text = title
+	$Info/Description.text = desc
