@@ -3,12 +3,18 @@
 [resource]
 code = "shader_type canvas_item;
 
-uniform float rate = 1.0;
-
-varying vec2 v;
+uniform float rate = 3.0;
+uniform float amount = 3.0;
 
 void vertex(){
-	if (UV.x > 0.5)
-		VERTEX += vec2(15.0, 15.0);
-//	VERTEX *= abs(sin(x));
+	float val = sin(TIME*rate)*amount;
+	if (UV.y < .5)
+		VERTEX += vec2(0., val);
+	else
+		VERTEX -= vec2(0., val);
+
+	if (UV.x < .5)
+		VERTEX += vec2(val, 0.);
+	else
+		VERTEX -= vec2(val, 0.);
 }"
