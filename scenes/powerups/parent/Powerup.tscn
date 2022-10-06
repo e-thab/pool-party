@@ -8,8 +8,7 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
-shader_param/speed = 2.0
-shader_param/height = 2.0
+shader_param/rate = 1.0
 
 [node name="Powerup" type="TextureRect"]
 anchor_left = 0.474
@@ -25,6 +24,9 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Icon" type="TextureRect" parent="."]
 anchor_left = 0.22
@@ -54,7 +56,6 @@ margin_bottom = 3.99997
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
-
 [connection signal="gui_input" from="." to="." method="_on_Powerup_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_Powerup_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Powerup_mouse_exited"]

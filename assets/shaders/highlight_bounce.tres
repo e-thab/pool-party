@@ -3,13 +3,12 @@
 [resource]
 code = "shader_type canvas_item;
 
-uniform float speed = 2.0;
-uniform float height = 2.0;
+uniform float rate = 1.0;
+
+varying vec2 v;
 
 void vertex(){
-	float x = TIME*speed;
-	//VERTEX *= 2.0;
-	//VERTEX += vec2(122.5, 122.5) * 2.;
-	VERTEX *= vec2(sin(x), cos(x)); // not what i'm trying to do lol
-//	VERTEX += vec2(0.0, -pow(sin(x), 2) * height);  //-sin^2(x) * height
+	if (UV.x > 0.5)
+		VERTEX += vec2(15.0, 15.0);
+//	VERTEX *= abs(sin(x));
 }"

@@ -12,7 +12,7 @@
 [ext_resource path="res://scenes/LevelUp.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/WaveManager.tscn" type="PackedScene" id=12]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 36
 font_data = ExtResource( 8 )
 
@@ -58,7 +58,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -68.0
 margin_bottom = -13.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "KILLS: 0"
 align = 1
 valign = 1
@@ -99,5 +99,4 @@ color = Color( 0, 0, 0, 0.235294 )
 
 [node name="LevelUp" parent="." instance=ExtResource( 11 )]
 layer = 0
-
 [connection signal="timeout" from="HUD/RoundTimer" to="HUD" method="_on_RoundTimer_timeout"]
