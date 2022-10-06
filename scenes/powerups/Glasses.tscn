@@ -5,8 +5,9 @@
 [ext_resource path="res://assets/sprites/icons/glasses.png" type="Texture" id=3]
 
 [node name="Glasses" instance=ExtResource( 1 )]
-modulate = Color( 0.729412, 0.380392, 0.929412, 1 )
+self_modulate = Color( 0.729412, 0.380392, 0.929412, 1 )
 script = ExtResource( 2 )
 
 [node name="Icon" parent="." index="0"]
+self_modulate = Color( 0.729412, 0.380392, 0.929412, 1 )
 texture = ExtResource( 3 )

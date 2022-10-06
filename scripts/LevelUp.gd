@@ -67,6 +67,8 @@ func clear():
 		x.queue_free()
 	#$Placement.visible = false
 	$Info.visible = false
+	$Info/Title.text = "LEVEL UP"
+	$Info/Description.text = ""
 	get_tree().paused = false
 	emit_signal("level_pause", false)
 

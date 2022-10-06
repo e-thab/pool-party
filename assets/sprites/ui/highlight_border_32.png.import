@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/frame_normal.png-b6cae309e67da6bee45dd446b4118652.stex"
+path="res://.import/highlight_border_32.png-722e0b9a101d3cd5c00994ea22303abc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/frame_normal.png"
-dest_files=[ "res://.import/frame_normal.png-b6cae309e67da6bee45dd446b4118652.stex" ]
+source_file="res://assets/sprites/ui/highlight_border_32.png"
+dest_files=[ "res://.import/highlight_border_32.png-722e0b9a101d3cd5c00994ea22303abc.stex" ]
 
 [params]
 

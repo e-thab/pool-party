@@ -1,0 +1,15 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float speed = 2.0;
+uniform float height = 2.0;
+
+void vertex(){
+	float x = TIME*speed;
+	//VERTEX *= 2.0;
+	//VERTEX += vec2(122.5, 122.5) * 2.;
+	VERTEX *= vec2(sin(x), cos(x)); // not what i'm trying to do lol
+//	VERTEX += vec2(0.0, -pow(sin(x), 2) * height);  //-sin^2(x) * height
+}"

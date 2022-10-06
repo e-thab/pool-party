@@ -14,5 +14,5 @@ func _init():
 
 func power():
 	var player = get_tree().get_nodes_in_group("player")[0]
-	player.add_stat_literal(Stats.LVL_CHOICES, 1)
+	player.add_stats_literal(Stats.LVL_CHOICES, 1)
 	print('you feel 30% smarter. lvl_choices = ', player.lvl_choices)
