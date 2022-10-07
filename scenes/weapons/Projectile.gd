@@ -19,7 +19,7 @@ func _process(delta):
 
 
 func set_stats(dmg, spd, prc):
-	damage = dmg
+	damage = stepify(dmg, 0.5) # may change
 	speed = spd
 	pierce = prc
 	$Particles2D.amount = $Particles2D.amount * (spd / 100) # lower framerates can't keep up

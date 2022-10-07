@@ -26,7 +26,6 @@ func power():  # the function to redefine for children
 
 
 func resize(x, y):
-	print('resizing')
 	var x_offset = (rect_size.x - x)/2.0
 	var y_offset = (rect_size.y - y)/2.0
 	rect_position += Vector2(x_offset, y_offset)

@@ -4,8 +4,11 @@ extends CanvasLayer
 # Declare member variables here. Examples:
 onready var player = get_tree().get_nodes_in_group("player")[0]
 onready var controls = [
-		$FPS, $TimeScale, $MaxHP, $HP, $Dmg, $Speed, $Ammo, $FireRate, $ReloadSpeed,
-		$ShotSpeed, $ShotCount, $ShotSpread, $Pierce, $PickupDistance, $XP
+		$Container/FPS, $Container/TimeScale, $Container/MaxHP, $Container/HP,
+		$Container/Dmg, $Container/Speed, $Container/Ammo, $Container/FireRate,
+		$Container/ReloadSpeed, $Container/ShotSpeed, $Container/ShotCount,
+		$Container/ShotSpread, $Container/Pierce, $Container/PickupDistance,
+		$Container/XP
 		]
 
 var target_time_scale = 1
@@ -19,13 +22,13 @@ var target_time_scale = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 #	pos.text = "Pos: " + str(player.position)
-	$FPS/Label.text = "FPS: " + str(Engine.get_frames_per_second())
-	$TimeScale/Label.text = "Time Scale: " + str(Engine.time_scale)
+	$Container/FPS/Label.text = "FPS: " + str(Engine.get_frames_per_second())
+	$Container/TimeScale/Label.text = "Time Scale: " + str(Engine.time_scale)
 
 
 func _on_FPS_text_entered(new_text):
 	Engine.set_target_fps(int(new_text))
-	$FPS/Label.text = "FPS: " + new_text
+	$Container/FPS/Label.text = "FPS: " + new_text
 	release_all()
 
 

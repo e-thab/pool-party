@@ -18,7 +18,7 @@ func _process(delta):
 
 
 func set_num(n):
-	n = stepify(n, 0.01)  # round to hundredths place
+	#n = stepify(n, 0.1)  # round to tenths place
 	$Number.text = str(n)
 
 

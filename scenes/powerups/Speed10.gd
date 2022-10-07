@@ -7,11 +7,11 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 
 func _init():
-	title = "PIERCE"
-	desc = "Shots pierce 1 more enemy."
+	title = "SPEED"
+	desc = "+10% move speed."
 
 
 func power():
 	var player = get_tree().get_nodes_in_group("player")[0]
-	player.add_stats_literal(Stats.PIERCE, 1)
-	print('+1 pierce. pierce = ', player.pierce)
+	player.add_stats_percent(Stats.SPEED, 10)
+	print('+10% move speed. speed = ', player.speed)

@@ -27,7 +27,7 @@ var shot_count = 0       # int literal, adds to base count
 var shot_spread = 20     # angle of shot spread, does not add
 var pierce = 0           # number of enemies to pierce
 
-# base player stats so that percentage modifiers don't compound
+# base player stats so that percentage modifiers don't compound undesirably
 onready var base_pickup_dist = pickup_dist
 onready var base_max_health = max_health
 onready var base_regen_amt = regen_amt
@@ -243,11 +243,17 @@ func set_stats(stat, val):
 			health = val
 			update_health_bar()
 		
+		Stats.REGEN_AMT:
+			regen_amt = val
+		
+		Stats.REGEN_TIME:
+			regen_time = val
+		
 		Stats.SPEED:
 			speed = val
 		
-		Stats.AMMO_MOD:
-			ammo_mod = val
+		Stats.XP_GAIN:
+			xp_gain = val
 		
 		Stats.XP:
 			xp = int(val)
@@ -255,7 +261,10 @@ func set_stats(stat, val):
 		
 		Stats.LVL:
 			lvl = int(val)
-			#level_up()
+			level_up()
+		
+		Stats.LVL_CHOICES:
+			lvl_choices = int(val)
 		
 		Stats.DAMAGE:
 			damage = val
@@ -265,6 +274,9 @@ func set_stats(stat, val):
 		
 		Stats.RELOAD_SPEED:
 			reload_speed = val
+		
+		Stats.AMMO_MOD:
+			ammo_mod = int(val)
 		
 		Stats.SHOT_SPEED:
 			shot_speed = val
@@ -279,40 +291,40 @@ func set_stats(stat, val):
 			pierce = int(val)
 
 
-func set_stats_percent(stat, percent):
-	# match statement for changing stats, calls necessary functions & guarantees proper type
-	match stat:
-		Stats.PICKUP_DIST:
-			pickup_dist *= (percent/100.0)
-		
-		Stats.MAX_HEALTH:
-			max_health *= (percent/100.0)
-			update_health_bar()
-		
-		Stats.HEALTH:
-			health *= (percent/100.0)
-			update_health_bar()
-		
-		Stats.SPEED:
-			speed *= (percent/100.0)
-		
-		Stats.XP_GAIN:
-			xp_gain *= (percent/100.0)
-		
-		Stats.DAMAGE:
-			damage *= (percent/100.0)
-		
-		Stats.FIRE_RATE:
-			fire_rate *= (percent/100.0)
-		
-		Stats.RELOAD_SPEED:
-			reload_speed *= (percent/100.0)
-		
-		Stats.SHOT_SPEED:
-			shot_speed *= (percent/100.0)
-		
-		Stats.SHOT_SPREAD:
-			shot_spread = int(shot_spread * (percent/100.0))
+#func set_stats_percent(stat, percent):
+#	# match statement for changing stats, calls necessary functions & guarantees proper type
+#	match stat:
+#		Stats.PICKUP_DIST:
+#			pickup_dist *= (percent/100.0)
+#
+#		Stats.MAX_HEALTH:
+#			max_health *= (percent/100.0)
+#			update_health_bar()
+#
+#		Stats.HEALTH:
+#			health *= (percent/100.0)
+#			update_health_bar()
+#
+#		Stats.SPEED:
+#			speed *= (percent/100.0)
+#
+#		Stats.XP_GAIN:
+#			xp_gain *= (percent/100.0)
+#
+#		Stats.DAMAGE:
+#			damage *= (percent/100.0)
+#
+#		Stats.FIRE_RATE:
+#			fire_rate *= (percent/100.0)
+#
+#		Stats.RELOAD_SPEED:
+#			reload_speed *= (percent/100.0)
+#
+#		Stats.SHOT_SPEED:
+#			shot_speed *= (percent/100.0)
+#
+#		Stats.SHOT_SPREAD:
+#			shot_spread = int(shot_spread * (percent/100.0))
 
 
 func _on_PlayerSprite_animation_finished():
