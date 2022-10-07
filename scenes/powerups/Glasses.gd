@@ -6,7 +6,6 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 # var b = "text"
 
 
-# Called when the node enters the scene tree for the first time.
 func _init():
 	title = "DINKY GLASSES"
 	desc = "Learn secrets long forgotten, predict the future, get one more choice on level up."

@@ -4,27 +4,23 @@
 code = "shader_type canvas_item;
 
 uniform float rate = 3.0;
-uniform float amount = 3.0;
+uniform float amount = 1.0;
+uniform bool x_left = true;
+uniform bool y_up = true;
 
 void vertex(){
-	float val = 2.;
+	float val = sin(TIME*rate+1.)*amount;
 	
-	if (VERTEX.x < 0.)
+	float x = 1.;
+	if (x_left)
 	{
-		VERTEX.x -= 100.;
+		x = -1.;
 	}
-	if (VERTEX.y < 0.)
+	
+	float y = 1.;
+	if (y_up)
 	{
-		VERTEX.y -= 100.;
+		y = -1.;
 	}
-//	float val = sin(TIME*rate)*amount;
-//	if (UV.y < .5)
-//		VERTEX += vec2(0., val);
-//	else
-//		VERTEX -= vec2(0., val);
-//
-//	if (UV.x < .5)
-//		VERTEX += vec2(val, 0.);
-//	else
-//		VERTEX -= vec2(val, 0.);
+	VERTEX += vec2(val * x, val * y);
 }"
