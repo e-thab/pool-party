@@ -7,14 +7,24 @@ uniform float rate = 3.0;
 uniform float amount = 3.0;
 
 void vertex(){
-	float val = sin(TIME*rate)*amount;
-	if (UV.y < .5)
-		VERTEX += vec2(0., val);
-	else
-		VERTEX -= vec2(0., val);
-
-	if (UV.x < .5)
-		VERTEX += vec2(val, 0.);
-	else
-		VERTEX -= vec2(val, 0.);
+	float val = 2.;
+	
+	if (VERTEX.x < 0.)
+	{
+		VERTEX.x -= 100.;
+	}
+	if (VERTEX.y < 0.)
+	{
+		VERTEX.y -= 100.;
+	}
+//	float val = sin(TIME*rate)*amount;
+//	if (UV.y < .5)
+//		VERTEX += vec2(0., val);
+//	else
+//		VERTEX -= vec2(0., val);
+//
+//	if (UV.x < .5)
+//		VERTEX += vec2(val, 0.);
+//	else
+//		VERTEX -= vec2(val, 0.);
 }"

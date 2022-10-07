@@ -27,7 +27,6 @@ script = ExtResource( 1 )
 powerups = [ ExtResource( 10 ), ExtResource( 3 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 6 ) ]
 
 [node name="SizePreview" type="TextureRect" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -41,7 +40,6 @@ expand = true
 stretch_mode = 6
 
 [node name="Info" type="TextureRect" parent="."]
-visible = false
 self_modulate = Color( 0, 0, 0, 0.705882 )
 anchor_left = 0.411
 anchor_top = 0.343
