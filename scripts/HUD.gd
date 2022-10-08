@@ -1,9 +1,13 @@
 extends CanvasLayer
 
 
+signal pause
+
 # Declare member variables here. Examples:
 var time = 0
-var level_pause = false
+var esc_paused = false
+#var paused_by_HUD = false
+#var menu_showing = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,16 +18,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
-		if get_tree().paused:
-			$PauseLabel.hide()
-			get_tree().paused = level_pause
-		else:
-			get_tree().paused = level_pause
-			$PauseLabel.show()
-
-
-func on_level_pause(b_pause):
-	level_pause = b_pause
+		esc_paused = !esc_paused
+		$PauseLabel.visible = !$PauseLabel.visible
+		emit_signal("pause", esc_paused)
 
 
 func _on_RoundTimer_timeout():

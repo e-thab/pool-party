@@ -12,7 +12,8 @@ var kills = 0
 func _ready():
 	#Engine.set_target_fps(Engine.get_iterations_per_second())
 	#print("setting fps at " + str(Engine.get_iterations_per_second()))
-	$LevelUp.connect("level_pause", $HUD, "on_level_pause")
+	$LevelUp.connect("pause", $PauseManager, "_on_pause")
+	$HUD.connect("pause", $PauseManager, "_on_pause")
 	
 	Input.set_custom_mouse_cursor(crosshair, 0, crosshair.get_size()/2)
 	randomize()

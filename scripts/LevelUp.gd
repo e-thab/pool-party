@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-signal level_pause
+signal pause
 
 export(Array, PackedScene) var powerups
 
@@ -30,8 +30,7 @@ func _ready():
 
 
 func _on_level_up():
-	get_tree().paused = true
-	emit_signal("level_pause", true)
+	emit_signal("pause", true)
 	generate()
 
 
@@ -69,8 +68,7 @@ func clear():
 	$Info.visible = false
 	$Info/Title.text = "LEVEL UP"
 	$Info/Description.text = ""
-	get_tree().paused = false
-	emit_signal("level_pause", false)
+	emit_signal("pause", false)
 
 
 func rand_choice(arr, amt):
