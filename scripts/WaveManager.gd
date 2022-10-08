@@ -6,7 +6,7 @@ export(bool) var spawn_enemies = true
 
 onready var root = get_tree().get_root()
 onready var main = root.get_node("Main")
-onready var player = get_tree().get_nodes_in_group("player")[0]
+onready var player = Game.get_player()
 
 var wave_kills = [0,  10,  15,  20,  25,  30]
 var wave_speed = [0, 1.0, 0.9, 0.8, 0.7, 0.6]

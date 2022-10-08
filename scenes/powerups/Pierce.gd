@@ -12,6 +12,6 @@ func _init():
 
 
 func power():
-	var player = get_tree().get_nodes_in_group("player")[0]
+	var player = Game.get_player()
 	player.add_stats_literal(Stats.PIERCE, 1)
 	print('+1 pierce. pierce = ', player.pierce)

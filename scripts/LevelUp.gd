@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-signal pause
 
 export(Array, PackedScene) var powerups
 
@@ -17,7 +16,7 @@ func _ready():
 		var choices = rand_choice(powerups, 800)
 		show_choices(choices)
 	else:
-		player = get_tree().get_nodes_in_group("player")[0]
+		player = Game.get_player()
 		player.connect("level_up", self, "_on_level_up")
 		# generate()
 
@@ -30,7 +29,7 @@ func _ready():
 
 
 func _on_level_up():
-	emit_signal("pause", true)
+	PauseManager.pause(true)
 	generate()
 
 
@@ -68,7 +67,7 @@ func clear():
 	$Info.visible = false
 	$Info/Title.text = "LEVEL UP"
 	$Info/Description.text = ""
-	emit_signal("pause", false)
+	PauseManager.pause(false)
 
 
 func rand_choice(arr, amt):

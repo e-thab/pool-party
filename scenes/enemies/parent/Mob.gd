@@ -6,7 +6,7 @@ signal enemy_death
 export(Array, SpriteFrames) var mob_types
 export(Array, PackedScene) var drops
 export(PackedScene) var dmg_number
-onready var player  = get_tree().get_nodes_in_group("player")[0]
+onready var player  = Game.get_player()
 onready var root = get_tree().get_root()
 
 var max_health = 30.0

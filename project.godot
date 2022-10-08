@@ -21,6 +21,8 @@ config/icon="res://icon.png"
 [autoload]
 
 Stats="*res://scripts/Stats.gd"
+PauseManager="*res://scripts/PauseManager.gd"
+Game="*res://scripts/Game.gd"
 
 [display]
 

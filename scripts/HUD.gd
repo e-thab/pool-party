@@ -1,13 +1,9 @@
 extends CanvasLayer
 
 
-signal pause
-
 # Declare member variables here. Examples:
 var time = 0
 var esc_paused = false
-#var paused_by_HUD = false
-#var menu_showing = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,7 +16,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		esc_paused = !esc_paused
 		$PauseLabel.visible = !$PauseLabel.visible
-		emit_signal("pause", esc_paused)
+		PauseManager.pause(esc_paused)
 
 
 func _on_RoundTimer_timeout():

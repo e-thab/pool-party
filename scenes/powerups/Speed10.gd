@@ -12,6 +12,6 @@ func _init():
 
 
 func power():
-	var player = get_tree().get_nodes_in_group("player")[0]
+	var player = Game.get_player()
 	player.add_stats_percent(Stats.SPEED, 10)
 	print('+10% move speed. speed = ', player.speed)

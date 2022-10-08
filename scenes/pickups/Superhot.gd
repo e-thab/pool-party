@@ -2,7 +2,7 @@ extends Node
 
 
 # Declare member variables here. Examples:
-onready var player = get_tree().get_nodes_in_group("player")[0]
+onready var player = Game.get_player()
 var last_pos = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.

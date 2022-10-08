@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var player  = get_tree().get_nodes_in_group("player")[0]
+onready var player  = Game.get_player()
 var seeking = false
 
 #func _ready():

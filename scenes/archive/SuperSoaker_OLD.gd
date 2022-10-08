@@ -4,7 +4,7 @@ extends Node2D
 # Declare member variables here. Examples:
 export(PackedScene) var projectile
 onready var root = get_tree().get_root()
-onready var player = get_tree().get_nodes_in_group("player")[0]
+onready var player = Game.get_player()
 
 var base_dmg = 1.0
 var base_rate = 0.4
