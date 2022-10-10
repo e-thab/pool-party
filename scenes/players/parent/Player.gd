@@ -24,7 +24,7 @@ var reload_speed = 100.0 # percentage
 var shot_speed = 100.0   # percentage
 var ammo_mod = 0         # int literal, adds to weapon max ammo
 var shot_count = 0       # int literal, adds to base count
-var shot_spread = 20     # angle of shot spread, does not add
+var shot_spread = 20     # angle of shot spread in degrees
 var pierce = 0           # number of enemies to pierce
 
 # base player stats so that percentage modifiers don't compound undesirably
@@ -34,10 +34,10 @@ onready var base_regen_amt = regen_amt
 onready var base_regen_time = regen_time
 onready var base_speed = speed
 onready var base_ammo_mod = ammo_mod
-onready var base_xp = xp
+#onready var base_xp = xp
 onready var base_xp_gain = xp_gain
-onready var base_lvl = lvl
-onready var base_lvl_choices = lvl_choices
+#onready var base_lvl = lvl
+#onready var base_lvl_choices = lvl_choices
 onready var base_damage = damage
 onready var base_fire_rate = fire_rate
 onready var base_reload_speed = reload_speed
@@ -130,7 +130,7 @@ func add_xp(n):
 
 
 func level_up():
-	if lvl < len(Stats.lvl_incs):
+	if lvl < len(Stats.lvl_incs) - 1:
 		#print('level up')
 		lvl += 1
 		emit_signal("level_up")

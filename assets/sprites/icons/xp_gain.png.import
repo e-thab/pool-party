@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/glyph_1.png-727494de8db1a02af02cb20428b7fe77.stex"
+path="res://.import/xp_gain.png-590ab487f4d3560d2a4b7ee9766ac206.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/glyph_1.png"
-dest_files=[ "res://.import/glyph_1.png-727494de8db1a02af02cb20428b7fe77.stex" ]
+source_file="res://assets/sprites/icons/xp_gain.png"
+dest_files=[ "res://.import/xp_gain.png-590ab487f4d3560d2a4b7ee9766ac206.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

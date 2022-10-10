@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/glyph_3.png-82c1bbf19eea0e5261131aa06e7773b1.stex"
+path="res://.import/fire_rate.png-d93c4ebcadb988b5c04bf2a3592e98cc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/glyph_3.png"
-dest_files=[ "res://.import/glyph_3.png-82c1bbf19eea0e5261131aa06e7773b1.stex" ]
+source_file="res://assets/sprites/icons/fire_rate.png"
+dest_files=[ "res://.import/fire_rate.png-d93c4ebcadb988b5c04bf2a3592e98cc.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
