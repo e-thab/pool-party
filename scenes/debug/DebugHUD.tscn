@@ -69,7 +69,7 @@ margin_left = 5.0
 margin_top = -12.0
 margin_right = 83.0
 margin_bottom = 12.0
-text = "PICKUP_DIST"
+text = "pickup_dist"
 valign = 1
 
 [node name="MaxHP" type="LineEdit" parent="Container"]

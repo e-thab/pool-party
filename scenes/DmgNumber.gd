@@ -20,7 +20,7 @@ func _process(delta):
 func set_num(n):
 	#n = stepify(n, 0.1)  # round to tenths place
 	$Number.text = str(n)
-	$Number.self_modulate = Color(1, 1 - n/30.0, 1 - n/30.0, 1) # doesn't quite work, but almost sorta
+	#$Number.self_modulate = Color(1, 1 - n/30.0, 1 - n/30.0, 1) # number is white at 0 and red at 30
 
 
 func _on_Fade_timeout():
