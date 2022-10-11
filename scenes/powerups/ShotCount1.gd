@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_literal(Stats.SHOT_COUNT, 1)
-	print('+1 shot count. shot count = ', player.shot_count)
+	player.add_stats(Stats.SHOT_COUNT, 1)

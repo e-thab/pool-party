@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_percent(Stats.FIRE_RATE, 10)
-	print('+10% fire rate. fire rate = ', player.fire_rate)
+	player.add_stats(Stats.FIRE_RATE, 10)

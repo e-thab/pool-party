@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_percent(Stats.RELOAD_SPEED, 10)
-	print('+10% reload speed. reload speed = ', player.reload_speed)
+	player.add_stats(Stats.RELOAD_SPEED, 10)

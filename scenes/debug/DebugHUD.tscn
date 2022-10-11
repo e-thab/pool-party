@@ -10,9 +10,9 @@ script = ExtResource( 2 )
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 27.0
-margin_top = -208.0
+margin_top = -418.0
 margin_right = 85.0
-margin_bottom = 208.0
+margin_bottom = 118.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -20,6 +20,7 @@ __meta__ = {
 [node name="FPS" type="LineEdit" parent="Container"]
 margin_right = 58.0
 margin_bottom = 24.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/FPS"]
 anchor_left = 1.0
@@ -37,6 +38,7 @@ valign = 1
 margin_top = 28.0
 margin_right = 58.0
 margin_bottom = 52.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/TimeScale"]
 anchor_left = 1.0
@@ -55,12 +57,15 @@ margin_top = 56.0
 margin_right = 58.0
 margin_bottom = 60.0
 
-[node name="PickupDistance" type="LineEdit" parent="Container"]
+[node name="ModeButton" type="Button" parent="Container"]
 margin_top = 64.0
 margin_right = 58.0
 margin_bottom = 88.0
+rect_min_size = Vector2( 58, 24 )
+toggle_mode = true
+text = "Mode"
 
-[node name="Label" type="Label" parent="Container/PickupDistance"]
+[node name="Label" type="Label" parent="Container/ModeButton"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -69,13 +74,14 @@ margin_left = 5.0
 margin_top = -12.0
 margin_right = 83.0
 margin_bottom = 12.0
-text = "pickup_dist"
+text = "add_stats( )"
 valign = 1
 
 [node name="MaxHP" type="LineEdit" parent="Container"]
 margin_top = 92.0
 margin_right = 58.0
 margin_bottom = 116.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/MaxHP"]
 anchor_left = 1.0
@@ -89,27 +95,11 @@ margin_bottom = 12.0
 text = "max_health"
 valign = 1
 
-[node name="Speed" type="LineEdit" parent="Container"]
+[node name="HP" type="LineEdit" parent="Container"]
 margin_top = 120.0
 margin_right = 58.0
 margin_bottom = 144.0
-
-[node name="Label" type="Label" parent="Container/Speed"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 5.0
-margin_top = -12.0
-margin_right = 83.0
-margin_bottom = 12.0
-text = "speed"
-valign = 1
-
-[node name="HP" type="LineEdit" parent="Container"]
-margin_top = 148.0
-margin_right = 58.0
-margin_bottom = 172.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/HP"]
 anchor_left = 1.0
@@ -123,10 +113,119 @@ margin_bottom = 12.0
 text = "health"
 valign = 1
 
-[node name="Dmg" type="LineEdit" parent="Container"]
+[node name="XP" type="LineEdit" parent="Container"]
+margin_top = 148.0
+margin_right = 58.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/XP"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "xp"
+valign = 1
+
+[node name="XPGain" type="LineEdit" parent="Container"]
 margin_top = 176.0
 margin_right = 58.0
 margin_bottom = 200.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/XPGain"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "xp_gain"
+valign = 1
+
+[node name="Level" type="LineEdit" parent="Container"]
+margin_top = 204.0
+margin_right = 58.0
+margin_bottom = 228.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/Level"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "lvl"
+valign = 1
+
+[node name="LevelChoices" type="LineEdit" parent="Container"]
+margin_top = 232.0
+margin_right = 58.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/LevelChoices"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "lvl_choices"
+valign = 1
+
+[node name="PickupDistance" type="LineEdit" parent="Container"]
+margin_top = 260.0
+margin_right = 58.0
+margin_bottom = 284.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/PickupDistance"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "pickup_dist"
+valign = 1
+
+[node name="Speed" type="LineEdit" parent="Container"]
+margin_top = 288.0
+margin_right = 58.0
+margin_bottom = 312.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/Speed"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "speed"
+valign = 1
+
+[node name="Dmg" type="LineEdit" parent="Container"]
+margin_top = 316.0
+margin_right = 58.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Dmg"]
 anchor_left = 1.0
@@ -141,9 +240,10 @@ text = "damage"
 valign = 1
 
 [node name="Ammo" type="LineEdit" parent="Container"]
-margin_top = 204.0
+margin_top = 344.0
 margin_right = 58.0
-margin_bottom = 228.0
+margin_bottom = 368.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Ammo"]
 anchor_left = 1.0
@@ -158,9 +258,10 @@ text = "ammo_mod"
 valign = 1
 
 [node name="FireRate" type="LineEdit" parent="Container"]
-margin_top = 232.0
+margin_top = 372.0
 margin_right = 58.0
-margin_bottom = 256.0
+margin_bottom = 396.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/FireRate"]
 anchor_left = 1.0
@@ -175,9 +276,10 @@ text = "fire_rate"
 valign = 1
 
 [node name="ReloadSpeed" type="LineEdit" parent="Container"]
-margin_top = 260.0
+margin_top = 400.0
 margin_right = 58.0
-margin_bottom = 284.0
+margin_bottom = 424.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ReloadSpeed"]
 anchor_left = 1.0
@@ -192,9 +294,10 @@ text = "reload_speed"
 valign = 1
 
 [node name="ShotSpeed" type="LineEdit" parent="Container"]
-margin_top = 288.0
+margin_top = 428.0
 margin_right = 58.0
-margin_bottom = 312.0
+margin_bottom = 452.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ShotSpeed"]
 anchor_left = 1.0
@@ -209,9 +312,10 @@ text = "shot_speed"
 valign = 1
 
 [node name="ShotCount" type="LineEdit" parent="Container"]
-margin_top = 316.0
+margin_top = 456.0
 margin_right = 58.0
-margin_bottom = 340.0
+margin_bottom = 480.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ShotCount"]
 anchor_left = 1.0
@@ -226,9 +330,10 @@ text = "shot_count"
 valign = 1
 
 [node name="ShotSpread" type="LineEdit" parent="Container"]
-margin_top = 344.0
+margin_top = 484.0
 margin_right = 58.0
-margin_bottom = 368.0
+margin_bottom = 508.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ShotSpread"]
 anchor_left = 1.0
@@ -243,9 +348,10 @@ text = "shot_spread"
 valign = 1
 
 [node name="Pierce" type="LineEdit" parent="Container"]
-margin_top = 372.0
+margin_top = 512.0
 margin_right = 58.0
-margin_bottom = 396.0
+margin_bottom = 536.0
+rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Pierce"]
 anchor_left = 1.0
@@ -259,46 +365,17 @@ margin_bottom = 12.0
 text = "pierce"
 valign = 1
 
-[node name="XP" type="LineEdit" parent="Container"]
-margin_top = 400.0
-margin_right = 58.0
-margin_bottom = 424.0
-
-[node name="Label" type="Label" parent="Container/XP"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 5.0
-margin_top = -12.0
-margin_right = 83.0
-margin_bottom = 12.0
-text = "add_xp( )"
-valign = 1
-
-[node name="XP_GAIN" type="LineEdit" parent="Container"]
-margin_top = 428.0
-margin_right = 58.0
-margin_bottom = 452.0
-
-[node name="Label" type="Label" parent="Container/XP_GAIN"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 5.0
-margin_top = -12.0
-margin_right = 83.0
-margin_bottom = 12.0
-text = "add_xp( )"
-valign = 1
-
 [connection signal="text_entered" from="Container/FPS" to="." method="_on_FPS_text_entered"]
 [connection signal="text_entered" from="Container/TimeScale" to="." method="_on_TimeScale_text_entered"]
-[connection signal="text_entered" from="Container/PickupDistance" to="." method="_on_PickupDistance_text_entered"]
+[connection signal="toggled" from="Container/ModeButton" to="." method="_on_ModeButton_toggled"]
 [connection signal="text_entered" from="Container/MaxHP" to="." method="_on_MaxHP_text_entered"]
-[connection signal="text_entered" from="Container/Speed" to="." method="_on_Speed_text_entered"]
 [connection signal="text_entered" from="Container/HP" to="." method="_on_HP_text_entered"]
+[connection signal="text_entered" from="Container/XP" to="." method="_on_XP_text_entered"]
+[connection signal="text_entered" from="Container/XPGain" to="." method="_on_XPGain_text_entered"]
+[connection signal="text_entered" from="Container/Level" to="." method="_on_Level_text_entered"]
+[connection signal="text_entered" from="Container/LevelChoices" to="." method="_on_LevelChoices_text_entered"]
+[connection signal="text_entered" from="Container/PickupDistance" to="." method="_on_PickupDistance_text_entered"]
+[connection signal="text_entered" from="Container/Speed" to="." method="_on_Speed_text_entered"]
 [connection signal="text_entered" from="Container/Dmg" to="." method="_on_Dmg_text_entered"]
 [connection signal="text_entered" from="Container/Ammo" to="." method="_on_Ammo_text_entered"]
 [connection signal="text_entered" from="Container/FireRate" to="." method="_on_FireRate_text_entered"]
@@ -306,6 +383,4 @@ valign = 1
 [connection signal="text_entered" from="Container/ShotSpeed" to="." method="_on_ShotSpeed_text_entered"]
 [connection signal="text_entered" from="Container/ShotCount" to="." method="_on_ShotCount_text_entered"]
 [connection signal="text_entered" from="Container/ShotSpread" to="." method="_on_ShotSpread_text_entered"]
-[connection signal="text_entered" from="Container/Pierce" to="." method="_on_Piercing_text_entered"]
-[connection signal="text_entered" from="Container/XP" to="." method="_on_XP_text_entered"]
-[connection signal="text_entered" from="Container/XP_GAIN" to="." method="_on_XP_text_entered"]
+[connection signal="text_entered" from="Container/Pierce" to="." method="_on_Pierce_text_entered"]

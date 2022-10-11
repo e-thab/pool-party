@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_percent(Stats.XP_GAIN, 10)
-	print('+10% xp gain. xp gain = ', player.xp_gain)
+	player.add_stats(Stats.XP_GAIN, 10)

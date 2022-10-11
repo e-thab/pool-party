@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_literal(Stats.REGEN_TIME, -0.25)
-	print('-0.25 seconds to regen. regen time = ', player.regen_time)
+	player.add_stats(Stats.REGEN_TIME, -0.25)

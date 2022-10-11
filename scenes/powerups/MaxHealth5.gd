@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_percent(Stats.MAX_HEALTH, 5)
-	print('+5% max health. max health = ', player.max_health)
+	player.add_stats(Stats.MAX_HEALTH, 5)

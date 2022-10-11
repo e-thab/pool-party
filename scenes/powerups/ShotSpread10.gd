@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_literal(Stats.SHOT_SPREAD, 10)
-	print('+10 degree spread. spread = ', player.shot_spread)
+	player.add_stats(Stats.SHOT_SPREAD, 10)

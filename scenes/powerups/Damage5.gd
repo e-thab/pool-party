@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_percent(Stats.DAMAGE, 5)
-	print('+5% damage. damage = ', player.damage)
+	player.add_stats(Stats.DAMAGE, 5)

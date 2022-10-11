@@ -21,6 +21,7 @@ script = ExtResource( 2 )
 crosshair = ExtResource( 5 )
 
 [node name="WaveManager" parent="." instance=ExtResource( 12 )]
+spawn_enemies = false
 
 [node name="TestCamera" type="Camera2D" parent="."]
 visible = false

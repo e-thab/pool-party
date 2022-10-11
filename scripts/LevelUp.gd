@@ -5,20 +5,15 @@ export(Array, PackedScene) var powerups
 
 onready var centerx = $Placement.rect_size.x/2.0
 onready var centery = $Placement.rect_size.y/2.0
-var player
+onready var player = Game.get_player()
+var level_signals = 0
+var is_leveling = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if get_tree().current_scene.name == "LevelUp":
-		$Placement.visible = true
-		randomize()
-		var choices = rand_choice(powerups, 800)
-		show_choices(choices)
-	else:
-		player = Game.get_player()
-		player.connect("level_up", self, "_on_level_up")
-		# generate()
+	player = Game.get_player()
+	player.connect("level_up", self, "_on_level_up")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,7 +25,12 @@ func _ready():
 
 func _on_level_up():
 	PauseManager.pause(true)
+	#queue_level_up()
 	generate()
+
+
+func queue_level_up():
+	level_signals += 1
 
 
 func generate():

@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_literal(Stats.LVL_CHOICES, 1)
-	print('you feel 30% smarter. lvl_choices = ', player.lvl_choices)
+	player.add_stats(Stats.LVL_CHOICES, 1)

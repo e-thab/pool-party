@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 
+signal stats_changed
 signal level_up
 
 export(PackedScene) var weapon_type
@@ -11,11 +12,11 @@ var pickup_dist = 100.0  # literal distance in units but can be treated as perce
 var regen_amt = 0.1      # how much health to regen
 var regen_time = 5.0     # time to regen 
 var lvl_choices = 4      # number of powerup choices on level
+var max_health = 100.0   
 
 # percentages
-var max_health = 100.0   # percentage
-var speed = 100.0        # percentage
-var xp_gain = 100.0      # percentage
+var speed = 100.0
+var xp_gain = 100.0
 
 # modify base weapon stats
 var damage = 100.0       # percentage
@@ -30,32 +31,23 @@ var pierce = 0           # number of enemies to pierce
 # base player stats so that percentage modifiers don't compound undesirably
 onready var base_pickup_dist = pickup_dist
 onready var base_max_health = max_health
-onready var base_regen_amt = regen_amt
-onready var base_regen_time = regen_time
 onready var base_speed = speed
-onready var base_ammo_mod = ammo_mod
-#onready var base_xp = xp
 onready var base_xp_gain = xp_gain
-#onready var base_lvl = lvl
-#onready var base_lvl_choices = lvl_choices
 onready var base_damage = damage
 onready var base_fire_rate = fire_rate
 onready var base_reload_speed = reload_speed
 onready var base_shot_speed = shot_speed
-onready var base_shot_count = shot_count
-onready var base_pierce = pierce
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
 onready var cam = $PlayerCamera
 
-#var moving_left = false
+# misc. trackers
 var xp = 0
 var lvl = 1
 var being_hurt = false
-var health = 0.0
+var health
 var gun
-
 var dir = Vector2.ZERO
 var mod_friction = 0.18
 
@@ -127,6 +119,7 @@ func add_xp(n):
 		level_up()
 	
 	update_xp_bar()
+	emit_signal("stats_changed")
 
 
 func level_up():
@@ -134,10 +127,11 @@ func level_up():
 		#print('level up')
 		lvl += 1
 		emit_signal("level_up")
+		emit_signal("stats_changed")
 
 
 func update_xp_bar():
-	if lvl >= len(Stats.lvl_incs):
+	if lvl >= len(Stats.lvl_incs) + 1:
 		$XPHUD/XPBar.max_value = 1
 		$XPHUD/XPBar.value = 1
 		$XPHUD/XPBar/Level.text = "LVL MAX"
@@ -154,11 +148,13 @@ func hurt(n):
 		being_hurt = true
 		$AnimatedSprite.play("hurt")
 		update_health_bar()
+		emit_signal("stats_changed")
 
 
 func heal(n):
 	health += n
 	update_health_bar()
+	emit_signal("stats_changed")
 
 
 func update_health_bar():
@@ -200,6 +196,7 @@ func add_stats_percent(stat, percent):
 		
 		Stats.SHOT_SPEED:
 			shot_speed += base_shot_speed * (percent/100.0)
+	emit_signal("stats_changed")
 
 
 func add_stats_literal(stat, val):
@@ -213,8 +210,12 @@ func add_stats_literal(stat, val):
 		Stats.REGEN_TIME:
 			regen_time += val
 		
+		Stats.XP:
+			add_xp(val)
+		
 		Stats.AMMO_MOD:
 			ammo_mod += int(val)
+			# NEEDS TO UPDATE AMMO BAR - gun.update_ammo()?
 		
 		Stats.LVL_CHOICES:
 			lvl_choices += int(val)
@@ -227,104 +228,94 @@ func add_stats_literal(stat, val):
 		
 		Stats.PIERCE:
 			pierce += int(val)
+	emit_signal("stats_changed")
 
 
-func set_stats(stat, val):
+func add_stats(stat, val):
+	set_stats(stat, val, true)
+
+
+func set_stats(stat, val, add=false, percentage=false):
 	# match statement for changing stats, calls necessary functions & guarantees proper type
+	# stat is the type of stat to set
+	# if add: value is added onto current stat, otherwise directly set
+	# if percentage: value is treated as a percentage of base stat
+	# percentage may not be necessary. could just always assume base = 100 even for characters with higher base
+	add = bool(add)
+	var addb = int(add)
+	#var per = int(percentage) * val/100.0
+	
 	match stat:
 		Stats.PICKUP_DIST:
-			pickup_dist = val
+			pickup_dist = pickup_dist*addb + val
 		
 		Stats.MAX_HEALTH:
-			max_health = val
-			update_health_bar()
+			var original_max = max_health
+			max_health = max_health*addb + val
+			
+			var hp = max_health * (health/original_max)
+			set_stats(Stats.HEALTH, hp)
+			#update_health_bar()
 		
 		Stats.HEALTH:
-			health = val
-			update_health_bar()
+			if add:
+				if val < 0:
+					heal(val)
+				else:
+					hurt(val)
+			else:
+				health = int(val)
+				update_health_bar()
 		
 		Stats.REGEN_AMT:
-			regen_amt = val
+			regen_amt = regen_amt*addb + val
 		
 		Stats.REGEN_TIME:
-			regen_time = val
+			regen_time = regen_time*addb + val
 		
 		Stats.SPEED:
-			speed = val
-		
-		Stats.XP_GAIN:
-			xp_gain = val
-		
-		Stats.XP:
-			xp = int(val)
-			#add_xp(int(val))
-		
-		Stats.LVL:
-			lvl = int(val)
-			level_up()
-		
-		Stats.LVL_CHOICES:
-			lvl_choices = int(val)
-		
-		Stats.DAMAGE:
-			damage = val
-		
-		Stats.FIRE_RATE:
-			fire_rate = val
-		
-		Stats.RELOAD_SPEED:
-			reload_speed = val
+			speed = speed*addb + val
 		
 		Stats.AMMO_MOD:
-			ammo_mod = int(val)
+			ammo_mod = ammo_mod*addb + int(val)
+		
+		Stats.XP:
+			if add:
+				add_xp(int(val))
+			else:
+				xp = int(val)
+		
+		Stats.XP_GAIN:
+			xp_gain = xp_gain*addb + val
+		
+		Stats.LVL:
+			lvl = lvl*addb + int(val)
+			#level_up()
+		
+		Stats.LVL_CHOICES:
+			lvl_choices = lvl_choices*addb + int(val)
+		
+		Stats.DAMAGE:
+			damage = damage*addb + val
+		
+		Stats.FIRE_RATE:
+			fire_rate = fire_rate*addb + val
+		
+		Stats.RELOAD_SPEED:
+			reload_speed = reload_speed*addb + val
 		
 		Stats.SHOT_SPEED:
-			shot_speed = val
+			shot_speed = shot_speed*addb + val
 		
 		Stats.SHOT_COUNT:
-			shot_count = int(val)
+			shot_count = shot_count*addb + int(val)
 		
 		Stats.SHOT_SPREAD:
-			shot_spread = int(val)
+			shot_spread = shot_spread*addb + int(val)
 		
 		Stats.PIERCE:
-			pierce = int(val)
-
-
-#func set_stats_percent(stat, percent):
-#	# match statement for changing stats, calls necessary functions & guarantees proper type
-#	match stat:
-#		Stats.PICKUP_DIST:
-#			pickup_dist *= (percent/100.0)
-#
-#		Stats.MAX_HEALTH:
-#			max_health *= (percent/100.0)
-#			update_health_bar()
-#
-#		Stats.HEALTH:
-#			health *= (percent/100.0)
-#			update_health_bar()
-#
-#		Stats.SPEED:
-#			speed *= (percent/100.0)
-#
-#		Stats.XP_GAIN:
-#			xp_gain *= (percent/100.0)
-#
-#		Stats.DAMAGE:
-#			damage *= (percent/100.0)
-#
-#		Stats.FIRE_RATE:
-#			fire_rate *= (percent/100.0)
-#
-#		Stats.RELOAD_SPEED:
-#			reload_speed *= (percent/100.0)
-#
-#		Stats.SHOT_SPEED:
-#			shot_speed *= (percent/100.0)
-#
-#		Stats.SHOT_SPREAD:
-#			shot_spread = int(shot_spread * (percent/100.0))
+			pierce = pierce*addb + int(val)
+	emit_signal("stats_changed")
 
 
 func _on_PlayerSprite_animation_finished():

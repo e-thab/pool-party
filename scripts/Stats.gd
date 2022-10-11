@@ -6,9 +6,9 @@ const SPEED_MODIFIER = 2
 enum {
 	PICKUP_DIST,
 	MAX_HEALTH,
+	HEALTH,
 	REGEN_AMT,
 	REGEN_TIME,
-	HEALTH,
 	SPEED,
 	AMMO_MOD,
 	XP,
@@ -23,6 +23,7 @@ enum {
 	SHOT_SPREAD,
 	PIERCE}
 
+	   # Level: 0, 1, 2, 3,  4,  5,  6,  7,   8,   9,  10
 var lvl_incs = [0, 0, 4, 5,  8, 13, 20, 29,  40,  53,  68]
 var lvl_sums = [0, 0, 4, 9, 17, 30, 50, 79, 119, 172, 240]
 

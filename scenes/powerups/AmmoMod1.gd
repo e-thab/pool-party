@@ -13,5 +13,4 @@ func _init():
 
 func power():
 	var player = Game.get_player()
-	player.add_stats_literal(Stats.AMMO_MOD, 1)
-	print('+1 ammo_mod. ammo_mod = ', player.ammo_mod)
+	player.add_stats(Stats.AMMO_MOD, 1)

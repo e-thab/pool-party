@@ -2,7 +2,7 @@ extends Node
 
 
 # Declare member variables here. Examples:
-var flags = []
+var signals = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,16 +12,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func queue_pause():
-	flags.append(1)
+	signals += 1
 	get_tree().paused = true
-	print('queueing pause. pause signals = ', len(flags))
+	print('queueing pause. pause signals = ', signals)
 
 
 func queue_unpause():
-	flags.pop_back()
-	if not flags:
+	signals -= 1
+	if signals <= 0:
 		get_tree().paused = false
-	print('dequeueing pause. pause signals = ', len(flags))
+		signals = 0  # Set signals back to 0 in case unpause was queued too much somehow
+	print('dequeueing pause. pause signals = ', signals)
 
 
 func pause(pause):
