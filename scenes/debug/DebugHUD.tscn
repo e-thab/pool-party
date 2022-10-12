@@ -364,7 +364,6 @@ margin_right = 83.0
 margin_bottom = 12.0
 text = "pierce"
 valign = 1
-
 [connection signal="text_entered" from="Container/FPS" to="." method="_on_FPS_text_entered"]
 [connection signal="text_entered" from="Container/TimeScale" to="." method="_on_TimeScale_text_entered"]
 [connection signal="toggled" from="Container/ModeButton" to="." method="_on_ModeButton_toggled"]

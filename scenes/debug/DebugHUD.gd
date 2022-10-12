@@ -11,13 +11,35 @@ onready var controls = [
 		$Container/ShotCount, $Container/ShotSpread, $Container/Pierce
 		]
 
+onready var labels = {
+	Stats.PICKUP_DIST : $Container/PickupDistance/Label,
+	Stats.MAX_HEALTH : $Container/MaxHP/Label,
+	Stats.HEALTH : $Container/HP/Label,
+	#Stats.REGEN_AMT : null,
+	#Stats.REGEN_TIME : null,
+	Stats.SPEED : $Container/Speed/Label,
+	Stats.AMMO_MOD : $Container/Ammo/Label,
+	Stats.XP : $Container/XP/Label,
+	Stats.XP_GAIN : $Container/XPGain/Label,
+	Stats.LVL : $Container/Level/Label,
+	Stats.LVL_CHOICES : $Container/LevelChoices/Label,
+	Stats.DAMAGE : $Container/Dmg/Label,
+	Stats.FIRE_RATE : $Container/FireRate/Label,
+	Stats.RELOAD_SPEED : $Container/ReloadSpeed/Label,
+	Stats.SHOT_SPEED : $Container/ShotSpeed/Label,
+	Stats.SHOT_COUNT : $Container/ShotCount/Label,
+	Stats.SHOT_SPREAD : $Container/ShotSpread/Label,
+	Stats.PIERCE : $Container/Pierce/Label
+}
+
 var target_time_scale = 1
 var add_mode = true
+var highlighted_labels = [null, null, null]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player.connect('stats_changed', self, 'update_stat_labels')
+	player.connect('stats_changed', self, '_on_stats_changed')
 	update_stat_labels()
 
 
@@ -47,6 +69,11 @@ func update_stat_labels():
 	$Container/Pierce/Label.text = "pierce: " + str(player.pierce)
 
 
+func _on_stats_changed(stat):
+	update_stat_labels()
+	highlight_label(labels[stat])
+
+
 func _on_FPS_text_entered(new_text):
 	Engine.set_target_fps(int(new_text))
 	$Container/FPS/Label.text = "FPS: " + new_text
@@ -63,7 +90,6 @@ func _on_MaxHP_text_entered(new_text):
 	var stat = Stats.MAX_HEALTH
 	var val = float(new_text)
 	player.set_stats(stat, val, add_mode)
-	set_label_color($Container/MaxHP, Color.yellow)
 	release_all()
 
 
@@ -74,7 +100,6 @@ func _on_HP_text_entered(new_text):
 		player.heal(val)
 	else:
 		player.set_stats(stat, val)
-	set_label_color($Container/HP, Color.yellow)
 	release_all()
 
 
@@ -182,11 +207,23 @@ func release_all():
 		if x.has_focus(): x.release_focus()
 
 
-func set_label_color(node, color):
-	for x in controls:
-		if x != node: # don't think this comparison works
-			node.get_node("Label").remove_color_override("font_color")
-	node.get_node("Label").add_color_override("font_color", color)
+func highlight_label(node):
+	# 0 = blue, 1 = light blue, 2 = white
+#	highlighted_labels.insert(0, node)
+	
+	if highlighted_labels[2] != null:
+		highlighted_labels.pop_back().set("custom_colors/font_color", Color.white)
+	else:
+		highlighted_labels.pop_back()
+	
+	highlighted_labels.insert(0, node)
+	print(highlighted_labels)
+	
+	if highlighted_labels[0]:
+		highlighted_labels[0].set("custom_colors/font_color", Color.blue)
+	if highlighted_labels[1]:
+		highlighted_labels[1].set("custom_colors/font_color", Color.deepskyblue)
+	#highlighted_label = node
 
 
 func _on_ModeButton_toggled(button_pressed):

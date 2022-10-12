@@ -119,7 +119,7 @@ func add_xp(n):
 		level_up()
 	
 	update_xp_bar()
-	emit_signal("stats_changed")
+	emit_signal("stats_changed", Stats.XP)
 
 
 func level_up():
@@ -127,7 +127,7 @@ func level_up():
 		#print('level up')
 		lvl += 1
 		emit_signal("level_up")
-		emit_signal("stats_changed")
+		emit_signal("stats_changed", Stats.LVL)
 
 
 func update_xp_bar():
@@ -148,13 +148,13 @@ func hurt(n):
 		being_hurt = true
 		$AnimatedSprite.play("hurt")
 		update_health_bar()
-		emit_signal("stats_changed")
+		emit_signal("stats_changed", Stats.HEALTH)
 
 
 func heal(n):
 	health += n
 	update_health_bar()
-	emit_signal("stats_changed")
+	emit_signal("stats_changed", Stats.HEALTH)
 
 
 func update_health_bar():
@@ -167,68 +167,68 @@ func equip_weapon(weapon):
 	$GunPosition.add_child(gun)
 
 
-func add_stats_percent(stat, percent):
-	# adds percent to stat with respect to its base_stat value
-	# preferred function to modify any percentage-based stats except health
-	# to subtract just pass negative percent values, e.g. -20 would reduce by 20%
-	match stat:
-		Stats.PICKUP_DIST:
-			pickup_dist += base_pickup_dist * (percent/100.0)
-		
-		Stats.MAX_HEALTH:
-			max_health += base_max_health * (percent/100.0)
-			update_health_bar()
-		
-		Stats.SPEED:
-			speed += base_speed * (percent/100.0)
-		
-		Stats.XP_GAIN:
-			xp_gain += base_xp_gain * (percent/100.0)
-		
-		Stats.DAMAGE:
-			damage += base_damage * (percent/100.0)
-		
-		Stats.FIRE_RATE:
-			fire_rate += base_fire_rate * (percent/100.0)
-		
-		Stats.RELOAD_SPEED:
-			reload_speed += base_reload_speed * (percent/100.0)
-		
-		Stats.SHOT_SPEED:
-			shot_speed += base_shot_speed * (percent/100.0)
-	emit_signal("stats_changed")
-
-
-func add_stats_literal(stat, val):
-	# adds literal value to stat, casts to int when needed
-	# preferred function to modify any literal value stats
-	# to subtract just pass negative values, e.g. -20 would reduce by 20
-	match stat:
-		Stats.REGEN_AMT:
-			regen_amt += val
-		
-		Stats.REGEN_TIME:
-			regen_time += val
-		
-		Stats.XP:
-			add_xp(val)
-		
-		Stats.AMMO_MOD:
-			ammo_mod += int(val)
-			# NEEDS TO UPDATE AMMO BAR - gun.update_ammo()?
-		
-		Stats.LVL_CHOICES:
-			lvl_choices += int(val)
-		
-		Stats.SHOT_COUNT:
-			shot_count += int(val)
-		
-		Stats.SHOT_SPREAD:
-			shot_spread += int(val)
-		
-		Stats.PIERCE:
-			pierce += int(val)
-	emit_signal("stats_changed")
+#func add_stats_percent(stat, percent):
+#	# adds percent to stat with respect to its base_stat value
+#	# preferred function to modify any percentage-based stats except health
+#	# to subtract just pass negative percent values, e.g. -20 would reduce by 20%
+#	match stat:
+#		Stats.PICKUP_DIST:
+#			pickup_dist += base_pickup_dist * (percent/100.0)
+#
+#		Stats.MAX_HEALTH:
+#			max_health += base_max_health * (percent/100.0)
+#			update_health_bar()
+#
+#		Stats.SPEED:
+#			speed += base_speed * (percent/100.0)
+#
+#		Stats.XP_GAIN:
+#			xp_gain += base_xp_gain * (percent/100.0)
+#
+#		Stats.DAMAGE:
+#			damage += base_damage * (percent/100.0)
+#
+#		Stats.FIRE_RATE:
+#			fire_rate += base_fire_rate * (percent/100.0)
+#
+#		Stats.RELOAD_SPEED:
+#			reload_speed += base_reload_speed * (percent/100.0)
+#
+#		Stats.SHOT_SPEED:
+#			shot_speed += base_shot_speed * (percent/100.0)
+#	emit_signal("stats_changed", stat, val)
+#
+#
+#func add_stats_literal(stat, val):
+#	# adds literal value to stat, casts to int when needed
+#	# preferred function to modify any literal value stats
+#	# to subtract just pass negative values, e.g. -20 would reduce by 20
+#	match stat:
+#		Stats.REGEN_AMT:
+#			regen_amt += val
+#
+#		Stats.REGEN_TIME:
+#			regen_time += val
+#
+#		Stats.XP:
+#			add_xp(val)
+#
+#		Stats.AMMO_MOD:
+#			ammo_mod += int(val)
+#			# NEEDS TO UPDATE AMMO BAR - gun.update_ammo()?
+#
+#		Stats.LVL_CHOICES:
+#			lvl_choices += int(val)
+#
+#		Stats.SHOT_COUNT:
+#			shot_count += int(val)
+#
+#		Stats.SHOT_SPREAD:
+#			shot_spread += int(val)
+#
+#		Stats.PIERCE:
+#			pierce += int(val)
+#	emit_signal("stats_changed", stat, val)
 
 
 func add_stats(stat, val):
@@ -250,11 +250,9 @@ func set_stats(stat, val, add=false, percentage=false):
 			pickup_dist = pickup_dist*addb + val
 		
 		Stats.MAX_HEALTH:
-			var original_max = max_health
+			var ratio = health / max_health
 			max_health = max_health*addb + val
-			
-			var hp = max_health * (health/original_max)
-			set_stats(Stats.HEALTH, hp)
+			set_stats(Stats.HEALTH, max_health * ratio)
 			#update_health_bar()
 		
 		Stats.HEALTH:
@@ -315,7 +313,7 @@ func set_stats(stat, val, add=false, percentage=false):
 		
 		Stats.PIERCE:
 			pierce = pierce*addb + int(val)
-	emit_signal("stats_changed")
+	emit_signal("stats_changed", stat)
 
 
 func _on_PlayerSprite_animation_finished():
