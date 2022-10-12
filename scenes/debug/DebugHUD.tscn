@@ -113,10 +113,46 @@ margin_bottom = 12.0
 text = "health"
 valign = 1
 
-[node name="XP" type="LineEdit" parent="Container"]
+[node name="RegenAmt" type="LineEdit" parent="Container"]
 margin_top = 148.0
 margin_right = 58.0
 margin_bottom = 172.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/RegenAmt"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "regen_amt"
+valign = 1
+
+[node name="RegenTime" type="LineEdit" parent="Container"]
+margin_top = 176.0
+margin_right = 58.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/RegenTime"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "regen_time"
+valign = 1
+
+[node name="XP" type="LineEdit" parent="Container"]
+margin_top = 204.0
+margin_right = 58.0
+margin_bottom = 228.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/XP"]
@@ -132,9 +168,9 @@ text = "xp"
 valign = 1
 
 [node name="XPGain" type="LineEdit" parent="Container"]
-margin_top = 176.0
+margin_top = 232.0
 margin_right = 58.0
-margin_bottom = 200.0
+margin_bottom = 256.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/XPGain"]
@@ -150,9 +186,9 @@ text = "xp_gain"
 valign = 1
 
 [node name="Level" type="LineEdit" parent="Container"]
-margin_top = 204.0
+margin_top = 260.0
 margin_right = 58.0
-margin_bottom = 228.0
+margin_bottom = 284.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Level"]
@@ -168,9 +204,9 @@ text = "lvl"
 valign = 1
 
 [node name="LevelChoices" type="LineEdit" parent="Container"]
-margin_top = 232.0
+margin_top = 288.0
 margin_right = 58.0
-margin_bottom = 256.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/LevelChoices"]
@@ -186,9 +222,9 @@ text = "lvl_choices"
 valign = 1
 
 [node name="PickupDistance" type="LineEdit" parent="Container"]
-margin_top = 260.0
+margin_top = 316.0
 margin_right = 58.0
-margin_bottom = 284.0
+margin_bottom = 340.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/PickupDistance"]
@@ -204,9 +240,9 @@ text = "pickup_dist"
 valign = 1
 
 [node name="Speed" type="LineEdit" parent="Container"]
-margin_top = 288.0
+margin_top = 344.0
 margin_right = 58.0
-margin_bottom = 312.0
+margin_bottom = 368.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Speed"]
@@ -222,9 +258,9 @@ text = "speed"
 valign = 1
 
 [node name="Dmg" type="LineEdit" parent="Container"]
-margin_top = 316.0
+margin_top = 372.0
 margin_right = 58.0
-margin_bottom = 340.0
+margin_bottom = 396.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Dmg"]
@@ -240,9 +276,9 @@ text = "damage"
 valign = 1
 
 [node name="Ammo" type="LineEdit" parent="Container"]
-margin_top = 344.0
+margin_top = 400.0
 margin_right = 58.0
-margin_bottom = 368.0
+margin_bottom = 424.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Ammo"]
@@ -258,9 +294,9 @@ text = "ammo_mod"
 valign = 1
 
 [node name="FireRate" type="LineEdit" parent="Container"]
-margin_top = 372.0
+margin_top = 428.0
 margin_right = 58.0
-margin_bottom = 396.0
+margin_bottom = 452.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/FireRate"]
@@ -276,9 +312,9 @@ text = "fire_rate"
 valign = 1
 
 [node name="ReloadSpeed" type="LineEdit" parent="Container"]
-margin_top = 400.0
+margin_top = 456.0
 margin_right = 58.0
-margin_bottom = 424.0
+margin_bottom = 480.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ReloadSpeed"]
@@ -294,9 +330,9 @@ text = "reload_speed"
 valign = 1
 
 [node name="ShotSpeed" type="LineEdit" parent="Container"]
-margin_top = 428.0
+margin_top = 484.0
 margin_right = 58.0
-margin_bottom = 452.0
+margin_bottom = 508.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ShotSpeed"]
@@ -312,9 +348,9 @@ text = "shot_speed"
 valign = 1
 
 [node name="ShotCount" type="LineEdit" parent="Container"]
-margin_top = 456.0
+margin_top = 512.0
 margin_right = 58.0
-margin_bottom = 480.0
+margin_bottom = 536.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ShotCount"]
@@ -330,9 +366,9 @@ text = "shot_count"
 valign = 1
 
 [node name="ShotSpread" type="LineEdit" parent="Container"]
-margin_top = 484.0
+margin_top = 540.0
 margin_right = 58.0
-margin_bottom = 508.0
+margin_bottom = 564.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ShotSpread"]
@@ -348,9 +384,9 @@ text = "shot_spread"
 valign = 1
 
 [node name="Pierce" type="LineEdit" parent="Container"]
-margin_top = 512.0
+margin_top = 568.0
 margin_right = 58.0
-margin_bottom = 536.0
+margin_bottom = 592.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Pierce"]
@@ -364,6 +400,7 @@ margin_right = 83.0
 margin_bottom = 12.0
 text = "pierce"
 valign = 1
+
 [connection signal="text_entered" from="Container/FPS" to="." method="_on_FPS_text_entered"]
 [connection signal="text_entered" from="Container/TimeScale" to="." method="_on_TimeScale_text_entered"]
 [connection signal="toggled" from="Container/ModeButton" to="." method="_on_ModeButton_toggled"]

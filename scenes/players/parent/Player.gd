@@ -44,6 +44,7 @@ onready var cam = $PlayerCamera
 
 # misc. trackers
 var xp = 0
+var xp_remainder = 0
 var lvl = 1
 var being_hurt = false
 var health
@@ -112,7 +113,19 @@ func _physics_process(delta):
 
 
 func add_xp(n):
-	xp += int(n * (xp_gain / 100.0))
+	var to_add = n * (xp_gain / 100.0)  # exact amount of xp to be added
+	xp = max(0, xp + int(to_add))       # only add integer portion, cap minimum at 0
+	xp_remainder += fmod(to_add, 1)     # get decimal portion for safe keeping
+	xp = max(xp, Stats.lvl_sums[lvl])        # cap xp min
+	xp_remainder = max(0, xp_remainder)
+	# xp_remainder allows for something like 120% xp gain to actually make a difference
+	# even though xp is an integer and will often only be added 1 at a time
+	
+	if xp_remainder >= 1:                     # if remainder is 1 or more, it should be added
+		xp += int(xp_remainder)               # add integer portion
+		xp_remainder = fmod(xp_remainder, 1)  # safe keeping
+	print(xp_remainder)
+	
 	var new_lvl = Stats.xp2lvl(xp) # find target level at current total xp
 	
 	for _i in range(lvl, new_lvl): # for every level between current and target
@@ -128,6 +141,8 @@ func level_up():
 		lvl += 1
 		emit_signal("level_up")
 		emit_signal("stats_changed", Stats.LVL)
+	# at the moment, multiple level ups at once happen simultaneously, freezing the game with pause signals
+	# there should be a level up queue, maybe handled by the levelup script
 
 
 func update_xp_bar():
@@ -235,11 +250,10 @@ func add_stats(stat, val):
 	set_stats(stat, val, true)
 
 
-func set_stats(stat, val, add=false, percentage=false):
+func set_stats(stat, val, add=false):
 	# match statement for changing stats, calls necessary functions & guarantees proper type
 	# stat is the type of stat to set
 	# if add: value is added onto current stat, otherwise directly set
-	# if percentage: value is treated as a percentage of base stat
 	# percentage may not be necessary. could just always assume base = 100 even for characters with higher base
 	add = bool(add)
 	var addb = int(add)

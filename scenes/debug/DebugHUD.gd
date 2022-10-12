@@ -15,8 +15,8 @@ onready var labels = {
 	Stats.PICKUP_DIST : $Container/PickupDistance/Label,
 	Stats.MAX_HEALTH : $Container/MaxHP/Label,
 	Stats.HEALTH : $Container/HP/Label,
-	#Stats.REGEN_AMT : null,
-	#Stats.REGEN_TIME : null,
+	Stats.REGEN_AMT : $Container/RegenAmt/Label,
+	Stats.REGEN_TIME : $Container/RegenTime/Label,
 	Stats.SPEED : $Container/Speed/Label,
 	Stats.AMMO_MOD : $Container/Ammo/Label,
 	Stats.XP : $Container/XP/Label,
@@ -34,7 +34,7 @@ onready var labels = {
 
 var target_time_scale = 1
 var add_mode = true
-var highlighted_labels = [null, null, null]
+var highlights = [null, null]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -53,6 +53,8 @@ func _process(_delta):
 func update_stat_labels():
 	$Container/MaxHP/Label.text = "max_health: " + str(player.max_health)
 	$Container/HP/Label.text = "health: " + str(player.health)
+	$Container/RegenAmt/Label.text = "regen_amt: " + str(player.regen_amt)
+	$Container/RegenTime/Label.text = "regen_time: " + str(player.regen_time)
 	$Container/XP/Label.text = "xp: " + str(player.xp)
 	$Container/XPGain/Label.text = "xp_gain: " + str(player.xp_gain)
 	$Container/Level/Label.text = "lvl: " + str(player.lvl)
@@ -208,26 +210,22 @@ func release_all():
 
 
 func highlight_label(node):
-	# 0 = blue, 1 = light blue, 2 = white
-#	highlighted_labels.insert(0, node)
-	
-	if highlighted_labels[2] != null:
-		highlighted_labels.pop_back().set("custom_colors/font_color", Color.white)
-	else:
-		highlighted_labels.pop_back()
-	
-	highlighted_labels.insert(0, node)
-	print(highlighted_labels)
-	
-	if highlighted_labels[0]:
-		highlighted_labels[0].set("custom_colors/font_color", Color.blue)
-	if highlighted_labels[1]:
-		highlighted_labels[1].set("custom_colors/font_color", Color.deepskyblue)
-	#highlighted_label = node
+	if highlights[0] != node:
+		highlights.insert(0, node)
+		
+		if highlights[2]:
+			highlights.pop_back().set("custom_colors/font_color", Color.white)
+		else:
+			highlights.pop_back()
+		
+		if highlights[0]:
+			highlights[0].set("custom_colors/font_color", Color(1, 1, 0))
+		if highlights[1]:
+			highlights[1].set("custom_colors/font_color", Color(1, 1, 0.6))
 
 
 func _on_ModeButton_toggled(button_pressed):
-	add_mode = !add_mode
+	add_mode = !button_pressed
 	if add_mode:
 		$Container/ModeButton/Label.text = "add_stats( )"
 	else:
