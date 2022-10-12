@@ -5,10 +5,12 @@ extends CanvasLayer
 onready var player = Game.get_player()
 onready var controls = [
 		$Container/FPS, $Container/TimeScale, $Container/MaxHP, $Container/HP,
-		$Container/XP, $Container/XPGain, $Container/Level, $Container/LevelChoices,
-		$Container/PickupDistance, $Container/Speed, $Container/Dmg,  $Container/Ammo,
-		$Container/FireRate, $Container/ReloadSpeed, $Container/ShotSpeed,
-		$Container/ShotCount, $Container/ShotSpread, $Container/Pierce
+		$Container/RegenAmt, $Container/RegenTime, $Container/XP,$Container/XPGain,
+		$Container/Level, $Container/LevelChoices, $Container/PickupDistance,
+		$Container/Speed, $Container/Dmg,  $Container/Ammo, $Container/FireRate,
+		$Container/ReloadSpeed, $Container/ShotSpeed, $Container/ShotSize,
+		$Container/ExtraShots, $Container/ShotSpread, $Container/Pierce,
+		$Container/CritChance
 		]
 
 onready var labels = {
@@ -18,7 +20,7 @@ onready var labels = {
 	Stats.REGEN_AMT : $Container/RegenAmt/Label,
 	Stats.REGEN_TIME : $Container/RegenTime/Label,
 	Stats.SPEED : $Container/Speed/Label,
-	Stats.AMMO_MOD : $Container/Ammo/Label,
+	Stats.EXTRA_AMMO : $Container/Ammo/Label,
 	Stats.XP : $Container/XP/Label,
 	Stats.XP_GAIN : $Container/XPGain/Label,
 	Stats.LVL : $Container/Level/Label,
@@ -27,9 +29,11 @@ onready var labels = {
 	Stats.FIRE_RATE : $Container/FireRate/Label,
 	Stats.RELOAD_SPEED : $Container/ReloadSpeed/Label,
 	Stats.SHOT_SPEED : $Container/ShotSpeed/Label,
-	Stats.SHOT_COUNT : $Container/ShotCount/Label,
+	Stats.SHOT_SIZE : $Container/ShotSize/Label,
+	Stats.EXTRA_SHOTS : $Container/ExtraShots/Label,
 	Stats.SHOT_SPREAD : $Container/ShotSpread/Label,
-	Stats.PIERCE : $Container/Pierce/Label
+	Stats.PIERCE : $Container/Pierce/Label,
+	Stats.CRIT_CHANCE : $Container/CritChance/Label
 }
 
 var target_time_scale = 1
@@ -62,13 +66,15 @@ func update_stat_labels():
 	$Container/PickupDistance/Label.text = "pickup_dist: " + str(player.pickup_dist)
 	$Container/Speed/Label.text = "speed: " + str(player.speed)
 	$Container/Dmg/Label.text = "damage: " + str(player.damage)
-	$Container/Ammo/Label.text = "ammo_mod: " + str(player.ammo_mod)
+	$Container/Ammo/Label.text = "extra_ammo: " + str(player.extra_ammo)
 	$Container/FireRate/Label.text = "fire_rate: " + str(player.fire_rate)
 	$Container/ReloadSpeed/Label.text = "reload_speed: " + str(player.reload_speed)
 	$Container/ShotSpeed/Label.text = "shot_speed: " + str(player.shot_speed)
-	$Container/ShotCount/Label.text = "shot_count: " + str(player.shot_count)
+	$Container/ShotSize/Label.text = "shot_size: " + str(player.shot_size)
+	$Container/ExtraShots/Label.text = "extra_shots: " + str(player.extra_shots)
 	$Container/ShotSpread/Label.text = "shot_spread: " + str(player.shot_spread)
 	$Container/Pierce/Label.text = "pierce: " + str(player.pierce)
+	$Container/CritChance/Label.text = "crit_chance: " + str(player.crit_chance)
 
 
 func _on_stats_changed(stat):
@@ -98,10 +104,7 @@ func _on_MaxHP_text_entered(new_text):
 func _on_HP_text_entered(new_text):
 	var stat = Stats.HEALTH
 	var val = float(new_text)
-	if add_mode:
-		player.heal(val)
-	else:
-		player.set_stats(stat, val)
+	player.set_stats(stat, val, add_mode)
 	release_all()
 
 
@@ -120,7 +123,7 @@ func _on_Speed_text_entered(new_text):
 
 
 func _on_Ammo_text_entered(new_text):
-	var stat = Stats.AMMO_MOD
+	var stat = Stats.EXTRA_AMMO
 	var val = int(new_text)
 	player.set_stats(stat, val, add_mode)
 	release_all()
@@ -148,7 +151,7 @@ func _on_ShotSpeed_text_entered(new_text):
 
 
 func _on_ShotCount_text_entered(new_text):
-	var stat = Stats.SHOT_COUNT
+	var stat = Stats.EXTRA_SHOTS
 	var val = int(new_text)
 	player.set_stats(stat, val, add_mode)
 	release_all()
@@ -203,6 +206,34 @@ func _on_LevelChoices_text_entered(new_text):
 	release_all()
 
 
+func _on_RegenAmt_text_entered(new_text):
+	var stat = Stats.REGEN_AMT
+	var val = int(new_text)
+	player.set_stats(stat, val, add_mode)
+	release_all()
+
+
+func _on_RegenTime_text_entered(new_text):
+	var stat = Stats.REGEN_TIME
+	var val = float(new_text)
+	player.set_stats(stat, val, add_mode)
+	release_all()
+
+
+func _on_CritChance_text_entered(new_text):
+	var stat = Stats.CRIT_CHANCE
+	var val = float(new_text)
+	player.set_stats(stat, val, add_mode)
+	release_all()
+
+
+func _on_ShotSize_text_entered(new_text):
+	var stat = Stats.SHOT_SIZE
+	var val = float(new_text)
+	player.set_stats(stat, val, add_mode)
+	release_all()
+
+
 func release_all():
 	for x in controls:
 		x.text = ''
@@ -213,10 +244,8 @@ func highlight_label(node):
 	if highlights[0] != node:
 		highlights.insert(0, node)
 		
-		if highlights[2]:
-			highlights.pop_back().set("custom_colors/font_color", Color.white)
-		else:
-			highlights.pop_back()
+		var pop = highlights.pop_back()
+		if pop: pop.set("custom_colors/font_color", Color.white)
 		
 		if highlights[0]:
 			highlights[0].set("custom_colors/font_color", Color(1, 1, 0))
@@ -227,6 +256,6 @@ func highlight_label(node):
 func _on_ModeButton_toggled(button_pressed):
 	add_mode = !button_pressed
 	if add_mode:
-		$Container/ModeButton/Label.text = "add_stats( )"
+		$Container/ModeButton/Label.text = "ADD"
 	else:
-		$Container/ModeButton/Label.text = "set_stats( )"
+		$Container/ModeButton/Label.text = "SET"

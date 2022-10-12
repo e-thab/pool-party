@@ -23,14 +23,17 @@ func _ready():
 	#pass
 
 
+# queue allows multiple levels at once without everything happening at once
 func _on_level_up():
-	PauseManager.pause(true)
-	#queue_level_up()
-	generate()
+	queue_level_up()
 
 
 func queue_level_up():
 	level_signals += 1
+	if not is_leveling:
+		is_leveling = true
+		PauseManager.pause(true)
+		generate()
 
 
 func generate():
@@ -67,7 +70,6 @@ func clear():
 	$Info.visible = false
 	$Info/Title.text = "LEVEL UP"
 	$Info/Description.text = ""
-	PauseManager.pause(false)
 
 
 func rand_choice(arr, amt):
@@ -86,8 +88,14 @@ func rand_choice(arr, amt):
 
 
 func _on_choose():
-	#print('chosen')
 	clear()
+	level_signals -= 1  # reduce level queue by 1
+	
+	if level_signals:   # check if any levels still queued, end level up if not
+		generate()
+	else:
+		is_leveling = false
+		PauseManager.pause(false)
 
 
 func _on_hover(title, desc):

@@ -8,7 +8,7 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 func _init():
 	title = "DINKY GLASSES"
-	desc = "Learn secrets long forgotten, predict the future, get one more choice on level up."
+	desc = "Learn secrets long forgotten, predict the future, get one more choice on level up"
 
 
 func power():

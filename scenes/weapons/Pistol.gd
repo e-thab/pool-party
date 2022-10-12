@@ -7,4 +7,5 @@ func _init():
 	base_reload = 120.0
 	base_spd = 400.0
 	base_ammo = 18
+	crit_multi = 2.0
 	semi_auto = true

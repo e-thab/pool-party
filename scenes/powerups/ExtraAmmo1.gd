@@ -8,9 +8,9 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 func _init():
 	title = "AMMO"
-	desc = "+1 shot per tank"
+	desc = "+1 ammo per tank"
 
 
 func power():
 	var player = Game.get_player()
-	player.add_stats(Stats.AMMO_MOD, 1)
+	player.add_stats(Stats.EXTRA_AMMO, 1)

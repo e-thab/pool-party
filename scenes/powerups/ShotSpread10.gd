@@ -8,7 +8,7 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 func _init():
 	title = "SPREAD"
-	desc = "+10 degrees "
+	desc = "+10 degree shot arc"
 
 
 func power():

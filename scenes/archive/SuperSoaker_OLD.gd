@@ -19,7 +19,7 @@ var reloading = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	max_ammo = base_ammo + player.ammo_mod
+	max_ammo = base_ammo + player.extra_ammo
 	ammo = max_ammo
 	update_ammo()
 	

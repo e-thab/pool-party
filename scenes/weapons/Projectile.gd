@@ -5,6 +5,7 @@ extends Area2D
 var speed = 100.0
 var damage = 0.0
 var pierce = 0
+var crit = false
 var fading = false
 
 
@@ -18,17 +19,18 @@ func _process(delta):
 	position += (transform.x * delta * speed * Stats.SPEED_MODIFIER) / scale
 
 
-func set_stats(dmg, spd, prc):
+func set_stats(dmg, spd, prc, crt):
 	damage = round(dmg)
 	speed = spd
 	pierce = prc
+	crit = crt
 	$Particles2D.amount = $Particles2D.amount * (spd / 100) # lower framerates can't keep up
 
 
 func _on_Projectile_body_entered(body):
 	if body.is_in_group("mobs"):
 		if not fading:
-			body.hurt(damage)
+			body.hurt(damage, crit)
 			pierce -= 1
 			if pierce <= -1: fade()
 	elif not body.is_in_group("player") and not fading:

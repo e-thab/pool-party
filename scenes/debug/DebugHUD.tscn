@@ -74,7 +74,7 @@ margin_left = 5.0
 margin_top = -12.0
 margin_right = 83.0
 margin_bottom = 12.0
-text = "add_stats( )"
+text = "ADD"
 valign = 1
 
 [node name="MaxHP" type="LineEdit" parent="Container"]
@@ -290,7 +290,7 @@ margin_left = 5.0
 margin_top = -12.0
 margin_right = 83.0
 margin_bottom = 12.0
-text = "ammo_mod"
+text = "extra_ammo"
 valign = 1
 
 [node name="FireRate" type="LineEdit" parent="Container"]
@@ -347,13 +347,13 @@ margin_bottom = 12.0
 text = "shot_speed"
 valign = 1
 
-[node name="ShotCount" type="LineEdit" parent="Container"]
+[node name="ShotSize" type="LineEdit" parent="Container"]
 margin_top = 512.0
 margin_right = 58.0
 margin_bottom = 536.0
 rect_min_size = Vector2( 58, 24 )
 
-[node name="Label" type="Label" parent="Container/ShotCount"]
+[node name="Label" type="Label" parent="Container/ShotSize"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -362,13 +362,31 @@ margin_left = 5.0
 margin_top = -12.0
 margin_right = 83.0
 margin_bottom = 12.0
-text = "shot_count"
+text = "shot_size"
 valign = 1
 
-[node name="ShotSpread" type="LineEdit" parent="Container"]
+[node name="ExtraShots" type="LineEdit" parent="Container"]
 margin_top = 540.0
 margin_right = 58.0
 margin_bottom = 564.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/ExtraShots"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "extra_shots"
+valign = 1
+
+[node name="ShotSpread" type="LineEdit" parent="Container"]
+margin_top = 568.0
+margin_right = 58.0
+margin_bottom = 592.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/ShotSpread"]
@@ -384,9 +402,9 @@ text = "shot_spread"
 valign = 1
 
 [node name="Pierce" type="LineEdit" parent="Container"]
-margin_top = 568.0
+margin_top = 596.0
 margin_right = 58.0
-margin_bottom = 592.0
+margin_bottom = 620.0
 rect_min_size = Vector2( 58, 24 )
 
 [node name="Label" type="Label" parent="Container/Pierce"]
@@ -401,11 +419,31 @@ margin_bottom = 12.0
 text = "pierce"
 valign = 1
 
+[node name="CritChance" type="LineEdit" parent="Container"]
+margin_top = 624.0
+margin_right = 58.0
+margin_bottom = 648.0
+rect_min_size = Vector2( 58, 24 )
+
+[node name="Label" type="Label" parent="Container/CritChance"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -12.0
+margin_right = 83.0
+margin_bottom = 12.0
+text = "crit_chance"
+valign = 1
+
 [connection signal="text_entered" from="Container/FPS" to="." method="_on_FPS_text_entered"]
 [connection signal="text_entered" from="Container/TimeScale" to="." method="_on_TimeScale_text_entered"]
 [connection signal="toggled" from="Container/ModeButton" to="." method="_on_ModeButton_toggled"]
 [connection signal="text_entered" from="Container/MaxHP" to="." method="_on_MaxHP_text_entered"]
 [connection signal="text_entered" from="Container/HP" to="." method="_on_HP_text_entered"]
+[connection signal="text_entered" from="Container/RegenAmt" to="." method="_on_RegenAmt_text_entered"]
+[connection signal="text_entered" from="Container/RegenTime" to="." method="_on_RegenTime_text_entered"]
 [connection signal="text_entered" from="Container/XP" to="." method="_on_XP_text_entered"]
 [connection signal="text_entered" from="Container/XPGain" to="." method="_on_XPGain_text_entered"]
 [connection signal="text_entered" from="Container/Level" to="." method="_on_Level_text_entered"]
@@ -417,6 +455,8 @@ valign = 1
 [connection signal="text_entered" from="Container/FireRate" to="." method="_on_FireRate_text_entered"]
 [connection signal="text_entered" from="Container/ReloadSpeed" to="." method="_on_ReloadSpeed_text_entered"]
 [connection signal="text_entered" from="Container/ShotSpeed" to="." method="_on_ShotSpeed_text_entered"]
-[connection signal="text_entered" from="Container/ShotCount" to="." method="_on_ShotCount_text_entered"]
+[connection signal="text_entered" from="Container/ShotSize" to="." method="_on_ShotSize_text_entered"]
+[connection signal="text_entered" from="Container/ExtraShots" to="." method="_on_ShotCount_text_entered"]
 [connection signal="text_entered" from="Container/ShotSpread" to="." method="_on_ShotSpread_text_entered"]
 [connection signal="text_entered" from="Container/Pierce" to="." method="_on_Pierce_text_entered"]
+[connection signal="text_entered" from="Container/CritChance" to="." method="_on_CritChance_text_entered"]

@@ -9,7 +9,7 @@ export(Color) var hand_color
 
 # literal values
 var pickup_dist = 100.0  # literal distance in units but can be treated as percentage
-var regen_amt = 0.1      # how much health to regen
+var regen_amt = 1.0      # how much health to regen
 var regen_time = 5.0     # time to regen 
 var lvl_choices = 4      # number of powerup choices on level
 var max_health = 100.0   
@@ -17,26 +17,28 @@ var max_health = 100.0
 # percentages
 var speed = 100.0
 var xp_gain = 100.0
+var crit_chance = 5.0
 
 # modify base weapon stats
 var damage = 100.0       # percentage
 var fire_rate = 100.0    # percentage
 var reload_speed = 100.0 # percentage
 var shot_speed = 100.0   # percentage
-var ammo_mod = 0         # int literal, adds to weapon max ammo
-var shot_count = 0       # int literal, adds to base count
+var shot_size = 100.0    # percentage
+var extra_ammo = 0       # int literal, adds to weapon max ammo
+var extra_shots = 0      # int literal, adds to base weapon shots
 var shot_spread = 20     # angle of shot spread in degrees
 var pierce = 0           # number of enemies to pierce
 
 # base player stats so that percentage modifiers don't compound undesirably
-onready var base_pickup_dist = pickup_dist
-onready var base_max_health = max_health
-onready var base_speed = speed
-onready var base_xp_gain = xp_gain
-onready var base_damage = damage
-onready var base_fire_rate = fire_rate
-onready var base_reload_speed = reload_speed
-onready var base_shot_speed = shot_speed
+#onready var base_pickup_dist = pickup_dist
+#onready var base_max_health = max_health
+#onready var base_speed = speed
+#onready var base_xp_gain = xp_gain
+#onready var base_damage = damage
+#onready var base_fire_rate = fire_rate
+#onready var base_reload_speed = reload_speed
+#onready var base_shot_speed = shot_speed
 
 onready var screen_size  = get_viewport_rect().size
 onready var tile = $TileSpriteBG
@@ -57,8 +59,12 @@ func _ready():
 	# create exported weapon type instance
 	equip_weapon(weapon_type)
 	
-	# set health
+	# set health / regen
 	health = max_health
+	$RegenTimer.wait_time = regen_time
+	$RegenTimer.start()
+	
+	# set progress bars
 	update_health_bar()
 	update_xp_bar()
 
@@ -124,7 +130,7 @@ func add_xp(n):
 	if xp_remainder >= 1:                     # if remainder is 1 or more, it should be added
 		xp += int(xp_remainder)               # add integer portion
 		xp_remainder = fmod(xp_remainder, 1)  # safe keeping
-	print(xp_remainder)
+	#print(xp_remainder)
 	
 	var new_lvl = Stats.xp2lvl(xp) # find target level at current total xp
 	
@@ -137,16 +143,14 @@ func add_xp(n):
 
 func level_up():
 	if lvl < len(Stats.lvl_incs) - 1:
-		#print('level up')
 		lvl += 1
 		emit_signal("level_up")
 		emit_signal("stats_changed", Stats.LVL)
-	# at the moment, multiple level ups at once happen simultaneously, freezing the game with pause signals
-	# there should be a level up queue, maybe handled by the levelup script
+	update_xp_bar()
 
 
 func update_xp_bar():
-	if lvl >= len(Stats.lvl_incs) + 1:
+	if lvl >= len(Stats.lvl_incs) - 1:
 		$XPHUD/XPBar.max_value = 1
 		$XPHUD/XPBar.value = 1
 		$XPHUD/XPBar/Level.text = "LVL MAX"
@@ -167,7 +171,7 @@ func hurt(n):
 
 
 func heal(n):
-	health += n
+	health = min(max_health, health + n)  # prevent healing past full
 	update_health_bar()
 	emit_signal("stats_changed", Stats.HEALTH)
 
@@ -228,15 +232,15 @@ func equip_weapon(weapon):
 #		Stats.XP:
 #			add_xp(val)
 #
-#		Stats.AMMO_MOD:
-#			ammo_mod += int(val)
+#		Stats.EXTRA_AMMO:
+#			extra_ammo += int(val)
 #			# NEEDS TO UPDATE AMMO BAR - gun.update_ammo()?
 #
 #		Stats.LVL_CHOICES:
 #			lvl_choices += int(val)
 #
-#		Stats.SHOT_COUNT:
-#			shot_count += int(val)
+#		Stats.EXTRA_SHOTS:
+#			extra_shots += int(val)
 #
 #		Stats.SHOT_SPREAD:
 #			shot_spread += int(val)
@@ -257,7 +261,6 @@ func set_stats(stat, val, add=false):
 	# percentage may not be necessary. could just always assume base = 100 even for characters with higher base
 	add = bool(add)
 	var addb = int(add)
-	#var per = int(percentage) * val/100.0
 	
 	match stat:
 		Stats.PICKUP_DIST:
@@ -271,10 +274,10 @@ func set_stats(stat, val, add=false):
 		
 		Stats.HEALTH:
 			if add:
-				if val < 0:
+				if val >= 0:
 					heal(val)
 				else:
-					hurt(val)
+					hurt(abs(val))
 			else:
 				health = int(val)
 				update_health_bar()
@@ -284,12 +287,13 @@ func set_stats(stat, val, add=false):
 		
 		Stats.REGEN_TIME:
 			regen_time = regen_time*addb + val
+			$RegenTimer.wait_time = regen_time
 		
 		Stats.SPEED:
 			speed = speed*addb + val
 		
-		Stats.AMMO_MOD:
-			ammo_mod = ammo_mod*addb + int(val)
+		Stats.EXTRA_AMMO:
+			extra_ammo = extra_ammo*addb + int(val)
 		
 		Stats.XP:
 			if add:
@@ -301,8 +305,11 @@ func set_stats(stat, val, add=false):
 			xp_gain = xp_gain*addb + val
 		
 		Stats.LVL:
-			lvl = lvl*addb + int(val)
-			#level_up()
+			var new_lvl = lvl*addb + int(val)
+			
+			for i in range(lvl, new_lvl):
+				level_up()
+			xp = Stats.lvl_sums[lvl]
 		
 		Stats.LVL_CHOICES:
 			lvl_choices = lvl_choices*addb + int(val)
@@ -319,14 +326,20 @@ func set_stats(stat, val, add=false):
 		Stats.SHOT_SPEED:
 			shot_speed = shot_speed*addb + val
 		
-		Stats.SHOT_COUNT:
-			shot_count = shot_count*addb + int(val)
+		Stats.SHOT_SIZE:
+			shot_size = shot_size*addb + val  # doesn't actually do anything yet
+		
+		Stats.EXTRA_SHOTS:
+			extra_shots = extra_shots*addb + int(val)
 		
 		Stats.SHOT_SPREAD:
 			shot_spread = shot_spread*addb + int(val)
 		
 		Stats.PIERCE:
-			pierce = pierce*addb + int(val)
+			pierce = max(0, pierce*addb + int(val))
+		
+		Stats.CRIT_CHANCE:
+			crit_chance = max(0, crit_chance*addb + int(val))
 	emit_signal("stats_changed", stat)
 
 
@@ -334,3 +347,7 @@ func _on_PlayerSprite_animation_finished():
 	if $AnimatedSprite.animation == "hurt":
 		being_hurt = false # make this (invincibility duration) more controllable
 		#$AnimatedSprite.stop()
+
+
+func _on_RegenTimer_timeout():
+	heal(regen_amt)

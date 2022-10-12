@@ -33,7 +33,7 @@ func _process(delta):
 
 func hurt(n):
 	health -= n
-	print("mob hurt. hp = " + str(health))
+	#print("mob hurt. hp = " + str(health))
 	
 	if not being_hurt: # continuation of meh
 		being_hurt = true

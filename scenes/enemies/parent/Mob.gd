@@ -73,17 +73,17 @@ func _physics_process(delta):
 		player.hurt(damage)
 
 
-func hurt(n):
+func hurt(n, crit=false):
 	health -= n
 	$AnimatedSprite.play("hurt")
 	$AnimatedSprite.frame = 0
-	dmg_popup(n)
+	dmg_popup(n, crit)
 	#print("zombie hurt. hp = " + str(health))
 
 
-func dmg_popup(n):
+func dmg_popup(n, crit=false):
 	var num = dmg_number.instance()
-	num.set_num(n)
+	num.set_num(n, crit)
 	root.add_child(num)
 	num.position = global_position
 	

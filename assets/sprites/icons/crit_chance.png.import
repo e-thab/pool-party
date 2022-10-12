@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shot_speed.png-1455ddf6b9d9a5f84ad3cd518c048421.stex"
+path="res://.import/crit_chance.png-796f23ca0f353d0c5295a3f7b6c13580.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/shot_speed.png"
-dest_files=[ "res://.import/shot_speed.png-1455ddf6b9d9a5f84ad3cd518c048421.stex" ]
+source_file="res://assets/sprites/icons/crit_chance.png"
+dest_files=[ "res://.import/crit_chance.png-796f23ca0f353d0c5295a3f7b6c13580.stex" ]
 
 [params]
 

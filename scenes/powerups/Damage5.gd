@@ -8,7 +8,7 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 func _init():
 	title = "DAMAGE UP"
-	desc = "+5% damage."
+	desc = "+5% damage"
 
 
 func power():

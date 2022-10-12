@@ -7,6 +7,6 @@ func _init():
 	base_reload = 100.0
 	base_spd = 350.0
 	base_ammo = 6
-	
-	base_shot_count = 4
-	base_spread = 40
+	crit_multi = 1.5
+	base_shots = 4
+	base_spread = 20

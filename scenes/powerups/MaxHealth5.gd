@@ -8,7 +8,7 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 func _init():
 	title = "MAX HEALTH"
-	desc = "+5% max health."
+	desc = "+5% max health"
 
 
 func power():

@@ -7,10 +7,10 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 
 func _init():
-	title = "SHOT COUNT"
-	desc = "+1 projectile per shot"
+	title = "PROJECTILE SIZE"
+	desc = "+10% projectile size"
 
 
 func power():
 	var player = Game.get_player()
-	player.add_stats(Stats.SHOT_COUNT, 1)
+	player.add_stats(Stats.SHOT_SIZE, 10)

@@ -8,7 +8,7 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 func _init():
 	title = "SPEED"
-	desc = "+10% move speed."
+	desc = "+10% move speed"
 
 
 func power():

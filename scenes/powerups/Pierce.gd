@@ -8,7 +8,7 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 func _init():
 	title = "PIERCE"
-	desc = "Shots pierce 1 more enemy."
+	desc = "Projectiles pierce 1 more enemy"
 
 
 func power():

@@ -11,9 +11,10 @@ var base_rate = 100.0    # fire rate, percentage of 1 sec
 var base_reload = 100.0  # reload rate, percentage of 1 sec
 var base_spd = 100.0     # projectile speed, arbitrary for now
 var base_ammo = 1        # literal number of shots per mag
-var base_shot_count = 1  # literal number of projectiles per shot
+var base_shots = 1       # literal number of projectiles per shot
 var base_spread = 10.0   # arc spread in degrees for guns w/ multi shot
 var base_pierce = 0      # number of enemies projectile can pass through
+var crit_multi = 1.5     # factor to multiply damage by on crit
 var semi_auto = false    # flag for hold to fire functionality
 
 var max_ammo
@@ -23,7 +24,7 @@ var reloading = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	max_ammo = base_ammo + player.ammo_mod
+	max_ammo = base_ammo + player.extra_ammo
 	ammo = max_ammo
 	update_ammo()
 	
@@ -54,8 +55,8 @@ func _process(_delta):
 	$Sprite.flip_v = abs(global_rotation) > (PI/2) # use abs() for easier comparison
 	$Sprite/Hands.flip_v = $Sprite.flip_v
 	
-	if max_ammo != base_ammo + player.ammo_mod: # wrap this into player.set_stats() func when created
-		max_ammo = base_ammo + player.ammo_mod
+	if max_ammo != base_ammo + player.extra_ammo: # wrap this into player.set_stats() func when created
+		max_ammo = base_ammo + player.extra_ammo
 		update_ammo()
 
 
@@ -68,7 +69,7 @@ func shoot():
 	$ShotTimer.wait_time = (base_rate / 100.0) * (100.0 / player.fire_rate)
 	$ShotTimer.start()
 	
-	var shot_count = base_shot_count + player.shot_count
+	var shot_count = base_shots + player.extra_shots
 	if shot_count > 1:
 		var spread = max(base_spread, player.shot_spread)
 		var theta = $ShotOrigin.global_rotation_degrees + spread/2
@@ -89,13 +90,19 @@ func shoot():
 
 
 func instance_projectile(rot):
+	var crit = randf() <= player.crit_chance / 100.0
+	var dmg = base_dmg * (player.damage / 100.0)
+	if crit: dmg *= crit_multi
+	
+	var spd = base_spd * (player.shot_speed / 100.0)
+	var pierce = base_pierce + player.pierce
+	var size  # tbd
+	
 	var proj_inst = projectile.instance()
 	root.add_child(proj_inst)
 	proj_inst.position = $ShotOrigin.global_position
 	proj_inst.rotation = rot
-	proj_inst.set_stats(base_dmg * (player.damage / 100.0),      # damage
-						base_spd * (player.shot_speed / 100.0),  # speed
-						base_pierce + player.pierce)             # pierce
+	proj_inst.set_stats(dmg, spd, pierce, crit)
 
 
 func update_ammo():

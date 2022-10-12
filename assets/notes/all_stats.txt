@@ -5,7 +5,7 @@ Stats.gd Enum:
 	REGEN_AMT
 	REGEN_TIME
 	SPEED
-	AMMO_MOD
+	EXTRA_AMMO
 	XP
 	XP_GAIN
 	LVL
@@ -14,9 +14,11 @@ Stats.gd Enum:
 	FIRE_RATE
 	RELOAD_SPEED
 	SHOT_SPEED
-	SHOT_COUNT
+	SHOT_SIZE
+	EXTRA_SHOTS
 	SHOT_SPREAD
 	PIERCE
+	CRIT_CHANCE
 
 Player:
 	Percent
@@ -28,11 +30,13 @@ Player:
 		fire_rate
 		reload_speed
 		shot_speed
+		shot_size
+		crit_chance
 	Literal
 		regen_amt
 		regen_time
-		ammo_mod
+		extra_ammo
 		lvl_choices
-		shot_count
+		extra_shots
 		shot_spread
 		pierce

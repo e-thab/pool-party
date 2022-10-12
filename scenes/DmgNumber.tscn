@@ -5,6 +5,8 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
+outline_size = 1
+outline_color = Color( 0.164706, 0.164706, 0.164706, 1 )
 font_data = ExtResource( 1 )
 
 [node name="DmgNumber" type="Node2D"]
@@ -19,8 +21,7 @@ margin_left = -149.0
 margin_top = -18.0
 margin_right = 149.0
 margin_bottom = 19.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0.164706, 0.164706, 0.164706, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 1
 custom_fonts/font = SubResource( 1 )

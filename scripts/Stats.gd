@@ -10,7 +10,7 @@ enum {
 	REGEN_AMT,
 	REGEN_TIME,
 	SPEED,
-	AMMO_MOD,
+	EXTRA_AMMO,
 	XP,
 	XP_GAIN,
 	LVL,
@@ -19,9 +19,11 @@ enum {
 	FIRE_RATE,
 	RELOAD_SPEED,
 	SHOT_SPEED,
-	SHOT_COUNT,
+	SHOT_SIZE,
+	EXTRA_SHOTS,
 	SHOT_SPREAD,
-	PIERCE}
+	PIERCE,
+	CRIT_CHANCE}
 
 	   # Level: 0, 1, 2, 3,  4,  5,  6,  7,   8,   9,  10
 var lvl_incs = [0, 0, 4, 5,  8, 13, 20, 29,  40,  53,  68]

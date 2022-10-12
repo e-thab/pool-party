@@ -17,9 +17,12 @@ func _process(delta):
 	position.y -= 50 * delta
 
 
-func set_num(n):
+func set_num(n, crit=false):
 	#n = stepify(n, 0.1)  # round to tenths place
 	$Number.text = str(n)
+	if crit:
+		$Number.self_modulate = Color.yellow
+		scale *= 1.2
 	#$Number.self_modulate = Color(1, 1 - n/30.0, 1 - n/30.0, 1) # number is white at 0 and red at 30
 
 
