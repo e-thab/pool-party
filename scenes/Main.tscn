@@ -99,5 +99,4 @@ color = Color( 0, 0, 0, 0.235294 )
 
 [node name="LevelUp" parent="." instance=ExtResource( 11 )]
 layer = 0
-
 [connection signal="timeout" from="HUD/RoundTimer" to="HUD" method="_on_RoundTimer_timeout"]

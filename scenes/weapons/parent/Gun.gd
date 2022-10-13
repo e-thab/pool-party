@@ -96,13 +96,13 @@ func instance_projectile(rot):
 	
 	var spd = base_spd * (player.shot_speed / 100.0)
 	var pierce = base_pierce + player.pierce
-	var size  # tbd
+	var size = player.shot_size
 	
 	var proj_inst = projectile.instance()
 	root.add_child(proj_inst)
 	proj_inst.position = $ShotOrigin.global_position
 	proj_inst.rotation = rot
-	proj_inst.set_stats(dmg, spd, pierce, crit)
+	proj_inst.set_stats(dmg, spd, size, pierce, crit)
 
 
 func update_ammo():

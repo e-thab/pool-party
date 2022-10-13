@@ -3,6 +3,7 @@ extends Area2D
 
 # Declare member variables here. Examples:
 var speed = 100.0
+var size = 100.0
 var damage = 0.0
 var pierce = 0
 var crit = false
@@ -19,12 +20,19 @@ func _process(delta):
 	position += (transform.x * delta * speed * Stats.SPEED_MODIFIER) / scale
 
 
-func set_stats(dmg, spd, prc, crt):
+func set_stats(dmg, spd, sze, prc, crt):
 	damage = round(dmg)
 	speed = spd
+	size = sze
 	pierce = prc
 	crit = crt
+	set_size()
 	$Particles2D.amount = $Particles2D.amount * (spd / 100) # lower framerates can't keep up
+
+
+func set_size():
+	$Particles2D.process_material.scale = 0.6 * size/100.0
+	$CollisionShape2D.shape.radius = 4 * size/100.0
 
 
 func _on_Projectile_body_entered(body):

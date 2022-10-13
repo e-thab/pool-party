@@ -24,6 +24,7 @@ func _ready():
 	health = max_health
 	move_target = player
 	
+	speed += randf() * pow(-1, randi()%2) * 6  # set speed randomly +- 6 from base
 	$AnimatedSprite.frames = mob_types[randi() % len(mob_types)]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,7 +62,8 @@ func _physics_process(delta):
 #		#add_central_force(-dir * 600)
 #	else:
 #		applied_force = dir * speed * Stats.SPEED_MODIFIER * delta * 100
-	$DebugMovement.set_point_position(1, applied_force.normalized() * 50)
+	if $DebugMovement.visible:
+		$DebugMovement.set_point_position(1, applied_force.normalized() * 50)
 	
 	# flip sprite left/right
 	if dir.x < 0:
