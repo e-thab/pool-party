@@ -151,13 +151,13 @@ func level_up():
 
 func update_xp_bar():
 	if lvl >= len(Stats.lvl_incs) - 1:
-		$XPHUD/XPBar.max_value = 1
-		$XPHUD/XPBar.value = 1
-		$XPHUD/XPBar/Level.text = "LVL MAX"
+		$PlayerHUD/XPBar.max_value = 1
+		$PlayerHUD/XPBar.value = 1
+		$PlayerHUD/XPBar/Level.text = "LVL MAX"
 	else:
-		$XPHUD/XPBar.max_value = Stats.lvl_incs[lvl+1]
-		$XPHUD/XPBar.value = xp - Stats.lvl_sums[lvl]
-		$XPHUD/XPBar/Level.text = "LVL " + str(lvl)
+		$PlayerHUD/XPBar.max_value = Stats.lvl_incs[lvl+1]
+		$PlayerHUD/XPBar.value = xp - Stats.lvl_sums[lvl]
+		$PlayerHUD/XPBar/Level.text = "LVL " + str(lvl)
 
 
 func hurt(n):
@@ -184,70 +184,6 @@ func update_health_bar():
 func equip_weapon(weapon):
 	gun = weapon.instance()
 	$GunPosition.add_child(gun)
-
-
-#func add_stats_percent(stat, percent):
-#	# adds percent to stat with respect to its base_stat value
-#	# preferred function to modify any percentage-based stats except health
-#	# to subtract just pass negative percent values, e.g. -20 would reduce by 20%
-#	match stat:
-#		Stats.PICKUP_DIST:
-#			pickup_dist += base_pickup_dist * (percent/100.0)
-#
-#		Stats.MAX_HEALTH:
-#			max_health += base_max_health * (percent/100.0)
-#			update_health_bar()
-#
-#		Stats.SPEED:
-#			speed += base_speed * (percent/100.0)
-#
-#		Stats.XP_GAIN:
-#			xp_gain += base_xp_gain * (percent/100.0)
-#
-#		Stats.DAMAGE:
-#			damage += base_damage * (percent/100.0)
-#
-#		Stats.FIRE_RATE:
-#			fire_rate += base_fire_rate * (percent/100.0)
-#
-#		Stats.RELOAD_SPEED:
-#			reload_speed += base_reload_speed * (percent/100.0)
-#
-#		Stats.SHOT_SPEED:
-#			shot_speed += base_shot_speed * (percent/100.0)
-#	emit_signal("stats_changed", stat, val)
-#
-#
-#func add_stats_literal(stat, val):
-#	# adds literal value to stat, casts to int when needed
-#	# preferred function to modify any literal value stats
-#	# to subtract just pass negative values, e.g. -20 would reduce by 20
-#	match stat:
-#		Stats.REGEN_AMT:
-#			regen_amt += val
-#
-#		Stats.REGEN_TIME:
-#			regen_time += val
-#
-#		Stats.XP:
-#			add_xp(val)
-#
-#		Stats.EXTRA_AMMO:
-#			extra_ammo += int(val)
-#			# NEEDS TO UPDATE AMMO BAR - gun.update_ammo()?
-#
-#		Stats.LVL_CHOICES:
-#			lvl_choices += int(val)
-#
-#		Stats.EXTRA_SHOTS:
-#			extra_shots += int(val)
-#
-#		Stats.SHOT_SPREAD:
-#			shot_spread += int(val)
-#
-#		Stats.PIERCE:
-#			pierce += int(val)
-#	emit_signal("stats_changed", stat, val)
 
 
 func add_stats(stat, val):
@@ -307,7 +243,7 @@ func set_stats(stat, val, add=false):
 		Stats.LVL:
 			var new_lvl = lvl*addb + int(val)
 			
-			for i in range(lvl, new_lvl):
+			for _i in range(lvl, new_lvl):
 				level_up()
 			xp = Stats.lvl_sums[lvl]
 		

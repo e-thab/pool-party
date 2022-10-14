@@ -48,4 +48,4 @@ func _on_Powerup_mouse_exited():
 func _on_Powerup_gui_input(event):
 	if event.is_action("primary_fire") and event.is_pressed():
 		power()
-		emit_signal("choose")
+		emit_signal("choose", title)

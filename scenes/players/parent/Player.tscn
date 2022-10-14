@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/sprites/sheets/base_16.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/players/parent/Player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/weapons/parent/GunPosition.gd" type="Script" id=4]
 [ext_resource path="res://scenes/weapons/SuperSoaker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/sprites/icons/shot_size.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=13]
 radius = 19.0
@@ -28,6 +29,9 @@ bg_color = Color( 0.164706, 0.164706, 0.164706, 0.705882 )
 
 [sub_resource type="DynamicFont" id=15]
 size = 18
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=18]
 font_data = ExtResource( 6 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
@@ -57,6 +61,7 @@ position = Vector2( 0, 2 )
 shape = SubResource( 13 )
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -85,9 +90,9 @@ script = ExtResource( 4 )
 
 [node name="Pickups" type="Node" parent="."]
 
-[node name="XPHUD" type="CanvasLayer" parent="."]
+[node name="PlayerHUD" type="CanvasLayer" parent="."]
 
-[node name="XPBar" type="ProgressBar" parent="XPHUD"]
+[node name="XPBar" type="ProgressBar" parent="PlayerHUD"]
 anchor_right = 1.0
 margin_left = 18.0
 margin_top = 18.0
@@ -99,7 +104,7 @@ max_value = 5.0
 step = 1.0
 percent_visible = false
 
-[node name="Level" type="Label" parent="XPHUD/XPBar"]
+[node name="Level" type="Label" parent="PlayerHUD/XPBar"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -111,6 +116,45 @@ margin_bottom = 14.5
 custom_fonts/font = SubResource( 15 )
 text = "LVL 1"
 align = 2
+
+[node name="GridContainer" type="GridContainer" parent="PlayerHUD"]
+margin_left = 18.0
+margin_top = 55.0
+margin_right = 865.0
+margin_bottom = 128.0
+columns = 24
+
+[node name="StatsBox" type="VBoxContainer" parent="PlayerHUD"]
+anchor_left = 0.009
+anchor_top = 0.127
+anchor_right = 0.057
+anchor_bottom = 0.868
+margin_left = 0.719999
+margin_top = -0.160004
+margin_right = -59.44
+margin_bottom = -0.440063
+
+[node name="ShotSize" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/ShotSize"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/ShotSize"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 18 )
+text = "+120%"
+valign = 1
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_PlayerSprite_animation_finished"]
 [connection signal="timeout" from="RegenTimer" to="." method="_on_RegenTimer_timeout"]

@@ -14,7 +14,7 @@ func _ready():
 func queue_pause():
 	signals += 1
 	get_tree().paused = true
-	print('queueing pause. pause signals = ', signals)
+	#print('queueing pause. pause signals = ', signals)
 
 
 func queue_unpause():
@@ -22,7 +22,7 @@ func queue_unpause():
 	if signals <= 0:
 		get_tree().paused = false
 		signals = 0  # Set signals back to 0 in case unpause was queued too much somehow
-	print('dequeueing pause. pause signals = ', signals)
+	#print('dequeueing pause. pause signals = ', signals)
 
 
 func pause(pause):

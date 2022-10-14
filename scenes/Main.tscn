@@ -32,6 +32,7 @@ visible = false
 texture = ExtResource( 4 )
 
 [node name="DebugHUD" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="HUD" type="CanvasLayer" parent="."]
 pause_mode = 2
