@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/players/Jackie.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=2]
 [ext_resource path="res://scenes/debug/DebugHUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/misc/red_circle.png" type="Texture" id=4]
 [ext_resource path="res://assets/crosshairs/crosshair_4.png" type="Texture" id=5]
+[ext_resource path="res://assets/sounds/FX231.wav" type="AudioStream" id=6]
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=7]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://assets/themes/8b_font_theme.tres" type="Theme" id=9]
@@ -99,4 +100,8 @@ color = Color( 0, 0, 0, 0.235294 )
 
 [node name="LevelUp" parent="." instance=ExtResource( 11 )]
 layer = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
 [connection signal="timeout" from="HUD/RoundTimer" to="HUD" method="_on_RoundTimer_timeout"]

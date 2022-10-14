@@ -65,6 +65,7 @@ func _physics_process(_delta):
 
 
 func shoot():
+	$ShotSound.play()
 	can_fire = false
 	$ShotTimer.wait_time = (base_rate / 100.0) * (100.0 / player.fire_rate)
 	$ShotTimer.start()

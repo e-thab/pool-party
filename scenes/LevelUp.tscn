@@ -4,15 +4,15 @@
 [ext_resource path="res://assets/sprites/misc/green_circle.png" type="Texture" id=2]
 [ext_resource path="res://scenes/powerups/Glasses.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/powerups/Pierce.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/powerups/Damage5.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/powerups/MaxHealth5.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/powerups/Damage10.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/powerups/MaxHealth10.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/powerups/Speed10.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/powerups/PickupDistance.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/powerups/PickupDistance10.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/powerups/XPGain10.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/powerups/FireRate10.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/powerups/ShotSpread10.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/powerups/ReloadSpeed10.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/powerups/RegenRate10.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/powerups/RegenRate025.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/powerups/ExtraAmmo1.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/sprites/ui/highlight_28.png" type="Texture" id=15]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=16]
@@ -20,6 +20,7 @@
 [ext_resource path="res://scenes/powerups/Crit10.tscn" type="PackedScene" id=18]
 [ext_resource path="res://scenes/powerups/ShotSpeed10.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/powerups/ShotSize10.tscn" type="PackedScene" id=20]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 24

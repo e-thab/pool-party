@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/powerups/parent/Powerup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/powerups/ExtraAmmo1.gd" type="Script" id=3]
 
-[node name="AmmoMod1" instance=ExtResource( 2 )]
+[node name="ExtraAmmo1" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
 [node name="Icon" parent="." index="1"]

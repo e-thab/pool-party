@@ -7,10 +7,10 @@ extends "res://scenes/powerups/parent/Powerup.gd"
 
 
 func _init():
-	title = "DAMAGE UP"
-	desc = "+5% damage"
+	title = "DAMAGE"
+	desc = "+10% damage"
 
 
 func power():
 	var player = Game.get_player()
-	player.add_stats(Stats.DAMAGE, 5)
+	player.add_stats(Stats.DAMAGE, 10)
