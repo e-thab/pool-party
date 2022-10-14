@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/sprites/icons/shot_count.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/icons/extra_shots.png" type="Texture" id=1]
 [ext_resource path="res://scenes/powerups/parent/Powerup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/powerups/ExtraShots1.gd" type="Script" id=3]
+
 
 [node name="ExtraShots1" instance=ExtResource( 2 )]
 script = ExtResource( 3 )

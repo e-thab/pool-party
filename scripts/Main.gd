@@ -16,6 +16,7 @@ func _ready():
 	Input.set_custom_mouse_cursor(crosshair, 0, crosshair.get_size()/2)
 	randomize()
 	
+	$DebugHUD.set_enabled(debug)
 	#temp_pickup_spawn()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

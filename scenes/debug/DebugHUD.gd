@@ -54,6 +54,11 @@ func _process(_delta):
 	$Container/TimeScale/Label.text = "Time Scale: " + str(Engine.time_scale)
 
 
+func set_enabled(b):
+	$Container.visible = b
+	set_process(b)
+
+
 func update_stat_labels():
 	$Container/MaxHP/Label.text = "max_health: " + str(player.max_health)
 	$Container/HP/Label.text = "health: " + str(player.health)

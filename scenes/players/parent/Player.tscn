@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/sprites/sheets/base_16.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/players/parent/Player.gd" type="Script" id=2]
@@ -6,35 +6,52 @@
 [ext_resource path="res://scenes/weapons/parent/GunPosition.gd" type="Script" id=4]
 [ext_resource path="res://scenes/weapons/SuperSoaker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/8bitoperator.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/sprites/icons/pierce.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/icons/damage_2.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/icons/shot_size.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/icons/extra_shots.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/icons/fire_rate.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/icons/shot_spread.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/icons/reload_speed.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/icons/crit_chance.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/icons/shot_speed.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/icons/glasses.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/icons/heart_1.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/icons/pickup_dist.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/icons/xp_gain.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/icons/regen_rate.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/icons/speed_1.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/icons/smile_1.png" type="Texture" id=22]
 
-[sub_resource type="CapsuleShape2D" id=13]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 19.0
 height = 22.0
 
-[sub_resource type="DynamicFont" id=12]
-font_data = ExtResource( 6 )
-
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.788235, 0.313726, 0.313726, 1 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.164706, 0.164706, 0.164706, 0.705882 )
 
-[sub_resource type="StyleBoxFlat" id=16]
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.819608, 0.317647, 0.6, 0.705882 )
 
-[sub_resource type="StyleBoxFlat" id=17]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.164706, 0.164706, 0.164706, 0.705882 )
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=7]
 size = 18
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=18]
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 6 )
 
-[node name="Player" type="KinematicBody2D" groups=["player"]]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 pause_mode = 1
 z_index = 3
 collision_layer = 2
@@ -53,12 +70,13 @@ region_rect = Rect2( 0, 0, 1920, 1080 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 2 )
-shape = SubResource( 13 )
+shape = SubResource( 1 )
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
@@ -70,9 +88,9 @@ margin_left = -85.0
 margin_top = 43.0
 margin_right = 85.0
 margin_bottom = 62.0
-custom_fonts/font = SubResource( 12 )
-custom_styles/fg = SubResource( 10 )
-custom_styles/bg = SubResource( 11 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 value = 50.0
 percent_visible = false
 
@@ -98,8 +116,8 @@ margin_left = 18.0
 margin_top = 18.0
 margin_right = -1055.0
 margin_bottom = 47.0
-custom_styles/fg = SubResource( 16 )
-custom_styles/bg = SubResource( 17 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
 max_value = 5.0
 step = 1.0
 percent_visible = false
@@ -113,7 +131,7 @@ margin_left = -350.0
 margin_top = -14.5
 margin_right = -7.0
 margin_bottom = 14.5
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 7 )
 text = "LVL 1"
 align = 2
 
@@ -123,6 +141,9 @@ margin_top = 55.0
 margin_right = 865.0
 margin_bottom = 128.0
 columns = 24
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StatsBox" type="VBoxContainer" parent="PlayerHUD"]
 anchor_left = 0.009
@@ -133,10 +154,109 @@ margin_left = 0.719999
 margin_top = -0.160004
 margin_right = -59.44
 margin_bottom = -0.440063
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ShotSize" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+[node name="ShotSpeed" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
 margin_right = 98.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/ShotSpeed"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/ShotSpeed"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "+0%"
+align = 2
+valign = 1
+
+[node name="ReloadSpeed" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 36.0
+margin_right = 98.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/ReloadSpeed"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/ReloadSpeed"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "+0%"
+align = 2
+valign = 1
+
+[node name="FireRate" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 72.0
+margin_right = 98.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/FireRate"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/FireRate"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "+0%"
+align = 2
+valign = 1
+
+[node name="Damage" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 108.0
+margin_right = 98.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/Damage"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/Damage"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "+0%"
+align = 2
+valign = 1
+
+[node name="ShotSize" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 144.0
+margin_right = 98.0
+margin_bottom = 176.0
 rect_min_size = Vector2( 0, 32 )
 
 [node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/ShotSize"]
@@ -152,9 +272,273 @@ margin_left = 36.0
 margin_right = 98.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 62, 32 )
-custom_fonts/font = SubResource( 18 )
-text = "+120%"
+custom_fonts/font = SubResource( 8 )
+text = "+0%"
+align = 2
 valign = 1
 
+[node name="CritChance" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 180.0
+margin_right = 98.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/CritChance"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/CritChance"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "0%"
+align = 2
+valign = 1
+
+[node name="ShotSpread" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 216.0
+margin_right = 98.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/ShotSpread"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/ShotSpread"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "0°"
+align = 2
+valign = 1
+
+[node name="ExtraAmmo" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 252.0
+margin_right = 98.0
+margin_bottom = 284.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/ExtraAmmo"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/ExtraAmmo"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="Pierce" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 288.0
+margin_right = 98.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/Pierce"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/Pierce"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="ExtraShots" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 324.0
+margin_right = 98.0
+margin_bottom = 356.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/ExtraShots"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/ExtraShots"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="XPGain" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 360.0
+margin_right = 98.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/XPGain"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/XPGain"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "+0%"
+align = 2
+valign = 1
+
+[node name="PickupDistance" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 396.0
+margin_right = 98.0
+margin_bottom = 428.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/PickupDistance"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/PickupDistance"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "+0%"
+align = 2
+valign = 1
+
+[node name="LevelChoices" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 432.0
+margin_right = 98.0
+margin_bottom = 464.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/LevelChoices"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/LevelChoices"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="MaxHealth" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 468.0
+margin_right = 98.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/MaxHealth"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/MaxHealth"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="RegenRate" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 504.0
+margin_right = 98.0
+margin_bottom = 536.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/RegenRate"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/RegenRate"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="Speed" type="HBoxContainer" parent="PlayerHUD/StatsBox"]
+margin_top = 540.0
+margin_right = 98.0
+margin_bottom = 572.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Icon" type="TextureRect" parent="PlayerHUD/StatsBox/Speed"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/StatsBox/Speed"]
+margin_left = 36.0
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 62, 32 )
+custom_fonts/font = SubResource( 8 )
+text = "+0%"
+align = 2
+valign = 1
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_PlayerSprite_animation_finished"]
 [connection signal="timeout" from="RegenTimer" to="." method="_on_RegenTimer_timeout"]

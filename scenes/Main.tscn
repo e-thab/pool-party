@@ -32,7 +32,6 @@ visible = false
 texture = ExtResource( 4 )
 
 [node name="DebugHUD" parent="." instance=ExtResource( 3 )]
-visible = false
 
 [node name="HUD" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -104,5 +103,4 @@ layer = 0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-
 [connection signal="timeout" from="HUD/RoundTimer" to="HUD" method="_on_RoundTimer_timeout"]
